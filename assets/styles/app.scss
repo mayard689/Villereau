@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import "_vars";
+@import "_navbar";
 
 @font-face {
     font-family: 'Source Sans';
@@ -16,10 +17,4 @@
     src: url(../fonts/archivo-narrow-regular.ttf) format('truetype');
 }
 
-body {
-    background-color: lightgray;
-}
 
-h1 {
-    color:green;
-}

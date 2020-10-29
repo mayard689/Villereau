@@ -1,0 +1,40 @@
+.navbar-nav .active > .nav-link {
+  color: var(--primary);
+}
+
+.navbar{
+  padding-left : 0;
+
+  height: $navbar-height;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+
+.nav-item{
+  display: inline-block;
+  overflow: hidden;
+  list-style: none;
+
+  &:hover{
+    transform: scale(1.05);
+  }
+
+  .nav-link{
+    color: $dark;
+  }
+}
+
+.navbar-brand{
+  color: $light;
+}
+
+.navbar-title{
+  padding-top:$spacing-w-small;
+  padding-left: 0.5rem;
+
+  font-family: 'Julius', sans-serif;
+  font-size: 110px;
+
+  color:var(--primary);
+}
