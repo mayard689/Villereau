@@ -1,5 +1,20 @@
 @import "~bootstrap/scss/bootstrap";
 
+@font-face {
+    font-family: 'Source Sans';
+    src: url('../fonts/SourceSansPro-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Julius';
+    src: url(../fonts/JuliusSansOne-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Archivo';
+    src: url(../fonts/archivo-narrow-regular.ttf) format('truetype');
+}
+
 body {
     background-color: lightgray;
 }
