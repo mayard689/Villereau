@@ -17,4 +17,18 @@
     src: url(../fonts/archivo-narrow-regular.ttf) format('truetype');
 }
 
+* {
+    margin : 0;
+    padding : 0;
+}
 
+body {
+    background : $background;
+}
+
+section {
+    &:first-of-type {
+        margin-top: $navbar-height;
+    }
+
+}

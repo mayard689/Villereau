@@ -1,6 +1,8 @@
-$navbar-height: 64px;
+$titleFontSize : 110px;
+$navbarLinkFontSize : 20px;
+$navbar-height: 1.8 * ($titleFontSize + $navbarLinkFontSize);
 
-$background: #fef9e7 ;
+$background: #FEFEFE ;
 
 $primary: #D72D85;
 $secondary: #009688;

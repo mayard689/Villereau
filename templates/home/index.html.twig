@@ -2,6 +2,16 @@
 
 {% block title %}Hello HomeController!{% endblock %}
 
-{% block body %}
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('homepage') }}
+{% endblock %}
 
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
+{% block body %}
+    {% include 'home/_intro.html.twig' %}
 {% endblock %}
