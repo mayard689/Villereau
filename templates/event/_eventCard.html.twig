@@ -1,0 +1,17 @@
+<div class="card event-card" >
+
+        <div class="img-wrapper">
+            <img class="card-img-top" src="/pictures/event/emptyEventPicture.jpg" alt="Card image cap">
+        </div>
+
+        <div class="card-body">
+            <h5 class="card-title">{{event.place}}</h5>
+            <h6 class="card-title"> Date : {{event.date|date("d/m/Y")}}</h6>
+
+            <a class="btn btn-primary mt-2" href="{{ path('event_show', { 'id':event.id }) }}">
+                <i class="far fa-laugh-wink mr-1"></i>
+                En savoir plus
+            </a>
+        </div>
+
+</div>

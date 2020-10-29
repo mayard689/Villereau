@@ -19,32 +19,15 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    // /**
-    //  * @return Event[] Returns an array of Event objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findComming(int $number=999)
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('e.date > :now')
+            ->setParameter('now', new \Datetime('now'))
+            ->orderBy('e.date', 'ASC')
+            ->setMaxResults($number)
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Event
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

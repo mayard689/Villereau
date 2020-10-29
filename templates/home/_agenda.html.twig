@@ -1,0 +1,9 @@
+<section class="agenda container">
+    <h2>AGENDA</h2>
+
+    <div class="card-deck  justify-content-around">
+        {%  for event in events %}
+            {{ include('event/_eventCard.html.twig') }}
+        {% endfor %}
+    </div>
+</section>
