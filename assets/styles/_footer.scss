@@ -1,0 +1,21 @@
+@import "_vars";
+
+.footer {
+  padding : $spacing-w-small;
+
+  height : $footer-height;
+
+  background : #404040;
+  color : $primary;
+}
+
+.footer li{
+  list-style: none;
+
+  font-size : $font-size-small;
+  font-weight : bold;
+
+  color : $light;
+
+  margin-left : $spacing-w-small;
+}

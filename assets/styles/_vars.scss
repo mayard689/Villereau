@@ -2,6 +2,8 @@ $titleFontSize : 110px;
 $navbarLinkFontSize : 20px;
 $navbar-height: 1.8 * ($titleFontSize + $navbarLinkFontSize);
 
+$footer-height : auto;
+
 $background: #FEFEFE ;
 
 $primary: #D72D85;
@@ -16,12 +18,12 @@ $danger: #dc3545;
 
 $shadow: #aaa;
 
-
 $back-light: #FFFFFF;
 $back-dark: #DDDDDD;
 
 
 $font-size: 16pt;
+$font-size-small : 14px;
 
 $spacing-h-small : 2.5vh;
 $spacing-h-normal : 5vh;
