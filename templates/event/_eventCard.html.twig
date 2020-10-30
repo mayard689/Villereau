@@ -1,17 +1,29 @@
 <div class="card event-card" >
 
-        <div class="img-wrapper">
-            <img class="card-img-top" src="/pictures/event/emptyEventPicture.jpg" alt="Card image cap">
-        </div>
+    <div class="date">
+        <p class="day">{{event.date|date("d/m")}}</p>
+        <p class="hour">{{event.date|date("h\\hi")}}</p>
+    </div>
+
+    <div class="picture">
+        <img class="card-img" src="/pictures/event/emptyEventPicture.jpg" alt="Card image cap">
 
         <div class="card-body">
-            <h5 class="card-title">{{event.place}}</h5>
-            <h6 class="card-title"> Date : {{event.date|date("d/m/Y")}}</h6>
+            <p class="card-name">{{event.name}}</p>
 
-            <a class="btn btn-primary mt-2" href="{{ path('event_show', { 'id':event.id }) }}">
+            <a class="btn btn-sm btn-primary mt-2" href="{{ path('event_show', { 'id':event.id }) }}">
                 <i class="far fa-laugh-wink mr-1"></i>
                 En savoir plus
             </a>
         </div>
+    </div>
+
+
+
+
+
+
+
 
 </div>
+

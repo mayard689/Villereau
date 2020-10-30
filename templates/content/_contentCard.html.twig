@@ -1,0 +1,9 @@
+<div class="card content-card" style="width: 18rem;">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+        <h5 class="card-title">{{content.title}}</h5>
+        <h6 class="card-title">Publié le {{content.date|date("d/m/Y")}}</h6>
+        <p class="card-text">{{content.text|u.truncate(125)}}...</p>
+    </div>
+    <a class="btn btn-outline-primary mr-2" href="{{ path('content_show',{'id':content.id}) }}" >Voir l'article</a>
+</div>
