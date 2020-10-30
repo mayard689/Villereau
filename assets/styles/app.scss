@@ -28,8 +28,17 @@ body {
 }
 
 section {
+
+    margin : $spacing-h-large;
+
     &:first-of-type {
         margin-top: $navbar-height;
     }
 
+}
+
+h2 {
+    color: $primary;
+    margin-top: $spacing-h-small;
+    margin-bottom: $spacing-h-normal;
 }
