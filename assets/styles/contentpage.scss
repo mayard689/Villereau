@@ -1,0 +1,33 @@
+@import "_vars";
+
+.content{
+  margin-top : $spacing-h-large;
+  margin-bottom : $spacing-h-large;
+
+  z-index : -1;
+}
+
+.card-deck{
+
+}
+
+.card-deck .content-card {
+  min-width : 90%;
+  margin-bottom : $spacing-h-small;
+
+  flex-direction: row;
+  &:nth-of-type(2n){
+    flex-direction: row-reverse;
+  }
+
+  justify-self: center;
+
+  .btn{
+    width: max-content;
+    align-self: center;
+  }
+
+  .card-img-top{
+    width : 40%;
+  }
+}

@@ -2,35 +2,33 @@
 
 {% block title %}Liste des articles{% endblock %}
 
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('contentpage') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('contentpage') }}
+{% endblock %}
+
 {% block body %}
 
     <section>
         <div class="container">
-
             <h2>Liste des articles</h2>
+            <a href="{{ path('content_new') }}">Créer un nouvel article</a>
 
-            {% for content in contents %}
-                <div class="row">
-                    <div class="col-6">
+            <div class="card-deck">
+                {% for content in contents %}
                         {{ include('content/_contentCard.html.twig') }}
-                    </div>
-                    <div class="col-6">
-                        <p class="card-text">{{content.text|u.truncate(125)}}...</p>
-                        <div class="">
-                            <a class="btn btn-primary" href="{{ path('content_show', {'id': content.id}) }}">show</a>
-                            <a class="btn btn-primary" href="{{ path('content_edit', {'id': content.id}) }}">edit</a>
-                        </div>
+                {% else %}
+                        Aucun article d'information n'est enregistré à l'heure actuelle.
+                {% endfor %}
+            </div>
 
-                    </div>
-                </div>
-
-
-            {% else %}
-                    Aucun article d'information n'est enregistré à l'heure actuelle.
-            {% endfor %}
-
+            <a href="{{ path('content_new') }}">Créer un nouvel article</a>
         </div>
     </section>
 
-    <a href="{{ path('content_new') }}">Create new</a>
 {% endblock %}
