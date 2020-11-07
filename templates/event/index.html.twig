@@ -1,45 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event index{% endblock %}
+{% block title %}Liste des évenements{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('eventpage') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('eventpage') }}
+{% endblock %}
 
 {% block body %}
 
+    <section>
+        <div class="container">
+            <h2>Liste des évenements</h2>
+            <a href="{{ path('event_new') }}">Créer un nouvel évenement</a>
 
-    <section class="container">
-        <h1>Liste des évenements de l'agenda</h1>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Texte</th>
-                <th>Date</th>
-                <th>Lieu</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for event in events %}
-                <tr>
-                    <td>{{ event.id }}</td>
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.text }}</td>
-                    <td>{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ event.place }}</td>
-                    <td>
-                        <a href="{{ path('event_show', {'id': event.id}) }}">show</a>
-                        <a href="{{ path('event_edit', {'id': event.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6">Aucun évenement trouvé</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+            <div class="card-deck">
+                {% set eventMonth = 0 %}
+                {% for event in events %}
+                    {% if (event.date|date("m")) != eventMonth %}
+                        </div>
+                        <p class="month-group">{{ event.getMonth() }} {{ event.date|date("Y") }}</p>
+                        <hr>
+                        <div class="card-deck">
+                        {% set eventMonth = event.date|date("m") %}
+                    {% endif %}
+                    {{ include('event/_eventCard.html.twig') }}
+                {% else %}
+                    Aucun évenement trouvé
+                {% endfor %}
+            </div>
 
-        <a href="{{ path('event_new') }}">Créer un nouvel évenement</a>
+            <a href="{{ path('event_new') }}">Créer un nouvel évenement</a>
+
+        </div>
     </section>
 
 {% endblock %}

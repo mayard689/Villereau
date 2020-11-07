@@ -1,3 +1,3 @@
 // any CSS you import will output into a single css file (app.css in this case)
-import './styles/contentpage.scss';
+import './styles/eventpage.scss';
 

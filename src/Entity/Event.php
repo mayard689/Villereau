@@ -89,4 +89,36 @@ class Event
 
         return $this;
     }
+
+    public function getMonth() : String
+    {
+        $month = $this->getDate()->format('m');
+
+        switch($month) {
+            case "01":
+                return "Janvier";
+            case "02":
+                return "Fevrier";
+            case "03":
+                return "Mars";
+            case "04":
+                return "Avril";
+            case "05":
+                return "Mai";
+            case "06":
+                return "Juin";
+            case "07":
+                return "Juillet";
+            case "08":
+                return "Aout";
+            case "09":
+                return "Septembre";
+            case "10":
+                return "Octobre";
+            case "11":
+                return "Novembre";
+            case "12":
+                return "Decembre";
+        }
+    }
 }
