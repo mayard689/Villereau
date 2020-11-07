@@ -1,35 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Event{% endblock %}
+{% block title %}{{ event.name }}{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('showevent') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('showevent') }}
+{% endblock %}
 
 {% block body %}
     <section class="container">
-        <h1>Event</h1>
+        <h1>{{ event.name }}</h1>
 
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ event.id }}</td>
-                </tr>
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ event.name }}</td>
-                </tr>
-                <tr>
-                    <th>Texte</th>
-                    <td>{{ event.text }}</td>
-                </tr>
-                <tr>
-                    <th>Date</th>
-                    <td>{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Lieu</th>
-                    <td>{{ event.place }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <img class="card-img" src="/pictures/event/emptyEventPicture.jpg" alt="Card image cap">
+
+        <div class="row">
+            <div class="col-2">
+                <div class="detail date">
+                    <p class="day">{{event.date|date("d/m")}}</p>
+                    <p class="hour">{{event.date|date("h\\hi")}}</p>
+                </div>
+                <div class="detail place">{{ event.place }}</div>
+                <div class="btn btn-primary">s'inscrire</div>
+            </div>
+            <div class="col-10 text">
+                {{ event.text }}
+            </div>
+        </div>
 
         <a href="{{ path('event_index') }}">Voir la liste des évenements</a>
 
