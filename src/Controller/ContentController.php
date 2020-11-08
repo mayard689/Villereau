@@ -21,7 +21,7 @@ class ContentController extends AbstractController
     public function index(ContentRepository $contentRepository): Response
     {
         return $this->render('content/index.html.twig', [
-            'contents' => $contentRepository->findAll(),
+            'contents' => $contentRepository->findBy(array(), array('date' => 'DESC')),
         ]);
     }
 
