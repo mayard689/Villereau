@@ -1,0 +1,10 @@
+.flashes{
+  background : transparent;
+  position : fixed;
+  top : $navbar-height;
+  width:100vw;
+
+  div{
+    text-align: center;
+  }
+}
