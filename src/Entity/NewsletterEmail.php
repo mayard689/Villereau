@@ -5,9 +5,13 @@ namespace App\Entity;
 use App\Repository\NewsletterEmailRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=NewsletterEmailRepository::class)
+ *
+ * @ORM\Entity
+ * @UniqueEntity("email", message="Cette adresse est déjà enregistrée")
  */
 class NewsletterEmail
 {

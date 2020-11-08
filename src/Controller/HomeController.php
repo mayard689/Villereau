@@ -31,19 +31,31 @@ class HomeController extends AbstractController
         $newsletterForm = $this->createForm(NewsletterEmailType::class, $newsletterEmail);
         $newsletterForm->handleRequest($request);
 
-        if ($newsletterForm->isSubmitted() && $newsletterForm->isValid()) {
+        if ($newsletterForm->isSubmitted()) {
+            if ($newsletterForm->isValid()) {
 
-            $newsletterEmail->setDate(new DateTime());
-            $entityManager = $this->getDoctrine()->getManager();
+                $newsletterEmail->setDate(new DateTime());
+                $entityManager = $this->getDoctrine()->getManager();
 
-            $entityManager->persist($newsletterEmail);
-            $entityManager->flush();
+                $entityManager->persist($newsletterEmail);
+                $entityManager->flush();
 
-            $this->addFlash('success', 'Votre inscription à la newsletter a été enregistrée');
+                $this->addFlash('success', 'Votre inscription à la newsletter a été enregistrée');
 
-            $this->confirmRegistrationToNewsletter($newsletterEmail->getEmail(), $mailer);
+                $email = (new Email())
+                    ->from('doc-albert@laposte.net')
+                    ->to($newsletterEmail->getEmail())
+                    ->subject('Newsletter de Villereau')
+                    ->html($this->renderView('email/inscription.html.twig', [
+                        'destination' => $newsletterEmail->getEmail()
+                    ]));
 
-            return $this->redirectToRoute('home');
+                $mailer->send($email);
+
+                return $this->redirectToRoute('home');
+            }else{
+                $this->addFlash('danger', 'Votre inscription à la newsletter n\'a pas été enregistrée car les données fournies présentent un problème.');
+            }
         }
 
         //manage events
@@ -59,14 +71,11 @@ class HomeController extends AbstractController
         ]);
     }
 
-    private function confirmRegistrationToNewsletter($destination, MailerInterface $mailer)
+    /**
+     * @Route("/unregister", name="unregister")
+     */
+    public function unregister()
     {
-        $email = (new Email())
-            ->from('doc-albert@laposte.net')
-            ->to($destination)
-            ->subject('Newsletter de Villereau')
-            ->html('<p>Bonjour, Nous vous confirmons votre inscription à la newsletter de la mairie de Villereau.</p>');
 
-        $mailer->send($email);
     }
 }

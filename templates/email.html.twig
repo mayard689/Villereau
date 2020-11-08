@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Bienvenue!{% endblock %}</title>
+        {% block stylesheets %} {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <header>
+
+            </header>
+            <div class="container" style="
+                background-color: #F0EFEA;
+                width:100%;
+                height:100%;
+                padding:100px;
+            ">
+                {% block main %}{% endblock %}
+            </div>
+
+            {% if destination is defined %}
+            <div class="container">
+                {{ app.request.schemeAndHttpHost~path('unregister',{'address':destination}) }}
+                {{ absolute_url(path('unregister',{'address':destination})) }}
+                <p> Pour ne plus recevoir de notification, cliquez sur le lien suivant :</p>
+                <a href=" {{ app.request.schemeAndHttpHost~path('unregister',{'address':destination}) }}"> Desinscription </a>
+            </div>
+            {%  endif %}
+
+            <footer>
+                {% block footer %}{% endblock %}
+            </footer>
+        {% endblock %}
+        {% block javascripts %} {{ encore_entry_script_tags('app') }} {% endblock %}
+    </body>
+</html>
