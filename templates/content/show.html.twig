@@ -1,38 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Content{% endblock %}
+{% block title %}{{ content.title }}{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('showcontent') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('showcontent') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Content</h1>
+    <section class="container">
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ content.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ content.title }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ content.date ? content.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Text</th>
-                <td>{{ content.text }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ content.picture }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <h1>{{ content.title }}</h1>
 
-    <a href="{{ path('content_index') }}">back to list</a>
+        <img class="card-img-top" src="/pictures/content/emptyContentPicture.jpg" alt="{{ content.picture }}">
 
-    <a href="{{ path('content_edit', {'id': content.id}) }}">edit</a>
+        <p class="detail">Publié le {{ content.date ? content.date|date('Y-m-d') : '' }}</p>
 
-    {{ include('content/_delete_form.html.twig') }}
+        <div class="text">
+            {{ content.text }}
+        </div>
+
+        <a href="{{ path('content_index') }}">back to list</a>
+
+        <a href="{{ path('content_edit', {'id': content.id}) }}">edit</a>
+
+        {{ include('content/_delete_form.html.twig') }}
+
+
+        <h2>Quelques suggestions</h2>
+
+        <div class="card-deck">
+            {% for content in contents %}
+                {{ include('content/_contentCard.html.twig') }}
+            {% endfor %}
+        </div>
+
+    </section>
 {% endblock %}

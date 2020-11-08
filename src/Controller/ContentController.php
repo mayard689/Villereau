@@ -51,10 +51,19 @@ class ContentController extends AbstractController
     /**
      * @Route("/{id}", name="content_show", methods={"GET"})
      */
-    public function show(Content $content): Response
+    public function show(Content $content, ContentRepository $contentRepository): Response
     {
+
+        //get four random article
+        $contents = [];
+        $contentCount = $contentRepository->count(array());
+        for($i = 0; $i < 4; $i++) {
+            $contents[] = $contentRepository->find(rand(0, $contentCount));
+        }
+
         return $this->render('content/show.html.twig', [
             'content' => $content,
+            'contents' => $contents,
         ]);
     }
 
