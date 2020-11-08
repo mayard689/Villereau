@@ -2,12 +2,21 @@
 
 {% block title %}Céer un article{% endblock %}
 
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('formContent') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('formContent') }}
+{% endblock %}
+
 {% block body %}
     <section class="container">
         <h1>Céer un article</h1>
 
         {{ include('content/_form.html.twig') }}
 
-        <a href="{{ path('content_index') }}">back to list</a>
     </section>
 {% endblock %}
