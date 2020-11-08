@@ -10,6 +10,8 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -17,8 +19,12 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request, EventRepository $eventRepository, ContentRepository $contentRepository): Response
-    {
+    public function index(
+        Request $request,
+        EventRepository $eventRepository,
+        ContentRepository $contentRepository,
+        MailerInterface $mailer
+    ): Response {
 
         // Manage newsletter email
         $newsletterEmail = new NewsletterEmail();
@@ -34,6 +40,9 @@ class HomeController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Votre inscription à la newsletter a été enregistrée');
+
+            $this->confirmRegistrationToNewsletter($newsletterEmail->getEmail(), $mailer);
+
             return $this->redirectToRoute('home');
         }
 
@@ -48,5 +57,16 @@ class HomeController extends AbstractController
             'contents' => $contents,
             'newsletterForm' => $newsletterForm->createView(),
         ]);
+    }
+
+    private function confirmRegistrationToNewsletter($destination, MailerInterface $mailer)
+    {
+        $email = (new Email())
+            ->from('doc-albert@laposte.net')
+            ->to($destination)
+            ->subject('Newsletter de Villereau')
+            ->html('<p>Bonjour, Nous vous confirmons votre inscription à la newsletter de la mairie de Villereau.</p>');
+
+        $mailer->send($email);
     }
 }
