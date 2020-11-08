@@ -32,10 +32,18 @@
             </div>
         </div>
 
-        <a href="{{ path('event_index') }}">Voir la liste des évenements</a>
+        {% include 'tools/_backToList.html.twig' with {
+            'text': 'Revenir à la liste des évenements',
+            'path': path('event_index')
+        } %}
 
-        <a href="{{ path('event_edit', {'id': event.id}) }}">Modifier</a>
+        {% include 'tools/_adminButton.html.twig' with {
+            'path': path('event_edit', {'id': event.id})
+        } %}
 
-        {{ include('event/_delete_form.html.twig') }}
+        {% include'tools/_deleteButton.html.twig' with {
+            'path': path('event_delete', {'id': event.id}),
+            'tokenIndex' : event.id
+        } %}
     </section>
 {% endblock %}

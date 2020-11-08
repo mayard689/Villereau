@@ -17,7 +17,11 @@
     <section>
         <div class="container">
             <h2>Liste des évenements</h2>
-            <a href="{{ path('event_new') }}">Créer un nouvel évenement</a>
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouvel évenement',
+                'path': path('event_new')
+            } %}
 
             <div class="card-deck">
                 {% set eventMonth = 0 %}
@@ -35,7 +39,10 @@
                 {% endfor %}
             </div>
 
-            <a href="{{ path('event_new') }}">Créer un nouvel évenement</a>
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouvel évenement',
+                'path': path('event_new')
+            } %}
 
         </div>
     </section>

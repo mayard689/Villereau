@@ -17,7 +17,10 @@
     <section>
         <div class="container">
             <h2>Liste des articles</h2>
-            <a href="{{ path('content_new') }}">Créer un nouvel article</a>
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouvel article',
+                'path': path('content_new')
+            } %}
 
             <div class="card-deck">
                 {% for content in contents %}
@@ -27,7 +30,10 @@
                 {% endfor %}
             </div>
 
-            <a href="{{ path('content_new') }}">Créer un nouvel article</a>
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouvel article',
+                'path': path('content_new')
+            } %}
         </div>
     </section>
 
