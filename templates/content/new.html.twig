@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Content{% endblock %}
+{% block title %}Céer un article{% endblock %}
 
 {% block body %}
-    <h1>Create new Content</h1>
+    <section class="container">
+        <h1>Céer un article</h1>
 
-    {{ include('content/_form.html.twig') }}
+        {{ include('content/_form.html.twig') }}
 
-    <a href="{{ path('content_index') }}">back to list</a>
+        <a href="{{ path('content_index') }}">back to list</a>
+    </section>
 {% endblock %}
