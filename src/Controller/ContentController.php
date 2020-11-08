@@ -39,6 +39,8 @@ class ContentController extends AbstractController
             $entityManager->persist($content);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Votre nouvel article a bien été enregsitré.');
+
             return $this->redirectToRoute('content_index');
         }
 
@@ -78,6 +80,8 @@ class ContentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Votre article a bien été modifié');
 
             return $this->redirectToRoute('content_index');
         }
