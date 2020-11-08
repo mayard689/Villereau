@@ -58,7 +58,8 @@ class ContentController extends AbstractController
         $contents = [];
         $contentCount = $contentRepository->count(array());
         for($i = 0; $i < 4; $i++) {
-            $contents[] = $contentRepository->find(rand(0, $contentCount));
+            //$contents[] = $contentRepository->find(rand(0, $contentCount));
+            $contents[] = $contentRepository->findOneBy([],[],1, $i);
         }
 
         return $this->render('content/show.html.twig', [

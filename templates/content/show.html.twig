@@ -43,7 +43,7 @@
 
         <div class="card-deck">
             {% for content in contents %}
-                {{ include('content/_contentCard.html.twig') }}
+                {% include('content/_contentCard.html.twig') %}
             {% endfor %}
         </div>
 

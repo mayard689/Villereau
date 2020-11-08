@@ -4,7 +4,11 @@
         <h5 class="card-title">{{content.title}}</h5>
         <h6 class="card-title">Publié le {{content.date|date("d/m/Y")}}</h6>
         <p class="card-text">{{content.text|u.truncate(125)}}...</p>
-        <a class="btn btn-sm btn-outline-primary m-2" href="{{ path('content_show',{'id':content.id}) }}" >Voir l'article</a>
+
+        {% include 'tools/_seeButton.html.twig' with {
+            'text': 'Voir l\'article',
+            'path': path('content_show', {'id': content.id})
+        } %}
 
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Modifier',
