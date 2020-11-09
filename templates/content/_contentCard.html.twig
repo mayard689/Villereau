@@ -15,6 +15,10 @@
             'path': path('content_edit', {'id': content.id})
         } %}
 
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Envoyer cet article aux abonnés par email',
+            'path': path('content_notify', {'id': content.id})
+        } %}
     </div>
 
 </div>

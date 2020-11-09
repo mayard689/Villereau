@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Content;
 use App\Form\ContentType;
 use App\Repository\ContentRepository;
+use App\Service\MailSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -102,6 +103,21 @@ class ContentController extends AbstractController
             $entityManager->remove($content);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('content_index');
+    }
+
+    /**
+     * @Route("/{id}/notify", name="content_notify", methods={"GET","POST"})
+     */
+    public function notify(Content $content, MailSender $mailSender): Response
+    {
+        $mailSender->notifyMembers($content);
+
+        $this->addFlash(
+            'success',
+            'Un email a bien été envoyé à tous les abonnés concernant l\'article .'.$content->getTitle()
+        );
 
         return $this->redirectToRoute('content_index');
     }

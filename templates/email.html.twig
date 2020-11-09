@@ -21,8 +21,6 @@
 
             {% if destination is defined %}
             <div class="container">
-                {{ app.request.schemeAndHttpHost~path('unregister',{'address':destination}) }}
-                {{ absolute_url(path('unregister',{'address':destination})) }}
                 <p> Pour ne plus recevoir de notification, cliquez sur le lien suivant :</p>
                 <a href=" {{ app.request.schemeAndHttpHost~path('unregister',{'address':destination}) }}"> Desinscription </a>
             </div>
