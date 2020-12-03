@@ -1,6 +1,5 @@
 {% if is_granted('ROLE_ADMIN') %}
     {% include 'tools/_formAnonymValidateButton.html.twig' with {
         'text': text??null,
-        'path': path??null
     } %}
 {% endif %}

@@ -1,0 +1,19 @@
+{{ form_start(formSubject) }}
+
+    <div class="form-group row">
+        <div class="col-3">{{ form_label(formSubject.title, 'Indiquez le titre du sujet : ') }}</div>
+        <div class="col-sm-12 col-md-9">{{ form_widget(formSubject.title, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(formSubject.title) }}</div>
+    </div>
+
+    {% include 'tools/_backButton.html.twig' with {
+        'text': 'Annuler',
+        'path': path('report_edit', {'id':report.id})
+    } %}
+
+    {% include 'tools/_formAdminValidateButton.html.twig' with {
+    } %}
+
+{{ form_end(formSubject) }}
+
+

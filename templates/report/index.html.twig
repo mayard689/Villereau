@@ -16,7 +16,6 @@
 
     <section>
         <div class="container">
-
             <h1>Liste des rapports de conseil</h1>
 
             {% include 'tools/_adminButton.html.twig' with {
@@ -26,7 +25,6 @@
 
             <div class="report-list row">
                 {% set month = 0 %}
-
                 {% for report in reports %}
                 {# if the month changes, close the div and open a new one - add the month name#}
                     {% if (report.date|date("m")) != month %}
@@ -38,14 +36,16 @@
                     {% endif %}
                         {{ include('report/_reportCard.html.twig') }}
                 {% else %}
-                    Aucun évenement trouvé
+                    Aucun rapport trouvé
                 {% endfor %}
-
-
             </div>
 
             {% include 'tools/_adminButton.html.twig' with {
                 'text': 'Créer un nouveau rapport de conseil',
                 'path': path('report_new')
             } %}
+
+        </div>
+    </section>
+
 {% endblock %}

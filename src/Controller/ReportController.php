@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Report;
+use App\Entity\ReportSubject;
+use App\Form\ReportSubjectType;
 use App\Form\ReportType;
 use App\Repository\ReportRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,8 +22,9 @@ class ReportController extends AbstractController
      */
     public function index(ReportRepository $reportRepository): Response
     {
+        $reports = $reportRepository->findBy(array(), array('date' => 'DESC'));
         return $this->render('report/index.html.twig', [
-            'reports' => $reportRepository->findAll(),
+            'reports' => $reports,
         ]);
     }
 
@@ -31,6 +34,7 @@ class ReportController extends AbstractController
     public function new(Request $request): Response
     {
         $report = new Report();
+        $report->setDate(new \DateTime('now'));
         $form = $this->createForm(ReportType::class, $report);
         $form->handleRequest($request);
 
@@ -39,7 +43,7 @@ class ReportController extends AbstractController
             $entityManager->persist($report);
             $entityManager->flush();
 
-            return $this->redirectToRoute('report_index');
+            return $this->redirectToRoute('report_edit',['id'=>$report->getId()]);
         }
 
         return $this->render('report/new.html.twig', [
@@ -63,6 +67,7 @@ class ReportController extends AbstractController
      */
     public function edit(Request $request, Report $report): Response
     {
+        //manage new report form
         $form = $this->createForm(ReportType::class, $report);
         $form->handleRequest($request);
 
@@ -72,9 +77,24 @@ class ReportController extends AbstractController
             return $this->redirectToRoute('report_index');
         }
 
+        // Manage new subject form
+        $reportSubject = new ReportSubject();
+        $formSubject = $this->createForm(ReportSubjectType::class, $reportSubject);
+        $formSubject->handleRequest($request);
+
+        if ($formSubject->isSubmitted() && $formSubject->isValid()  && $formSubject->getData()->getId() == null) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $reportSubject->setReport($report);
+            $entityManager->persist($reportSubject);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('report_edit',['id'=>$report->getId()]);
+        }
+
         return $this->render('report/edit.html.twig', [
             'report' => $report,
             'form' => $form->createView(),
+            'formSubject' => $formSubject->createView(),
         ]);
     }
 

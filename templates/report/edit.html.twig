@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Report{% endblock %}
+{% block title %}Completer un rapport{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('formReport') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('formReport') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Report</h1>
+    <section class="container">
+        <h1>Edit Report</h1>
 
-    {{ include('report/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('report/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('report_index') }}">back to list</a>
-
-    {{ include('report/_delete_form.html.twig') }}
+    </section>
 {% endblock %}

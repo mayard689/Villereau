@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReportSubject{% endblock %}
+
+{% block body %}
+    <h1>ReportSubject</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ report_subject.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ report_subject.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('report_subject_index') }}">back to list</a>
+
+    <a href="{{ path('report_subject_edit', {'id': report_subject.id}) }}">edit</a>
+
+    {{ include('report_subject/_delete_form.html.twig') }}
+{% endblock %}

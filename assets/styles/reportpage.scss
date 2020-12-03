@@ -20,9 +20,5 @@
   .subjects{
     display: flex;
     flex-direction: column;
-
-    li{
-      margin-left : $spacing-w-small;
-    }
   }
 }

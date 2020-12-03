@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Report{% endblock %}
+{% block title %}Ajouter un compte rendu{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('formReport') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('formReport') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Report</h1>
+    <section class="container">
+        <h1>Ajouter un compte rendu</h1>
 
-    {{ include('report/_form.html.twig') }}
+        {{ include('report/_form.html.twig') }}
 
-    <a href="{{ path('report_index') }}">back to list</a>
+    </section>
 {% endblock %}
