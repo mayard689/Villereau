@@ -25,6 +25,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('homepage', './assets/homepage.js')
+    .addEntry('reportpage', './assets/reportpage.js')
     .addEntry('contentpage', './assets/contentpage.js')
     .addEntry('eventpage', './assets/eventpage.js')
     .addEntry('showevent', './assets/showevent.js')

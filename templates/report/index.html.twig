@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des rapports de conseil{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('reportpage') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('reportpage') }}
+{% endblock %}
+
+{% block body %}
+
+    <section>
+        <div class="container">
+
+            <h1>Liste des rapports de conseil</h1>
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouveau rapport de conseil',
+                'path': path('report_new')
+            } %}
+
+            <div class="report-list row">
+                {% set month = 0 %}
+
+                {% for report in reports %}
+                {# if the month changes, close the div and open a new one - add the month name#}
+                    {% if (report.date|date("m")) != month %}
+                        </div>
+                        <p class="month-group">{{ report.getMonth() }} {{ report.date|date("Y") }}</p>
+                        <hr>
+                        <div class="card-deck">
+                        {% set month = report.date|date("m") %}
+                    {% endif %}
+                        {{ include('report/_reportCard.html.twig') }}
+                {% else %}
+                    Aucun évenement trouvé
+                {% endfor %}
+
+
+            </div>
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouveau rapport de conseil',
+                'path': path('report_new')
+            } %}
+{% endblock %}

@@ -1,0 +1,28 @@
+<div class="report-card col-sm-12 col-md-4">
+
+    <div class="report-data">
+        <p>Conseil municipal du</p>
+        <h2>{{ report.date ? report.date|date('d ') ~ report.month ~ report.date|date(' Y'): '' }}</h2>
+        <div class="subjects">
+            <p>Ordre du jour :</p>
+            <ul>
+            {%  set subjects = report.reportSubjects %}
+            {%  for subject in subjects %}
+                <li class="subject">{{ subject.title }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+
+    {% include 'tools/_seeButton.html.twig' with {
+        'text': 'Voir le rapport',
+        'path': path('report_show', {'id': report.id})
+    } %}
+
+    {% include 'tools/_adminButton.html.twig' with {
+        'text': 'Modifier',
+        'path': path('report_edit', {'id': report.id})
+    } %}
+</div>

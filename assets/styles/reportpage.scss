@@ -1,0 +1,28 @@
+@import "_vars";
+
+.report-list{
+  display:flex;
+  flex-direction : column;
+}
+
+.report-card{
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 7px 5px 5px #3333335A;
+  background-color : white;
+  border : thin solid black;
+  border-radius : 3px;
+
+  padding : 5px;
+  margin : $spacing-w-small;
+
+  .subjects{
+    display: flex;
+    flex-direction: column;
+
+    li{
+      margin-left : $spacing-w-small;
+    }
+  }
+}
