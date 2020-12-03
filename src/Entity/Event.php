@@ -98,7 +98,7 @@ class Event
             case "01":
                 return "Janvier";
             case "02":
-                return "Fevrier";
+                return "Février";
             case "03":
                 return "Mars";
             case "04":
@@ -110,7 +110,7 @@ class Event
             case "07":
                 return "Juillet";
             case "08":
-                return "Aout";
+                return "Août";
             case "09":
                 return "Septembre";
             case "10":
@@ -118,7 +118,7 @@ class Event
             case "11":
                 return "Novembre";
             case "12":
-                return "Decembre";
+                return "Décembre";
         }
     }
 }

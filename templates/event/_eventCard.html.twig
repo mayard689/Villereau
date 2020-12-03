@@ -21,6 +21,11 @@
                 'path': path('event_edit', {'id': event.id})
             } %}
 
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Envoyer cet évènement aux abonnés par email',
+                'path': path('event_notify', {'id': event.id})
+            } %}
+
         </div>
     </div>
 

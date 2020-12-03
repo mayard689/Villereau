@@ -112,7 +112,7 @@ class ContentController extends AbstractController
      */
     public function notify(Content $content, MailSender $mailSender): Response
     {
-        $mailSender->notifyMembers($content);
+        $mailSender->notifyContentToMembers($content);
 
         $this->addFlash(
             'success',

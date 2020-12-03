@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Content;
+use App\Entity\Event;
 use App\Entity\NewsletterEmail;
 use App\Repository\NewsletterEmailRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -35,7 +36,7 @@ class MailSender
         $this->mailer->send($email);
     }
 
-    public function notifyMembers(Content $content)
+    public function notifyContentToMembers(Content $content)
     {
         $email = (new TemplatedEmail())
             ->from('doc-albert@laposte.net')
@@ -50,6 +51,27 @@ class MailSender
                 ->context([
                     'destination' => $member,
                     'content' => $content,
+                ]);
+
+            $this->mailer->send($email);
+        }
+    }
+
+    public function notifyEventToMembers(Event $event)
+    {
+        $email = (new TemplatedEmail())
+            ->from('doc-albert@laposte.net')
+            ->subject('Communication de Villereau');
+
+        $members = $this->newsletterEmailRepository->findAll();
+
+        foreach($members as $member) {
+            $email
+                ->to($member->getEmail())
+                ->htmlTemplate('email/eventNotification.html.twig')
+                ->context([
+                    'destination' => $member,
+                    'event' => $event,
                 ]);
 
             $this->mailer->send($email);

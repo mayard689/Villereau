@@ -5,11 +5,11 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use App\Service\MailSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -94,6 +94,21 @@ class EventController extends AbstractController
             $entityManager->remove($event);
             $entityManager->flush();
         }
+
+        return $this->redirectToRoute('event_index');
+    }
+
+    /**
+     * @Route("/{id}/notify", name="event_notify", methods={"GET","POST"})
+     */
+    public function notify(Event $event, MailSender $mailSender): Response
+    {
+        $mailSender->notifyEventToMembers($event);
+
+        $this->addFlash(
+            'success',
+            'Un email a bien été envoyé à tous les abonnés concernant l\'évènement .'.$event->getName()
+        );
 
         return $this->redirectToRoute('event_index');
     }
