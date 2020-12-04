@@ -25,21 +25,10 @@ class MailSender
         $this->twig = $twig;
     }
 
-    public function sendEmail($destination, $html)
-    {
-        $email = (new Email())
-            ->from('doc-albert@laposte.net')
-            ->to($destination)
-            ->subject('Newsletter de Villereau')
-            ->html($html);
-
-        $this->mailer->send($email);
-    }
-
     public function notifyContentToMembers(Content $content)
     {
         $email = (new TemplatedEmail())
-            ->from('doc-albert@laposte.net')
+            ->from($this->getParameter("mailer_from"))
             ->subject('Communication de Villereau');
 
         $members = $this->newsletterEmailRepository->findAll();
@@ -60,7 +49,7 @@ class MailSender
     public function notifyEventToMembers(Event $event)
     {
         $email = (new TemplatedEmail())
-            ->from('doc-albert@laposte.net')
+            ->from($this->getParameter("mailer_from"))
             ->subject('Communication de Villereau');
 
         $members = $this->newsletterEmailRepository->findAll();
