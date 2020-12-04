@@ -32,7 +32,7 @@ class ReportFixtures extends Fixture
                 $report->setDocument('doc.pdf');
             }
 
-            $report->setDate($faker->dateTimeThisDecade($max = 'now'));
+            $report->setDate($faker->dateTimeThisYear($max = 'now'));
 
             $this->addReference('report_' .$i, $report);
 
