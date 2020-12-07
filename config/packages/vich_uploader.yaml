@@ -6,6 +6,10 @@ vich_uploader:
             uri_prefix: /documents/reports
             upload_destination: '%kernel.project_dir%/public/documents/reports'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        newspaper_document:
+            uri_prefix: /documents/newspaper
+            upload_destination: '%kernel.project_dir%/public/documents/newspapers'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
     #mappings:
     #    products:
