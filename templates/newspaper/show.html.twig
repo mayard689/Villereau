@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bulletin munucipal{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <h1>Bulletin Municipal</h1>
+
+        {{ newspaper.id }}
+        {{ newspaper.document }}
+        <a href="../documents/newspapers/{{ newspaper.document }}">lien vers le document</a>
+        {{ newspaper.date ? newspaper.date|date('Y-m-d') : '' }}
+
+        <a href="{{ path('newspaper_index') }}">back to list</a>
+
+        <a href="{{ path('newspaper_edit', {'id': newspaper.id}) }}">edit</a>
+
+        {{ include('newspaper/_delete_form.html.twig') }}
+    </section>
+{% endblock %}

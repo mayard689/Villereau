@@ -30,7 +30,7 @@ class Newspaper
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="report_document", fileNameProperty="document", size="documentSize")
+     * @Vich\UploadableField(mapping="newspaper_document", fileNameProperty="document", size="documentSize")
      *
      * @var File|null
      */
@@ -56,13 +56,13 @@ class Newspaper
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=ReportSubject::class, mappedBy="report", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=NewspaperSubject::class, mappedBy="newspaper", orphanRemoval=true)
      */
-    private $reportSubjects;
+    private $newspaperSubjects;
 
     public function __construct()
     {
-        $this->reportSubjects = new ArrayCollection();
+        $this->newspaperSubjects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,29 +95,29 @@ class Newspaper
     }
 
     /**
-     * @return Collection|ReportSubject[]
+     * @return Collection|NewspaperSubject[]
      */
-    public function getReportSubjects(): Collection
+    public function getNewspaperSubjects(): Collection
     {
-        return $this->reportSubjects;
+        return $this->newspaperSubjects;
     }
 
-    public function addReportSubject(ReportSubject $reportSubject): self
+    public function addNewspaperSubject(NewspaperSubject $newspaperSubject): self
     {
-        if (!$this->reportSubjects->contains($reportSubject)) {
-            $this->reportSubjects[] = $reportSubject;
-            $reportSubject->setReport($this);
+        if (!$this->newspaperSubjects->contains($newspaperSubject)) {
+            $this->newspaperSubjects[] = $newspaperSubject;
+            $newspaperSubject->setNewspaper($this);
         }
 
         return $this;
     }
 
-    public function removeReportSubject(ReportSubject $reportSubject): self
+    public function removeNewspaperSubject(NewspaperSubject $newspaperSubject): self
     {
-        if ($this->reportSubjects->removeElement($reportSubject)) {
+        if ($this->newspaperSubjects->removeElement($newspaperSubject)) {
             // set the owning side to null (unless already changed)
-            if ($reportSubject->getReport() === $this) {
-                $reportSubject->setReport(null);
+            if ($newspaperSubject->getNewspaper() === $this) {
+                $newspaperSubject->setNewspaper(null);
             }
         }
 

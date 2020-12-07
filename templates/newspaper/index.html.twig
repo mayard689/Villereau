@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des rapports de conseil{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('reportpage') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('reportpage') }}
+{% endblock %}
+
+{% block body %}
+
+    <section>
+        <div class="container">
+            <h1>Liste des bulletins municipaux</h1>
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouveau bulletin municipal',
+                'path': path('newspaper_new')
+            } %}
+
+            <div class="report-list row">
+                {% set month = 0 %}
+                {% for newspaper in newspapers %}
+                {# if the month changes, close the div and open a new one - add the month name#}
+                    {% if (newspaper.date|date("m")) != month %}
+                        </div>
+                        <p class="month-group">{{ newspaper.getMonth() }} {{ newspaper.date|date("Y") }}</p>
+                        <hr>
+                        <div class="card-deck">
+                        {% set month = newspaper.date|date("m") %}
+                    {% endif %}
+                        {{ include('newspaper/_newspaperCard.html.twig') }}
+                {% else %}
+                    Aucun bulletin municipal trouvé
+                {% endfor %}
+            </div>
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouveau bulletin municipal',
+                'path': path('newspaper_new')
+            } %}
+
+        </div>
+    </section>
+
+{% endblock %}
