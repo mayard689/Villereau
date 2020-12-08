@@ -6,6 +6,7 @@ use App\Entity\Newspaper;
 use App\Entity\NewspaperSubject;
 use App\Form\NewspaperSubjectType;
 use App\Form\NewspaperType;
+use App\Repository\Newspaper2Repository;
 use App\Repository\NewspaperRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,11 +21,13 @@ class NewspaperController extends AbstractController
     /**
      * @Route("/", name="newspaper_index", methods={"GET"})
      */
-    public function index(NewspaperRepository $newspaperRepository): Response
+    public function index(NewspaperRepository $newspaperRepository, Newspaper2Repository $newspaper2Repository): Response
     {
         $newspapers = $newspaperRepository->findBy(array(), array('date' => 'DESC'));
+        $newspapers2 = $newspaper2Repository->findBy(array(), array('date' => 'DESC'));
         return $this->render('newspaper/index.html.twig', [
             'newspapers' => $newspapers,
+            'newspapers2' => $newspapers2,
         ]);
     }
 
