@@ -6,7 +6,7 @@ use App\Entity\Newspaper2;
 use App\Entity\NewspaperSubject2;
 use App\Form\Newspaper2Type;
 use App\Form\NewspaperSubject2Type;
-use App\Repository\Newspaper2Repository;
+use Dompdf\Dompdf;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,8 +46,33 @@ class Newspaper2Controller extends AbstractController
      */
     public function show(Newspaper2 $newspaper2): Response
     {
-        return $this->render('newspaper2/show.html.twig', [
+        //convert the picture
+        $pictures = [];
+        $subjects = $newspaper2->getNewspaperSubject2s();
+        foreach ($subjects as $subject) {
+            $picture = $subject->getContent()->getPicture();
+
+            $path = "./pictures/content/".$picture;
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            $pictures[$picture] = $base64;
+        }
+
+        //create the pdf file
+        $dompdf = new Dompdf();
+
+        $toBeRenderedAsPdf = $this->renderView('pdf/newspaper.html.twig', [
             'newspaper2' => $newspaper2,
+            'pictures' => $pictures,
+        ]);
+
+        $dompdf->loadHtml($toBeRenderedAsPdf);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream("projet.pdf", [
+            "Attachment" => false
         ]);
     }
 
@@ -72,11 +97,14 @@ class Newspaper2Controller extends AbstractController
         $formSubject->handleRequest($request);
 
         if ($formSubject->isSubmitted() && $formSubject->isValid()  && $formSubject->getData()->getId() == null) {
+
+            // manage the entity
             $entityManager = $this->getDoctrine()->getManager();
             $newspaperSubject2->setNewspaper2($newspaper2);
             $entityManager->persist($newspaperSubject2);
             $entityManager->flush();
 
+            //return
             return $this->redirectToRoute('newspaper2_edit',['id'=>$newspaper2->getId()]);
         }
 

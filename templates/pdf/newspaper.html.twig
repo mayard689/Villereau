@@ -1,0 +1,20 @@
+{% extends 'pdf.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('homepage') }}
+{% endblock %}
+
+{% block body %}
+    <h1>Bulletin municipal de la commune de VILLEREAU</h1>
+    <p>Edité le {{ newspaper2.date ? newspaper2.date|date('d ') ~ newspaper2.month ~ newspaper2.date|date(' Y'): '' }}</p>
+
+    {% for subject in newspaper2.newspaperSubject2s %}
+        <section>
+            <h2>{{ subject.content.title }}</h2>
+            {% set base64 = pictures[subject.content.picture] %}
+            <p><img src="{{base64}}" width="150" height="150"/>
+            {{ subject.content.text }}</p>
+        </section>
+    {% endfor %}
+{% endblock %}
