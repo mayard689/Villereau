@@ -56,16 +56,6 @@ class NewspaperController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="newspaper_show", methods={"GET"})
-     */
-    public function show(Newspaper $newspaper): Response
-    {
-        return $this->render('newspaper/show.html.twig', [
-            'newspaper' => $newspaper,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="newspaper_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Newspaper $newspaper): Response
