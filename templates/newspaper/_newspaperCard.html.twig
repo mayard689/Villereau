@@ -15,7 +15,7 @@
 
     {% include 'tools/_seeButton.html.twig' with {
         'text': 'Voir le rapport',
-        'path': path('newspaper_show', {'id': newspaper.id})
+        'path': "../documents/newspapers/"~newspaper.document
     } %}
 
     {% include 'tools/_adminButton.html.twig' with {
