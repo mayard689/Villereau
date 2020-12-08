@@ -22,4 +22,9 @@
         'text': 'Modifier',
         'path': path('newspaper_edit', {'id': newspaper.id})
     } %}
+
+    {% include 'tools/_deleteButton.html.twig' with {
+        'path': path('newspaper_delete', {'id': newspaper.id}),
+        'tokenIndex' : newspaper.id
+    } %}
 </div>
