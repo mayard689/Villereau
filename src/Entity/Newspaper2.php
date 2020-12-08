@@ -2,27 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\ContentRepository;
+use App\Repository\Newspaper2Repository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ContentRepository::class)
+ * @ORM\Entity(repositoryClass=Newspaper2Repository::class)
  */
-class Content
+class Newspaper2
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $title;
 
     /**
      * @ORM\Column(type="date")
@@ -30,41 +25,18 @@ class Content
     private $date;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    private $text;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $picture;
-
-    /**
-     * @ORM\OneToMany(targetEntity=NewspaperSubject2::class, mappedBy="content", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=NewspaperSubject2::class, mappedBy="newspaper2", orphanRemoval=true)
      */
     private $newspaperSubject2s;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
         $this->newspaperSubject2s = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getDate(): ?\DateTimeInterface
@@ -75,30 +47,6 @@ class Content
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getText(): ?string
-    {
-        return $this->text;
-    }
-
-    public function setText(string $text): self
-    {
-        $this->text = $text;
-
-        return $this;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): self
-    {
-        $this->picture = $picture;
 
         return $this;
     }
@@ -115,7 +63,7 @@ class Content
     {
         if (!$this->newspaperSubject2s->contains($newspaperSubject2)) {
             $this->newspaperSubject2s[] = $newspaperSubject2;
-            $newspaperSubject2->setContent($this);
+            $newspaperSubject2->setNewspaper2($this);
         }
 
         return $this;
@@ -125,11 +73,43 @@ class Content
     {
         if ($this->newspaperSubject2s->removeElement($newspaperSubject2)) {
             // set the owning side to null (unless already changed)
-            if ($newspaperSubject2->getContent() === $this) {
-                $newspaperSubject2->setContent(null);
+            if ($newspaperSubject2->getNewspaper2() === $this) {
+                $newspaperSubject2->setNewspaper2(null);
             }
         }
 
         return $this;
+    }
+
+    public function getMonth() : String
+    {
+        $month = $this->getDate()->format('m');
+
+        switch($month) {
+            case "01":
+                return "Janvier";
+            case "02":
+                return "Février";
+            case "03":
+                return "Mars";
+            case "04":
+                return "Avril";
+            case "05":
+                return "Mai";
+            case "06":
+                return "Juin";
+            case "07":
+                return "Juillet";
+            case "08":
+                return "Août";
+            case "09":
+                return "Septembre";
+            case "10":
+                return "Octobre";
+            case "11":
+                return "Novembre";
+            case "12":
+                return "Décembre";
+        }
     }
 }

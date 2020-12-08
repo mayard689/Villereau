@@ -1,0 +1,30 @@
+<div class="report-card col-sm-12 col-md-4">
+    <div class="report-data">
+        <p>Bulletin municipal du</p>
+        <h2>{{ newspaper.date ? newspaper.date|date('d ') ~ newspaper.month ~ newspaper.date|date(' Y'): '' }}</h2>
+        <div class="subjects">
+            <p>Sommaire :</p>
+            <ul>
+            {%  set subjects = newspaper.newspaperSubject2s %}
+            {%  for subject in subjects %}
+                <li class="subject">{{ subject.content.title }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    {% include 'tools/_seeButton.html.twig' with {
+        'text': 'Voir le rapport',
+        'path': path('newspaper2_show', {'id': newspaper.id})
+    } %}
+
+    {% include 'tools/_adminButton.html.twig' with {
+        'text': 'Modifier',
+        'path': path('newspaper2_edit', {'id': newspaper.id})
+    } %}
+
+    {% include 'tools/_deleteButton.html.twig' with {
+        'path': path('newspaper2_delete', {'id': newspaper.id}),
+        'tokenIndex' : newspaper.id
+    } %}
+</div>

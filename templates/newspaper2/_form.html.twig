@@ -1,0 +1,77 @@
+<div class="modal-dialog modal-lg shadow">
+    <div class="modal-content">
+        <div class="modal-body">
+            {{ form_start(form) }}
+
+            <div class="form-group row">
+                <div class="col-3">{{ form_label(form.date, 'Indiquez la date : ') }}</div>
+                <div class="col-sm-12 col-md-9">{{ form_widget(form.date, { 'attr': {'class': 'w-100'} }) }}</div>
+                <div class="col-12">{{ form_errors(form.date) }}</div>
+            </div>
+
+            {% include 'tools/_backButton.html.twig' with {
+                'text': 'Revenir à la liste des journaux',
+                'path': path('newspaper2_index')
+            } %}
+
+            {% include 'tools/_formAdminValidateButton.html.twig' with {
+                'path': path('newspaper2_index')
+            } %}
+
+            {{ form_end(form) }}
+
+            <div class="subjects">
+                <p>Sommaire :</p>
+                <ul>
+                    {%  set subjects = newspaper2.newspaperSubject2s %}
+                    {%  for subject in subjects %}
+                        <li class="subject">
+                            <div class="row">
+                                <p class="col-6">{{ subject.content.title }}</p>
+
+                                <div class="col-6">
+                                    {% include 'tools/_deleteButton.html.twig' with {
+                                        'path': path('newspaper_subject2_delete', {'id': subject.id}),
+                                        'tokenIndex' : subject.id
+                                    } %}
+                                </div>
+                            </div>
+
+                        </li>
+                    {% else %}
+                        <p>Aucun sujet au sommaire actuellement. Enregistrez le bulletin 2 pour ajouter des sujets.</p>
+                    {% endfor %}
+                </ul>
+
+                {% if not newspaper2.id is null %}
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#subjectNew">
+                        Ajouter un sujet au sommaire
+                    </button>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+{% if not newspaper2.id is null %}
+    <div class="modal fade" id="subjectNew" tabindex="-1" role="dialog" aria-labelledby="Ajouter un sujet" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajouter un sujet au sommaire</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    {% include 'newspaper_subject2/_form.html.twig' %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}

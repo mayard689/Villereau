@@ -2,12 +2,10 @@
 
     {% include 'tools/_backButton.html.twig' with {
         'text': 'Annuler',
-        'path': path('newspaper_edit', {'id':newspaper.id})
+        'path': path('newspaper2_edit', {'id':newspaper2.id})
     } %}
 
     {% include 'tools/_formAdminValidateButton.html.twig' with {
     } %}
 
 {{ form_end(formSubject) }}
-
-

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un bulletin municipal{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('formReport') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('formReport') }}
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <h1>Ajouter un bulletin municipal</h1>
+
+        {{ include('newspaper2/_form.html.twig') }}
+
+    </section>
+{% endblock %}
