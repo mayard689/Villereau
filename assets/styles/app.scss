@@ -42,12 +42,21 @@ h2 {
     margin-bottom: $spacing-h-normal;
 }
 
+h5{
+    margin : 0;
+    font-size : $font-size;
+}
+
 hr{
     margin-top:0;
 }
 
 li{
     margin-left : $spacing-w-small;
+}
+
+.btn{
+    font-size: $font-size;
 }
 
 .sticky-block{

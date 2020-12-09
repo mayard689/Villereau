@@ -1,0 +1,28 @@
+<div class="content-card col-sm-6">
+    <div class="picture-wrapper">
+        <img class="content-picture" src="/pictures/content/{{ content.picture ?? 'emptyContentPicture.jpg' }}" alt="Card image cap">
+    </div>
+
+    <div class="body">
+        <h5 class="content-title">{{content.title}}</h5>
+        <p class="content-text">{{content.text|u.truncate(125)}}...</p>
+    </div>
+
+    <div class="button-panel">
+        {% include 'tools/_seeButton.html.twig' with {
+            'text': 'Voir l\'article',
+            'path': path('content_show', {'id': content.id})
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Modifier',
+            'path': path('content_edit', {'id': content.id})
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Envoyer cet article aux abonnés par email',
+            'path': path('content_notify', {'id': content.id})
+        } %}
+    </div>
+
+</div>
