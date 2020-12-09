@@ -4,12 +4,13 @@
   padding:0;
 }
 
-#navbarNav{
-  justify-content: center;
+.navbar{
+  background : $dark;
+  color : $light;
 }
 
-.navbar-nav .active > .nav-link {
-  color: var(--primary);
+#navbarNav{
+  justify-content: center;
 }
 
 .nav-item{
@@ -22,7 +23,7 @@
   }
 
   .nav-link{
-    color: $dark;
+    color: $light;
     font-size : $navbarLinkFontSize;
   }
 }
