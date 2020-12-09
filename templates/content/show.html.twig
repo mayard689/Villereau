@@ -17,7 +17,7 @@
 
         <h1>{{ content.title }}</h1>
 
-        <img class="card-img-top" src="/pictures/content/emptyContentPicture.jpg" alt="{{ content.picture }}">
+        <img class="" src="/pictures/content/{{ content.picture ?? 'emptyContentPicture.jpg' }}" alt="{{ content.title }}">
 
         <p class="detail">Publié le {{ content.date ? content.date|date('Y-m-d') : '' }}</p>
 
