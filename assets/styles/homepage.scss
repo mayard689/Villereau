@@ -26,77 +26,21 @@
   }
 }
 
-
-.content-card{
-  position : relative;
-
+.widget-picture-wrapper{
+  //$image-width-height : 35%;
+  //min-width : $image-width-height;
+  //max-width : $image-width-height;
+  min-width : 100%;
+  max-width : 100%;
+  height : 0;
+  padding : 0 0 100% 0;
+  position: relative;
   overflow: hidden;
+}
 
-  margin-bottom: $spacing-h-small;
-
-  .picture-wrapper{
-    width : 100%;
-    height : 300px;
-    box-sizing: border-box;
-
-    .content-picture{
-      width : 100%;
-      object-fit: cover;
-    }
-  }
-
-  .body{
-    background : $thirdary-transparent;
-
-    position : absolute;
-    bottom : 0;
-    transform : translateY(100%);
-    transition: 1000ms ease-in-out;;
-
-    padding : 10px;
-
-    left: 15px;
-    right:15px;
-
-    .content-title{
-      position : absolute;
-      top : 0;
-      transform : translateY(-100%);
-
-      right: 0;
-      left: 0;
-      padding: 10px;
-
-      background : $thirdary-transparent;
-    }
-
-    .content-text{
-      opacity : 0%;
-      transition: 500ms;
-      transition-delay: 250ms;
-      transform : translateY(30%);
-    }
-  }
-
-  &:hover{
-    .body {
-      transform: translateY(0);
-      transition-duration: 500ms;
-
-      .content-text {
-        opacity: 100%;
-        transform : translateY(0%);
-        transition: 1000ms;
-        transition-delay: 250ms;
-      }
-    }
-  }
-
-  .button-panel{
-    margin: $spacing-h-small;
-    padding-left : $spacing-h-small;
-    position : absolute;
-    top : 10px;
-    left : 10px;
-  }
+.widget-picture{
+  object-fit: cover;
+  width : 100%;
+  height : 100%;
+  position : absolute;
 }
