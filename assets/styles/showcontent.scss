@@ -1,17 +1,8 @@
 @import "_vars";
+@import "_contentCard";
 
 .detail{
   color: grey;
   font-style: italic;
   font-size: $font-size-small;
-}
-
-.card-deck .content-card {
-  min-width : 40%;
-  margin-bottom : $spacing-h-small;
-
-  .btn{
-    width: max-content;
-    align-self: center;
-  }
 }

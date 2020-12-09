@@ -1,20 +1,4 @@
 @import "_vars";
-@import "_eventCard";
-@import "_contentCard";
-
-.introduction{
-  width:100vw;
-  height:100vh;
-
-  background-color: #FFFFFFCC;
-  background: center/cover no-repeat url("../pictures/villereau.jpg");
-
-  .text-wrapper{
-    position:absolute;
-    left:10%;
-    top:20%;
-  }
-}
 
 .card-deck .content-card {
   min-width : 40%;
