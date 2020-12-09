@@ -8,8 +8,12 @@
   position: fixed;
   top:0;
 
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   height : $navbar-height;
-  width : 100%;
 
   overflow:hidden;
 
@@ -20,12 +24,6 @@
 
 .navbar-nav .active > .nav-link {
   color: var(--primary);
-}
-
-.navbar{
-  padding : 0;
-
-  width: 100%;
 }
 
 .nav-item{
@@ -43,15 +41,33 @@
   }
 }
 
-.navbar-brand{
-  color: $light;
-}
-
 .navbar-title{
+  position:relative;
   padding-left: 0.5rem;
 
   font-family: 'Julius', sans-serif;
   font-size: $titleFontSize;
+  font-weight : bold;
 
   color:var(--primary);
+
+  line-height: 100%;
+
+  &:after{
+    content :"";
+    background : center / contain no-repeat  url("../pictures/corn-multiple.png");
+    min-width : 200px;
+    height : 100px;
+    display:inline-block;
+  }
+
+  .pre-title{
+    _position:absolute;
+    font-size : $font-size;
+    font-family: 'Source Sans';
+    color : $secondary;
+    margin-top : 30px;
+    padding : 0;
+    line-height: 100%;
+  }
 }
