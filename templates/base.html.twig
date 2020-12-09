@@ -9,9 +9,16 @@
         {% endblock %}
     </head>
     <body>
-        {% include '_navbar.html.twig' %}
 
-        {% include '_flashes.html.twig' %}
+        <div class="container navbar-title">
+            <p class="pre-title">Bienvenue à </p>
+            VILLEREAU
+        </div>
+
+        <div class="sticky-block">
+            {% include '_navbar.html.twig' %}
+            {% include '_flashes.html.twig' %}
+        </div>
 
         {% block body %}{% endblock %}
 

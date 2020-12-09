@@ -24,18 +24,16 @@
     padding : 0;
 }
 
+html{
+    font-size : 62.5%;
+}
+
 body {
     background : $background;
 }
 
 section {
-
     margin : $spacing-h-large;
-
-    &:first-of-type {
-        margin-top: $navbar-height;
-    }
-
 }
 
 h2 {
@@ -44,16 +42,52 @@ h2 {
     margin-bottom: $spacing-h-normal;
 }
 
-.month-group{
-    font-size: 50px;
-    margin-top : $spacing-h-large;
-    margin-bottom : 0;
-}
-
 hr{
     margin-top:0;
 }
 
 li{
     margin-left : $spacing-w-small;
+}
+
+.sticky-block{
+    position:sticky;
+    top:0;
+}
+
+.navbar-title{
+    padding-left: 0.5rem;
+
+    font-family: 'Julius', sans-serif;
+    font-size: $titleFontSize;
+    font-weight : bold;
+
+    color:var(--primary);
+
+    line-height: 100%;
+
+    &:after{
+        content :"";
+        background : center / contain no-repeat  url("../pictures/corn-multiple.png");
+        min-width : 200px;
+        height : 100px;
+        display:inline-block;
+    }
+
+    .pre-title{
+        font-size : $font-size;
+        font-family: 'Source Sans';
+        color : $secondary;
+        margin-bottom :0;
+        margin-top : 30px;
+        margin-left : -30px;
+        padding : 0;
+        line-height: 100%;
+    }
+}
+
+.month-group{
+    font-size: 50px;
+    margin-top : $spacing-h-large;
+    margin-bottom : 0;
 }
