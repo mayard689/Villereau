@@ -19,8 +19,13 @@
             <h1>Liste des bulletins municipaux</h1>
 
             {% include 'tools/_adminButton.html.twig' with {
-                'text': 'Créer un nouveau bulletin municipal',
+                'text': 'Créer un nouveau bulletin municipal à partir d\'un fichier',
                 'path': path('newspaper_new')
+            } %}
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouveau bulletin municipal à partir des articles du blog',
+                'path': path('newspaper2_new')
             } %}
 
             {% set newspapersCount = newspapers|length + newspapers2|length %}
@@ -54,8 +59,13 @@
             </div>
 
             {% include 'tools/_adminButton.html.twig' with {
-                'text': 'Créer un nouveau bulletin municipal',
+                'text': 'Créer un nouveau bulletin municipal à partir d\'un fichier',
                 'path': path('newspaper_new')
+            } %}
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Créer un nouveau bulletin municipal à partir des articles du blog',
+                'path': path('newspaper2_new')
             } %}
 
         </div>

@@ -88,7 +88,7 @@ class Newspaper2Controller extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('newspaper2_index');
+            return $this->redirectToRoute('newspaper_index');
         }
 
         // Manage new subject form
@@ -126,6 +126,6 @@ class Newspaper2Controller extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('newspaper2_index');
+        return $this->redirectToRoute('newspaper_index');
     }
 }
