@@ -20,10 +20,11 @@ class EventFixtures extends Fixture
 
             $event = new Event();
             $event->setName($faker->colorName);
-            $event->setText($faker->paragraph(3, true));
+            $event->setText($faker->paragraph(10, true));
             $event->setDate($faker->dateTimeBetween('-1 years', '2021/12/31'));
             $event->setPlace($city);
-
+            $event->setPicture('event-'.rand(1,5).'.jpg');
+            //$event->setPictureSize(100);
             $this->addReference('event_' .$i, $event);
             $manager->persist($event);
         }

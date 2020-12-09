@@ -1,5 +1,6 @@
 <div class="card content-card">
-    <img class="card-img-top" src="/pictures/content/emptyContentPicture.jpg" alt="Card image cap">
+    <img class="card-img-top" src="/pictures/content/{{ content.picture ?? 'emptyContentPicture.jpg' }}" alt="Card image cap">
+    
     <div class="card-body">
         <h5 class="card-title">{{content.title}}</h5>
         <h6 class="card-title">Publié le {{content.date|date("d/m/Y")}}</h6>

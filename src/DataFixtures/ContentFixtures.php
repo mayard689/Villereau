@@ -12,11 +12,6 @@ class ContentFixtures extends Fixture
     const CONTENT_NUMBER=20;
 
     const CONTENT = [
-      0 => [
-          'title' => 'Ceci est un exemple de titre.',
-          'text' => 'Ceci est un exemple de texte.',
-          'picture' => 'douche.jpeg',
-      ],
     ];
 
     public function load(ObjectManager $manager)
@@ -33,10 +28,11 @@ class ContentFixtures extends Fixture
                 $content->setPicture(self::CONTENT[$i]['picture']);
             } else {
                 $content->setTitle($faker->sentence);
-                $content->setText($faker->text);
-                $content->setPicture('content-'.rand(1,3).'.png');
-            }
+                $content->setText($faker->text(1000));
+                $content->setPicture('content-'.rand(1,7).'.jpg');
+                //$content->setPictureSize(100);
 
+            }
 
             $content->setDate($faker->dateTimeBetween('-3 months', '2021/06/31'));
 

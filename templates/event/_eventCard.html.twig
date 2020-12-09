@@ -6,7 +6,7 @@
     </div>
 
     <div class="picture">
-        <img class="card-img" src="/pictures/event/emptyEventPicture.jpg" alt="Card image cap">
+        <img class="card-img" src="/pictures/event/{{ event.picture ?? 'emptyEventPicture.jpg' }}" alt="Card image cap">
 
         <div class="card-body">
             <p class="card-name">{{event.name}}</p>

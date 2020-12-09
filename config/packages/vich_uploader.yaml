@@ -10,6 +10,14 @@ vich_uploader:
             uri_prefix: /documents/newspapers
             upload_destination: '%kernel.project_dir%/public/documents/newspapers'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        content_picture:
+            uri_prefix: /pictures/content
+            upload_destination: '%kernel.project_dir%/public/pictures/content'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        event_picture:
+            uri_prefix: /pictures/event
+            upload_destination: '%kernel.project_dir%/public/pictures/event'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
     #mappings:
     #    products:
