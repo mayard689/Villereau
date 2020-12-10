@@ -13,9 +13,7 @@
             </ul>
         </div>
     </div>
-
-
-
+    
     {% include 'tools/_seeButton.html.twig' with {
         'text': 'Voir le rapport',
         'path': "../documents/reports/"~report.document
@@ -24,5 +22,10 @@
     {% include 'tools/_adminButton.html.twig' with {
         'text': 'Modifier',
         'path': path('report_edit', {'id': report.id})
+    } %}
+
+    {% include 'tools/_deleteButton.html.twig' with {
+        'path': path('report_delete', {'id': report.id}),
+        'tokenIndex' : report.id
     } %}
 </div>
