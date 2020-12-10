@@ -8,6 +8,8 @@
             {%  set subjects = newspaper.newspaperSubject2s %}
             {%  for subject in subjects %}
                 <li class="subject">{{ subject.content.title }}</li>
+            {% else %}
+                <p class="detail">Le sommaire n'est pas disponible pour ce rapport.</p>
             {% endfor %}
             </ul>
         </div>
