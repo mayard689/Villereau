@@ -17,6 +17,11 @@
     <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'BULLETINS MUNICIPAUX'} %}
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Créer un nouveau bulletin municipal à partir d\'un fichier',
             'path': path('newspaper_new')
@@ -58,6 +63,11 @@
             {% endif %}
         </div>
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+        
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Créer un nouveau bulletin municipal à partir d\'un fichier',
             'path': path('newspaper_new')
