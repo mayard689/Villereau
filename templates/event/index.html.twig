@@ -14,9 +14,8 @@
 
 {% block body %}
 
-    <section>
-        <div class="container">
-            <h2>Liste des évenements</h2>
+    <section class="container">
+            {%  include 'tools/_h1.html.twig' with {'title' : 'HISTORIQUE DES EVENEMENTS'} %}
 
             {% include 'tools/_adminButton.html.twig' with {
                 'text': 'Créer un nouvel évenement',
@@ -43,7 +42,6 @@
                 'text': 'Créer un nouvel évenement',
                 'path': path('event_new')
             } %}
-
         </div>
     </section>
 

@@ -1,13 +1,7 @@
 <section>
     <div class="container">
 
-        <h1>
-            {% set title="CLIQUEZ-MOI" %}
-            {{ title }}
-            <p class="titleStyle">
-                {{ title }}
-            </p>
-        </h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'CLIQUEZ-MOI'} %}
 
         <div class="row">
 

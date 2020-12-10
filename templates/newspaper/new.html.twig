@@ -14,7 +14,7 @@
 
 {% block body %}
     <section class="container">
-        <h1>Ajouter un bulletin municipal</h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'AJOUTER UN BULLETIN MUNICIPAL'} %}
 
         {{ include('newspaper/_form.html.twig') }}
 

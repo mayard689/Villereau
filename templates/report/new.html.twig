@@ -14,7 +14,7 @@
 
 {% block body %}
     <section class="container">
-        <h1>Ajouter un compte rendu</h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'AJOUTER UN COMPTE RENDU'} %}
 
         {{ include('report/_form.html.twig') }}
 

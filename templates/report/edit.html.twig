@@ -14,7 +14,7 @@
 
 {% block body %}
     <section class="container">
-        <h1>Completer un rapport</h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'compléter un rapport'} %}
 
         {{ include('report/_form.html.twig', {'button_label': 'Update'}) }}
 

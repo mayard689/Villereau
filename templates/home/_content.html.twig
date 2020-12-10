@@ -1,14 +1,7 @@
-{%  set title="S'incrire à la newletter" %}
 <section>
     <div class="container">
 
-        <h1>
-            {% set title="INFORMATIONS" %}
-            {{ title }}
-            <p class="titleStyle">
-                {{ title }}
-            </p>
-        </h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'INFORMATIONS'} %}
 
         <div class="row">
             {% for content in contents %}

@@ -14,27 +14,27 @@
 
 {% block body %}
 
-    <section>
-        <div class="container">
-            <h2>Liste des articles</h2>
-            {% include 'tools/_adminButton.html.twig' with {
-                'text': 'Créer un nouvel article',
-                'path': path('content_new')
-            } %}
+    <section class="container">
 
-            <div class="card-deck">
-                {% for content in contents %}
-                        {{ include('content/_contentCard.html.twig') }}
-                {% else %}
-                        Aucun article d'information n'est enregistré à l'heure actuelle.
-                {% endfor %}
-            </div>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'TOUS VOS ARTICLES'} %}
 
-            {% include 'tools/_adminButton.html.twig' with {
-                'text': 'Créer un nouvel article',
-                'path': path('content_new')
-            } %}
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel article',
+            'path': path('content_new')
+        } %}
+
+        <div class="card-deck">
+            {% for content in contents %}
+                    {{ include('content/_contentCard.html.twig') }}
+            {% else %}
+                    Aucun article d'information n'est enregistré à l'heure actuelle.
+            {% endfor %}
         </div>
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel article',
+            'path': path('content_new')
+        } %}
     </section>
 
 {% endblock %}
