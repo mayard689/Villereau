@@ -6,7 +6,8 @@
 .report-card{
   display: flex;
   flex-direction: column;
-
+  justify-content: space-between;
+  
   box-shadow: 7px 5px 5px #3333335A;
   background-color : white;
   border : thin solid black;
@@ -38,5 +39,11 @@
     margin : 0;
     color : $secondary;
     text-shadow : $shadow;
+  }
+
+  .button-panel{
+    display:flex;
+    justify-content: space-around;
+    justify-self: flex-end;
   }
 }
