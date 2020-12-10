@@ -13,7 +13,8 @@
 
 .card-deck .content-card {
   min-width : 90%;
-  margin-bottom : $spacing-h-small;
+  margin-bottom : $spacing-h-large;
+  margin-top : $spacing-h-large;
 
   background : transparent;
 
@@ -28,7 +29,15 @@
 
   .btn{
     width: max-content;
-    align-self: center;
+  }
+
+  .content-card-body{
+    padding-left: 3rem;
+    padding-right : 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
   }
 
   .card-img-top{

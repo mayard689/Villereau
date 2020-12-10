@@ -1,9 +1,9 @@
 <div class="card content-card">
     <img class="card-img-top" src="/pictures/content/{{ content.picture ?? 'emptyContentPicture.jpg' }}" alt="Card image cap">
 
-    <div class="card-body">
-        <h5 class="card-title">{{content.title}}</h5>
-        <h6 class="card-title">Publié le {{content.date|date("d/m/Y")}}</h6>
+    <div class="content-card-body">
+        <h2 class="card-title">{{content.title}}</h2>
+        <p class="detail">Publié le {{content.date|date("d/m/Y")}}</p>
         <p class="card-text">{{content.text|u.truncate(125)}}...</p>
 
         {% include 'tools/_seeButton.html.twig' with {
