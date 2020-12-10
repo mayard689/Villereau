@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Content;
 use App\Form\ContentType;
 use App\Repository\ContentRepository;
+use App\Repository\Newspaper2Repository;
+use App\Repository\NewspaperRepository;
 use App\Service\MailSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +21,18 @@ class ContentController extends AbstractController
     /**
      * @Route("/", name="content_index", methods={"GET"})
      */
-    public function index(ContentRepository $contentRepository): Response
-    {
+    public function index(
+        ContentRepository $contentRepository,
+        NewspaperRepository $newspaperRepository,
+        Newspaper2Repository $newspaper2Repository
+    ): Response {
+        $newspapers = $newspaperRepository->findBy(array(), array('date' => 'DESC'));
+        $newspapers2 = $newspaper2Repository->findBy(array(), array('date' => 'DESC'));
+
         return $this->render('content/index.html.twig', [
             'contents' => $contentRepository->findBy(array(), array('date' => 'DESC')),
+            'newspapers' => $newspapers,
+            'newspapers2' => $newspapers2,
         ]);
     }
 
