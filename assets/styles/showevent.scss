@@ -1,45 +1,27 @@
 @import "_vars";
 
-.detail{
-  border : thin solid black;
-  margin-top : $spacing-h-small;
-  margin-bottom : $spacing-h-small;
-  text-align: center;
-  padding-top : $spacing-h-small;
-  padding-bottom : $spacing-h-small;
-  font-weight: bold;
-}
-
-.date{
-  background-color : $primary;
-
-  .day{
-    font-size : $font-size-big;
-    text-align: center;
-    margin : 0;
-    margin-top:0;
-  }
-
-  .hour{
-    font-size : $font-size;
-    text-align: center;
-    margin : 0;
-  }
+.info{
+  font-size : $font-size-big;
 }
 
 .place{
-  background-color : $secondary;
+  color: $secondary;
 }
 
-.text{
-  border : thin solid black;
-  margin-top : $spacing-h-small;
-  margin-bottom : $spacing-h-small;
-  padding-top : $spacing-h-small;
-  padding-bottom : $spacing-h-small;
+.date{
+  color: $secondary;
 }
 
-.btn{
-  width : 100%;
-  margin-bottom : $spacing-h-small;
+.hour{
+  color: $primary;
+}
+
+.event{
+  padding-top : $spacing-h-normal;
+  padding-bottom : $spacing-h-normal;
+
+  .event-data{
+    padding-top : $spacing-h-normal;
+    padding-bottom : $spacing-h-normal;
+  }
 }

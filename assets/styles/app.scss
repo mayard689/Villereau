@@ -93,6 +93,12 @@ li{
     font-size: $font-size;
 }
 
+.button-panel{
+    display:flex;
+    justify-content: space-around;
+    justify-self: flex-end;
+}
+
 .btn{
     font-size: $font-size;
     font-family: 'Archivo';
