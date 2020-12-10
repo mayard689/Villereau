@@ -1,9 +1,9 @@
 <div class="report-card col-sm-12 col-md-4">
     <div class="report-data">
-        <p>Bulletin municipal du</p>
+        <p class="detail">Bulletin municipal du</p>
         <h2>{{ newspaper.date ? newspaper.date|date('d ') ~ newspaper.month ~ newspaper.date|date(' Y'): '' }}</h2>
         <div class="subjects">
-            <p>Sommaire :</p>
+            <p class="summary-title">Au sommaire :</p>
             <ul>
             {%  set subjects = newspaper.newspaperSubjects %}
             {%  for subject in subjects %}
