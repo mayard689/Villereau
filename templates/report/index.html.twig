@@ -17,6 +17,11 @@
     <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'Tous les comptes rendus de conseils municipaux'} %}
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Créer un nouveau rapport de conseil',
             'path': path('report_new')
@@ -39,6 +44,11 @@
             {% endfor %}
         </div>
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+        
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Créer un nouveau rapport de conseil',
             'path': path('report_new')
