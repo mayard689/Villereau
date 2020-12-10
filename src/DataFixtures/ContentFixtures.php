@@ -30,8 +30,6 @@ class ContentFixtures extends Fixture
                 $content->setTitle($faker->sentence);
                 $content->setText($faker->text(1000));
                 $content->setPicture('content-'.rand(1,7).'.jpg');
-                //$content->setPictureSize(100);
-
             }
 
             $content->setDate($faker->dateTimeBetween('-3 months', '2021/06/31'));

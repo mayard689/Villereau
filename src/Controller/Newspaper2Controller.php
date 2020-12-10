@@ -42,10 +42,63 @@ class Newspaper2Controller extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="newspaper2_show", methods={"GET"})
+     * @Route("/{id}/edit", name="newspaper2_edit", methods={"GET","POST"})
      */
-    public function show(Newspaper2 $newspaper2): Response
+    public function edit(Request $request, Newspaper2 $newspaper2): Response
     {
+        //manage new newspaper form
+        $form = $this->createForm(Newspaper2Type::class, $newspaper2);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->makeNewspaper($newspaper2);
+
+            return $this->redirectToRoute('newspaper_index');
+        }
+
+        // Manage new subject form
+        $newspaperSubject2 = new NewspaperSubject2();
+        $formSubject = $this->createForm(NewspaperSubject2Type::class, $newspaperSubject2);
+        $formSubject->handleRequest($request);
+
+        if ($formSubject->isSubmitted() && $formSubject->isValid()  && $formSubject->getData()->getId() == null) {
+
+            // manage the entity
+            $entityManager = $this->getDoctrine()->getManager();
+            $newspaperSubject2->setNewspaper2($newspaper2);
+            $entityManager->persist($newspaperSubject2);
+            $entityManager->flush();
+
+            $this->makeNewspaper($newspaper2);
+
+            //return
+            return $this->redirectToRoute('newspaper2_edit',['id'=>$newspaper2->getId()]);
+        }
+
+        return $this->render('newspaper2/edit.html.twig', [
+            'newspaper2' => $newspaper2,
+            'form' => $form->createView(),
+            'formSubject' => $formSubject->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="newspaper2_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Newspaper2 $newspaper2): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$newspaper2->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($newspaper2);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('newspaper_index');
+    }
+
+    private function makeNewspaper(Newspaper2 $newspaper2){
         //convert the picture
         $pictures = [];
         $subjects = $newspaper2->getNewspaperSubject2s();
@@ -71,61 +124,16 @@ class Newspaper2Controller extends AbstractController
         $dompdf->loadHtml($toBeRenderedAsPdf);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream("projet.pdf", [
-            "Attachment" => false
-        ]);
-    }
 
-    /**
-     * @Route("/{id}/edit", name="newspaper2_edit", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Newspaper2 $newspaper2): Response
-    {
-        //manage new newspaper form
-        $form = $this->createForm(Newspaper2Type::class, $newspaper2);
-        $form->handleRequest($request);
+        // Store PDF Binary Data
+        $output = $dompdf->output();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        // In this case, we want to write the file in the public directory
+        $publicDirectory = './documents/newspapers';
+        // e.g /var/www/project/public/mypdf.pdf
+        $pdfFilepath =  $publicDirectory . '/newspaper_'.$newspaper2->getId().'.pdf';
 
-            return $this->redirectToRoute('newspaper_index');
-        }
-
-        // Manage new subject form
-        $newspaperSubject2 = new NewspaperSubject2();
-        $formSubject = $this->createForm(NewspaperSubject2Type::class, $newspaperSubject2);
-        $formSubject->handleRequest($request);
-
-        if ($formSubject->isSubmitted() && $formSubject->isValid()  && $formSubject->getData()->getId() == null) {
-
-            // manage the entity
-            $entityManager = $this->getDoctrine()->getManager();
-            $newspaperSubject2->setNewspaper2($newspaper2);
-            $entityManager->persist($newspaperSubject2);
-            $entityManager->flush();
-
-            //return
-            return $this->redirectToRoute('newspaper2_edit',['id'=>$newspaper2->getId()]);
-        }
-
-        return $this->render('newspaper2/edit.html.twig', [
-            'newspaper2' => $newspaper2,
-            'form' => $form->createView(),
-            'formSubject' => $formSubject->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="newspaper2_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Newspaper2 $newspaper2): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$newspaper2->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($newspaper2);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('newspaper_index');
+        // Write file to the desired path
+        file_put_contents($pdfFilepath, $output);
     }
 }

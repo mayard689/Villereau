@@ -9,6 +9,7 @@ use App\Form\NewspaperType;
 use App\Repository\Newspaper2Repository;
 use App\Repository\NewspaperRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -103,5 +104,30 @@ class NewspaperController extends AbstractController
         }
 
         return $this->redirectToRoute('newspaper_index');
+    }
+
+    /**
+     * @Route("/dernier", name="newspaper_show_latest", methods={"GET"})
+     */
+    public function showLatest(
+        Newspaper2Repository $newspaper2Repository,
+        NewspaperRepository $newspaperRepository
+    ): BinaryFileResponse
+    {
+        //get latest newspaper
+        $latestNewspaper = $newspaperRepository->findOneBy([],['date'=>'DESC']);
+
+        //get latest newspaper 2
+        $latestNewspaper2 = $newspaper2Repository->findOneBy([],['date'=>'DESC']);
+
+        //get the report filename according to the latest file
+        $filename = $latestNewspaper->getDocument();
+        if ($latestNewspaper->getDate() < $latestNewspaper2->getDate()) {
+            $filename = '/newspaper_'.$latestNewspaper2->getId().'.pdf';
+        }
+
+        // to being viewed in the Browser
+        $publicDirectory = './documents/newspapers/';
+        return new BinaryFileResponse($publicDirectory.$filename);
     }
 }

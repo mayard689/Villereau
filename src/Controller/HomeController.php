@@ -6,6 +6,7 @@ use App\Entity\NewsletterEmail;
 use App\Form\NewsletterEmailType;
 use App\Repository\ContentRepository;
 use App\Repository\EventRepository;
+use App\Repository\ReportRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,7 @@ class HomeController extends AbstractController
         Request $request,
         EventRepository $eventRepository,
         ContentRepository $contentRepository,
+        ReportRepository $reportRepository,
         MailerInterface $mailer
     ): Response {
 
@@ -64,10 +66,14 @@ class HomeController extends AbstractController
         //manage content (articles)
         $contents= $contentRepository->findComming(4,0);
 
+        //manage latest report
+        $latestReport = $reportRepository->findOneBy([],['date'=>'DESC']);
+
         return $this->render('home/index.html.twig', [
             'events' => $events,
             'contents' => $contents,
             'newsletterForm' => $newsletterForm->createView(),
+            'latestReport' => $latestReport,
         ]);
     }
 

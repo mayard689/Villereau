@@ -33,29 +33,30 @@
             {% set newspaper2Index = 0 %}
             <div class="report-list row">
 
-                {%  for i in 0..newspapersCount - 1 %}
-                    {% set newspaperDate = newspapers[newspaperIndex].date ?? 0 %}
-                    {% set newspaper2Date = newspapers2[newspaper2Index].date ?? 0 %}
+                {% if newspapersCount >0 %}
+                    {%  for i in 0..newspapersCount - 1 %}
+                        {% set newspaperDate = newspapers[newspaperIndex].date ?? 0 %}
+                        {% set newspaper2Date = newspapers2[newspaper2Index].date ?? 0 %}
 
-                    {% if newspaperDate|date('Y-m-d') > newspaper2Date|date('Y-m-d') %}
-                        {# put the newspaper in the html #}
-                        {% set newspaper = newspapers[newspaperIndex] %}
+                        {% if newspaperDate|date('Y-m-d') > newspaper2Date|date('Y-m-d') %}
+                            {# put the newspaper in the html #}
+                            {% set newspaper = newspapers[newspaperIndex] %}
 
-                        {{ include('newspaper/_newspaperCard.html.twig') }}
+                            {{ include('newspaper/_newspaperCard.html.twig') }}
 
-                        {% set newspaperIndex = newspaperIndex +1 %}
-                    {% else %}
-                        {# put the newspaper2 in the html #}
-                        {% set newspaper = newspapers2[newspaper2Index] %}
+                            {% set newspaperIndex = newspaperIndex +1 %}
+                        {% else %}
+                            {# put the newspaper2 in the html #}
+                            {% set newspaper = newspapers2[newspaper2Index] %}
 
-                        {{ include('newspaper2/_newspaperCard.html.twig') }}
+                            {{ include('newspaper2/_newspaperCard.html.twig') }}
 
-                        {% set newspaper2Index = newspaper2Index +1 %}
-                    {% endif %}
-
+                            {% set newspaper2Index = newspaper2Index +1 %}
+                        {% endif %}
+                    {% endfor %}
                 {% else %}
                     Aucun bulletin municipal n'est enregistré
-                {% endfor %}
+                {% endif %}
             </div>
 
             {% include 'tools/_adminButton.html.twig' with {
