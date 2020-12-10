@@ -18,6 +18,11 @@
 
         {%  include 'tools/_h1.html.twig' with {'title' : 'TOUS VOS ARTICLES'} %}
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Créer un nouvel article',
             'path': path('content_new')
@@ -30,6 +35,11 @@
                     Aucun article d'information n'est enregistré à l'heure actuelle.
             {% endfor %}
         </div>
+
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
 
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Créer un nouvel article',
