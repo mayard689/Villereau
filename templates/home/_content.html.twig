@@ -2,7 +2,13 @@
 <section>
     <div class="container">
 
-        <h2>INFORMATIONS</h2>
+        <h1>
+            {% set title="INFORMATIONS" %}
+            {{ title }}
+            <p class="titleStyle">
+                {{ title }}
+            </p>
+        </h1>
 
         <div class="row">
             {% for content in contents %}

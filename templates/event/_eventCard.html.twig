@@ -9,7 +9,7 @@
         <img class="card-img" src="/pictures/event/{{ event.picture ?? 'emptyEventPicture.jpg' }}" alt="Card image cap">
 
         <div class="card-body">
-            <p class="card-name">{{event.name}}</p>
+            <h2 class="content-name">{{event.name}}</h2>
 
             <a class="btn btn-sm btn-primary mt-2" href="{{ path('event_show', { 'id':event.id }) }}">
                 <i class="far fa-laugh-wink mr-1"></i>

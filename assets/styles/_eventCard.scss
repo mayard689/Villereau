@@ -49,7 +49,7 @@
       bottom : 5%;
       left : +15%;
 
-      box-shadow: 7px 5px 5px #3333335A;
+      box-shadow: $shadow;
       background-color : $light;
       border : thin solid black;
       border-radius : 3px;
@@ -57,11 +57,6 @@
       width : 80%;
 
       padding : 5px;
-
-      .card-name{
-        margin : 0;
-        font-size : $font-size;
-      }
     }
 
 

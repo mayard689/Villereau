@@ -15,15 +15,23 @@
 {% block body %}
     <section class="container">
 
-        <h1>{{ content.title }}</h1>
+        <h1>
+            {% set title=content.title %}
+            {{ title }}
+            <p class="titleStyle">
+                {{ title }}
+            </p>
+        </h1>
 
-        <img class="" src="/pictures/content/{{ content.picture ?? 'emptyContentPicture.jpg' }}" alt="{{ content.title }}">
+        <div class="main-picture-wrapper container">
+            <img class="main-picture" src="/pictures/content/{{ content.picture ?? 'emptyContentPicture.jpg' }}" alt="{{ content.title }}">
+        </div>
+
+        <p class="text">
+            {{ content.text }}
+        </p>
 
         <p class="detail">Publié le {{ content.date ? content.date|date('Y-m-d') : '' }}</p>
-
-        <div class="text">
-            {{ content.text }}
-        </div>
 
         {% include 'tools/_backButton.html.twig' with {
             'text': 'Revenir à la liste des articles',
@@ -38,8 +46,16 @@
             'path': path('content_delete', {'id': content.id}),
             'tokenIndex' : content.id
         } %}
+    </section>
 
-        <h2>Quelques suggestions</h2>
+    <section class="container">
+        <h1>
+            {% set title="QUELQUES ARTICLES AU HASARD..." %}
+            {{ title }}
+            <p class="titleStyle">
+                {{ title }}
+            </p>
+        </h1>
 
         <div class="card-deck">
             {% for content in contents %}
@@ -47,5 +63,9 @@
             {% endfor %}
         </div>
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la liste des articles',
+            'path': path('content_index')
+        } %}
     </section>
 {% endblock %}

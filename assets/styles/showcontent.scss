@@ -4,5 +4,14 @@
 .detail{
   color: grey;
   font-style: italic;
-  font-size: $font-size-small;
+  font-size: $font-size;
+}
+
+.main-picture-wrapper{
+  rwidth: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-h-large;
+  margin-bottom: $spacing-h-large;
+
 }

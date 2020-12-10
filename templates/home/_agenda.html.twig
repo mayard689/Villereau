@@ -1,5 +1,11 @@
 <section class="agenda container">
-    <h2>AGENDA</h2>
+    <h1>
+        {% set title="AGENDA" %}
+        {{ title }}
+        <p class="titleStyle">
+            {{ title }}
+        </p>
+    </h1>
 
     <div class="card-deck justify-content-around">
         {%  for event in events %}
