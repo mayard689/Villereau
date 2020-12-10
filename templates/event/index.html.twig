@@ -15,34 +15,44 @@
 {% block body %}
 
     <section class="container">
-            {%  include 'tools/_h1.html.twig' with {'title' : 'HISTORIQUE DES EVENEMENTS'} %}
+        {%  include 'tools/_h1.html.twig' with {'title' : 'HISTORIQUE DES EVENEMENTS'} %}
 
-            {% include 'tools/_adminButton.html.twig' with {
-                'text': 'Créer un nouvel évenement',
-                'path': path('event_new')
-            } %}
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
 
-            <div class="card-deck">
-                {% set eventMonth = 0 %}
-                {% for event in events %}
-                    {% if (event.date|date("m")) != eventMonth %}
-                        </div>
-                        <p class="month-group">{{ event.getMonth() }} {{ event.date|date("Y") }}</p>
-                        <hr>
-                        <div class="card-deck">
-                        {% set eventMonth = event.date|date("m") %}
-                    {% endif %}
-                    {{ include('event/_eventCard.html.twig') }}
-                {% else %}
-                    Aucun évenement trouvé
-                {% endfor %}
-            </div>
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel évenement',
+            'path': path('event_new')
+        } %}
 
-            {% include 'tools/_adminButton.html.twig' with {
-                'text': 'Créer un nouvel évenement',
-                'path': path('event_new')
-            } %}
+        <div class="card-deck">
+            {% set eventMonth = 0 %}
+            {% for event in events %}
+                {% if (event.date|date("m")) != eventMonth %}
+                    </div>
+                    <p class="month-group">{{ event.getMonth() }} {{ event.date|date("Y") }}</p>
+                    <hr>
+                    <div class="card-deck">
+                    {% set eventMonth = event.date|date("m") %}
+                {% endif %}
+                {{ include('event/_eventCard.html.twig') }}
+            {% else %}
+                Aucun évenement trouvé
+            {% endfor %}
         </div>
+
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel évenement',
+            'path': path('event_new')
+        } %}
+
     </section>
 
 {% endblock %}
