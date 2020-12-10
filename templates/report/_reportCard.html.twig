@@ -18,7 +18,7 @@
 
     {% include 'tools/_seeButton.html.twig' with {
         'text': 'Voir le rapport',
-        'path': path('report_show', {'id': report.id})
+        'path': "../documents/reports/"~report.document
     } %}
 
     {% include 'tools/_adminButton.html.twig' with {

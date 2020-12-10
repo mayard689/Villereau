@@ -53,16 +53,6 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="report_show", methods={"GET"})
-     */
-    public function show(Report $report): Response
-    {
-        return $this->render('report/show.html.twig', [
-            'report' => $report,
-        ]);
-    }
-
-    /**
      * @Route("/dernier", name="report_show_latest", methods={"GET"})
      */
     public function showLatest(Report $report): Response
