@@ -1,28 +1,35 @@
-<div class="modal-dialog modal-lg shadow">
-    <div class="modal-content">
-        <div class="modal-body">
+
             {{ form_start(form) }}
 
                 <div class="form-group row">
-                    <div class="col-3">{{ form_label(form.date, 'Indiquez la date : ') }}</div>
-                    <div class="col-sm-12 col-md-9">{{ form_widget(form.date, { 'attr': {'class': 'w-100'} }) }}</div>
-                    <div class="col-12">{{ form_errors(form.date) }}</div>
+                    {{ form_label(form.date, 'Indiquez la date : ') }}
+                    <div class="col-sm-10">{{ form_widget(form.date, { 'attr': {'class': 'w-100'} }) }}</div>
+                    <small>{{ form_help(form.date) }}</small>
+                    <div class="form-error">{{ form_errors(form.date) }}</div>
                 </div>
 
                 <div class="form-group row ">
-                    <div class="col-4">{{ form_label(form.documentFile, 'Selectionnez le document : ') }}</div>
-                    <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.documentFile) }}</div></div>
-                    <div class="col-12">{{ form_errors(form.documentFile) }}</div>
+                    {{ form_label(form.documentFile, 'Selectionnez le document : ') }}
+                    <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-10">{{ form_widget(form.documentFile) }}</div></div>
+                    <small>{{ form_help(form.documentFile) }}</small>
+                    <div class="form-error">{{ form_errors(form.documentFile) }}</div>
                 </div>
 
-                {% include 'tools/_backButton.html.twig' with {
-                    'text': 'Revenir à la liste des journaux',
-                    'path': path('content_index')
-                } %}
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        {% include 'tools/_backButton.html.twig' with {
+                            'text': 'Revenir à la liste des journaux',
+                            'path': path('content_index')
+                        } %}
 
-                {% include 'tools/_formAdminValidateButton.html.twig' with {
-                    'path': path('content_index')
-                } %}
+                        {% include 'tools/_formAdminValidateButton.html.twig' with {
+                            'path': path('content_index')
+                        } %}
+                    </div>
+                </div>
+
+
 
             {{ form_end(form) }}
 
@@ -56,9 +63,6 @@
                 {% endif %}
             </div>
 
-        </div>
-    </div>
-</div>
 
 <!-- Modal -->
 {% if not newspaper.id is null %}
