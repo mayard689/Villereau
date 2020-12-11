@@ -26,12 +26,19 @@
 
 html{
     font-size : 62.5%;
+    min-height : 100%;
 }
 
 body {
     background : $background;
     font-family: 'Source Sans';
     font-size : $font-size;
+
+    min-height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 section {

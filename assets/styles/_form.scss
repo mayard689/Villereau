@@ -1,0 +1,25 @@
+@import "_vars";
+
+.form-container{
+  padding : $spacing-w-small;
+}
+
+textarea.form-control{
+  _height : 25vh;
+}
+
+form .btn{
+  text-align: right;
+}
+
+form .input-number{
+  width : 60px;
+}
+
+.table {
+  border-spacing: 0px;
+}
+
+.table td, .table th{
+  vertical-align: baseline;
+}

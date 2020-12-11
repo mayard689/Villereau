@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dites nous tout{% endblock title %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('contact') }}
+{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <div class="form-container">
+            {{ form_start(form) }}
+                <div class="form-group row">
+                    {{ form_label(form.name, 'Votre nom :') }}
+                    <div class="col-sm-10">{{ form_widget(form.name) }}</div>
+
+                    <small>{{ form_help(form.name) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.name) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    {{ form_label(form.from, 'Votre email :') }}
+                    <div class="col-sm-10">{{ form_widget(form.from) }}</div>
+
+                    <small>{{ form_help(form.from) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.from) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    {{ form_label(form.message, 'Votre messsage :') }}
+                    <div class="col-sm-10">{{ form_widget(form.message) }}</div>
+
+                    <small>{{ form_help(form.message) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(form.message) }}
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <button class="btn btn-primary">{{ button_label|default('Envoyer') }}</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

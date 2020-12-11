@@ -48,7 +48,10 @@
             </div>
 
             <div class="col-4">
-
+                {% include 'tools/_seeButton.html.twig' with {
+                    'text': 'Contactez-nous !',
+                    'path': path('contact')
+                } %}
             </div>
         </div>
     </div>
