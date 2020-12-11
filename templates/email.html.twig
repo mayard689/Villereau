@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Bienvenue!{% endblock %}</title>
         {% block stylesheets %} {% endblock %}
     </head>
     <body>
@@ -37,11 +36,6 @@
                 <a href=" {{ app.request.schemeAndHttpHost~path('unregister',{'address':destination}) }}"> Desinscription </a>
             </div>
             {%  endif %}
-
-            <footer>
-                {% block footer %}{% endblock %}
-            </footer>
         {% endblock %}
-        {% block javascripts %} {{ encore_entry_script_tags('app') }} {% endblock %}
     </body>
 </html>

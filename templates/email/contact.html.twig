@@ -1,0 +1,13 @@
+{% extends 'email.html.twig' %}
+
+{% block object %}
+    Le message suivant vient de vous être envoyé :
+{% endblock %}
+
+{% block body %}
+    {{ name }}
+
+    {{ from }}
+
+    {{ message }}
+{% endblock %}
