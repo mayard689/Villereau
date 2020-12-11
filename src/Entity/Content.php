@@ -70,6 +70,12 @@ class Content
      */
     private $newspaperSubject2s;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="contents")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -192,5 +198,17 @@ class Content
     public function getPictureSize(): ?int
     {
         return $this->pictureSize;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }
