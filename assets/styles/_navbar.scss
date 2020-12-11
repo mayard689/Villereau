@@ -7,16 +7,24 @@
 .navbar{
   background : $dark;
   color : $light;
-  z-index : 1000;
 }
+
 
 #navbarNav{
   justify-content: center;
+
+  .dropdown-menu{
+    background-color : $dark;
+
+    a{
+      color : $light;
+      font-size : $font-size;
+    }
+  }
 }
 
 .nav-item{
   display: inline-block;
-  overflow: hidden;
   list-style: none;
 
   &:hover{
@@ -28,3 +36,5 @@
     font-size : $navbarLinkFontSize;
   }
 }
+
+

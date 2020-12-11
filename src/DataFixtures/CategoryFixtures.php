@@ -9,7 +9,7 @@ use Faker\Factory;
 
 class CategoryFixtures extends Fixture
 {
-    const CATEGORY_NUMBER=5;
+    const CATEGORY_NUMBER=6;
 
     const CATEGORIES = [
       0 => [

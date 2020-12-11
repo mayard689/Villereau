@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Content;
 use App\Form\ContentType;
+use App\Repository\CategoryRepository;
 use App\Repository\ContentRepository;
 use App\Repository\Newspaper2Repository;
 use App\Repository\NewspaperRepository;
@@ -30,7 +32,26 @@ class ContentController extends AbstractController
         $newspapers2 = $newspaper2Repository->findBy(array(), array('date' => 'DESC'));
 
         return $this->render('content/index.html.twig', [
-            'contents' => $contentRepository->findBy(array(), array('date' => 'DESC')),
+            'contents' => $contentRepository->findBy([], array('date' => 'DESC')),
+            'newspapers' => $newspapers,
+            'newspapers2' => $newspapers2,
+        ]);
+    }
+
+    /**
+     * @Route("categorie/{id}", name="content_index_category", methods={"GET"})
+     */
+    public function indexByCategory(
+        ContentRepository $contentRepository,
+        NewspaperRepository $newspaperRepository,
+        Newspaper2Repository $newspaper2Repository,
+        Category $category
+    ): Response {
+        $newspapers = $newspaperRepository->findBy(array(), array('date' => 'DESC'));
+        $newspapers2 = $newspaper2Repository->findBy(array(), array('date' => 'DESC'));
+
+        return $this->render('content/index.html.twig', [
+            'contents' => $contentRepository->findBy(['category' => $category], array('date' => 'DESC')),
             'newspapers' => $newspapers,
             'newspapers2' => $newspapers2,
         ]);
@@ -130,5 +151,14 @@ class ContentController extends AbstractController
         );
 
         return $this->redirectToRoute('content_index');
+    }
+
+    /**
+     * @Route("/list/category", name="content_categories")
+     */
+    public function getCategoryList(CategoryRepository $categoryRepository)
+    {
+        $categories=$categoryRepository->findAll();
+        return $this->render('_navbarCategoryItem.html.twig',['categories'=> $categories]);
     }
 }
