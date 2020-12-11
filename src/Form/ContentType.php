@@ -24,6 +24,7 @@ class ContentType extends AbstractType
                 'image_uri' => true,
                 'asset_helper' => true,
             ])
+            ->add('category',null, ['choice_label'=>'name'])
         ;
     }
 

@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Content;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class ContentFixtures extends Fixture
+class ContentFixtures extends Fixture implements DependentFixtureInterface
 {
     const CONTENT_NUMBER=20;
 
@@ -30,6 +31,10 @@ class ContentFixtures extends Fixture
                 $content->setTitle($faker->sentence);
                 $content->setText($faker->text(1000));
                 $content->setPicture('content-'.rand(1,7).'.jpg');
+
+                $categoryIndex = rand(0 , CategoryFixtures::CATEGORY_NUMBER-1);
+                $category = $this->getReference('category_'.$categoryIndex);
+                $content->setCategory($category);
             }
 
             $content->setDate($faker->dateTimeBetween('-3 months', '2021/06/31'));
@@ -40,4 +45,11 @@ class ContentFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function getDependencies()
+    {
+        return [CategoryFixtures::class];
+    }
 }
