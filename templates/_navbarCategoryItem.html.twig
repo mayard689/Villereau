@@ -10,7 +10,7 @@
                     Informations
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{{ path('content_index') }}">Bulletins Municipaux</a>
+                    <a class="dropdown-item" href="{{ path('newspaper_index') }}">Bulletins Municipaux</a>
                     {%  for category in categories %}
                         <a class="dropdown-item" href="{{ path('content_index_category', {'id':category.id}) }}">{{category.name}}</a>
                     {%  endfor %}

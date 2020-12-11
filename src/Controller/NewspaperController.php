@@ -19,6 +19,18 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class NewspaperController extends AbstractController
 {
+    /**
+     * @Route("/", name="newspaper_index", methods={"GET"})
+     */
+    public function index(NewspaperRepository $newspaperRepository, Newspaper2Repository $newspaper2Repository): Response
+    {
+        $newspapers = $newspaperRepository->findBy(array(), array('date' => 'DESC'));
+        $newspapers2 = $newspaper2Repository->findBy(array(), array('date' => 'DESC'));
+        return $this->render('newspaper/index.html.twig', [
+            'newspapers' => $newspapers,
+            'newspapers2' => $newspapers2,
+        ]);
+    }
 
     /**
      * @Route("/new", name="newspaper_new", methods={"GET","POST"})
