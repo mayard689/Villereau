@@ -1,2 +1,15 @@
 @import "_vars";
 @import "_form";
+
+.inflate, form{
+  flex-grow:5;
+
+  display:flex;
+  flex-direction : column;
+  min-height : 100%;
+}
+
+.row.inflate{
+  flex-direction : row;
+}
+
