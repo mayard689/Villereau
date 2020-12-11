@@ -11,11 +11,11 @@
 
             {% include 'tools/_backButton.html.twig' with {
                 'text': 'Revenir à la liste des journaux',
-                'path': path('newspaper_index')
+                'path': path('content_index')
             } %}
 
             {% include 'tools/_formAdminValidateButton.html.twig' with {
-                'path': path('newspaper_index')
+                'path': path('content_index')
             } %}
 
             {{ form_end(form) }}
