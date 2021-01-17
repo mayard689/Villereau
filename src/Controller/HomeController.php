@@ -7,6 +7,7 @@ use App\Form\NewsletterEmailType;
 use App\Repository\ContentRepository;
 use App\Repository\EventRepository;
 use App\Repository\ReportRepository;
+use App\Service\MeteoCH;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,6 +75,19 @@ class HomeController extends AbstractController
             'contents' => $contents,
             'newsletterForm' => $newsletterForm->createView(),
             'latestReport' => $latestReport,
+        ]);
+    }
+
+    /**
+     * @Route("/meteo", name="home_weather")
+     */
+    public function currentWeather(MeteoCH $meteoCH)
+    {
+        $weatherData = $meteoCH->getWeather();
+        $iconURL = $meteoCH->getCurrentIcon($weatherData);
+
+        return $this->render('home/_weatherWidget.html.twig', [
+            'iconURL' => $iconURL,
         ]);
     }
 

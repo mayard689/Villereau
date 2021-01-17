@@ -1,0 +1,55 @@
+<img class="widget-picture" src="{{ iconURL}}" alt="Current Meteo Icon">
+
+{%  set path = 'https://www.prevision-meteo.ch/uploads/widget/' %}
+{%  set pictures = ['villereau-45_0.png', 'villereau-45_1.png', 'villereau-45_2.png','villereau-45_3.png','villereau-45_4.png'] %}
+{%  set title = 'Météo des prochains jours à Villereau' %}
+
+<!-- Modal markup: https://getbootstrap.com/docs/4.4/components/modal/ -->
+<div class="modal fade" id="galeryModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>{{ title }}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <!-- Carousel markup: https://getbootstrap.com/docs/4.4/components/carousel/ -->
+                <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for picture in pictures %}
+                            <div class="carousel-item
+                                {% if loop.index0 == 0 %} active {% endif %}
+                            ">
+                                <img class="d-block w-100" src="{{ path }}{{picture}}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="control-buttons">
+                <a class="d-flex justify-content-around carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-left-square" fill="dark-blue" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                    </svg>
+                    <h2>jour precedent</h2>
+                </a>
+                <a class="d-flex justify-content-around carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                    <h2>jour suivant</h2>
+                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-arrow-right-square" fill="dark-blue" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>

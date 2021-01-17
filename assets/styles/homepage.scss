@@ -1,6 +1,7 @@
 @import "_vars";
 @import "_eventCard";
 @import "_contentCard";
+@import "bootstrap-gallery";
 
 .introduction{
   width:100vw;
@@ -28,9 +29,7 @@
 }
 
 .widget-picture-wrapper{
-  //$image-width-height : 35%;
-  //min-width : $image-width-height;
-  //max-width : $image-width-height;
+  background-color:$secondary;
   min-width : 100%;
   max-width : 100%;
   height : 0;
