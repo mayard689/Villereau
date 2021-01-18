@@ -1,45 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Teammate index{% endblock %}
+{% block title %}Mairie{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('teammatepage') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('teammatepage') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Teammate index</h1>
+    <section class="container">
+        <h1>Mairie</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Role</th>
-                <th>Type</th>
-                <th>Text</th>
-                <th>Picture</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
         {% for teammate in teammates %}
-            <tr>
-                <td>{{ teammate.id }}</td>
-                <td>{{ teammate.firstname }}</td>
-                <td>{{ teammate.lastname }}</td>
-                <td>{{ teammate.role }}</td>
-                <td>{{ teammate.type }}</td>
-                <td>{{ teammate.text }}</td>
-                <td>{{ teammate.picture }}</td>
-                <td>
-                    <a href="{{ path('teammate_show', {'id': teammate.id}) }}">show</a>
-                    <a href="{{ path('teammate_edit', {'id': teammate.id}) }}">edit</a>
-                </td>
-            </tr>
+            {{ include('teammate/_teammateCard.html.twig', {'teammate': teammate}) }}
         {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
+            <td colspan="8">no records found</td>
         {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('teammate_new') }}">Create new</a>
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel équipier',
+            'path': path('teammate_new')
+        } %}
+    <section class="container">
 {% endblock %}

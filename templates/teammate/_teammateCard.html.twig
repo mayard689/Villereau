@@ -1,0 +1,22 @@
+{%  set modalName= 'modale-teammate-'~teammate.id %}
+
+<div class="teammate row">
+
+    <div class="col-sm-12 col-md-6 teammatee-picture-wrapper" data-aos="fade-up" data-aos-duration="1500" data-aos-easing="ease-in-out">
+        <img class="teammate-picture shadow"
+             src="/pictures/teammate/{{ teammate.picture }}"
+             alt="Photo de {{teammate.firstname}}">
+    </div>
+
+    <div class="col-sm-12 col-md-6 teammate-data">
+        <p class="name">{{ teammate.firstname }} {{ teammate.lastname }}</p>
+        <p class="title">{{ teammate.role }}</p>
+        <p class="story">{{ teammate.text }}</p>
+        <div class="d-flex">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-info mr-2 ml-2" href="{{ path('teammate_edit', {'id': teammate.id}) }}"><i class="far fa-edit mr-1"></i>edit</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+

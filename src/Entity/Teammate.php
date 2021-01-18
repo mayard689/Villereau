@@ -85,7 +85,7 @@ class Teammate
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="content_picture", fileNameProperty="picture", size="pictureSize")
+     * @Vich\UploadableField(mapping="teammate_picture", fileNameProperty="picture", size="pictureSize")
      *
      * @var File|null
      */

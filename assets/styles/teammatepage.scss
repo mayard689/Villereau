@@ -1,0 +1,51 @@
+@import "_vars";
+
+.teammate{
+  margin: $spacing-w-normal;
+  margin-top : $spacing-w-large;
+  margin-bottom : $spacing-w-large;
+
+  &:nth-of-type(2n){
+    flex-direction: row-reverse;
+  }
+}
+
+
+.teammate-picture{
+  $width:250px;
+  width:$width;
+  height:$width;
+
+  max-width:70vw;
+  max-height:70vw;
+
+  border-radius:50%;
+
+  margin:auto;
+  margin-bottom:0;
+
+  display:flex;
+  align-items: center;
+  justify-content: center;
+
+  object-fit: cover;
+
+  vertical-align: bottom;
+}
+
+.teammatee-picture-wrapper{
+  position:relative;
+  bottom:0;
+  display:flex;
+  align-items: end;
+}
+
+.title{
+  font-size:24px;
+  color:$primary;
+}
+
+.name{
+  font-size:20px;
+  font-style: italic;
+}
