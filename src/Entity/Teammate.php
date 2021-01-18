@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TeammateRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TeammateRepository::class)
@@ -18,27 +19,58 @@ class Teammate
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Veuiller entrer plus de {{ limit }} caractères",
+     *      maxMessage = "Veuiller entrer moins de {{ limit }} caractères",
+     *      allowEmptyString = false
+     * )
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Veuiller entrer plus de {{ limit }} caractères",
+     *      maxMessage = "Veuiller entrer moins de {{ limit }} caractères",
+     *      allowEmptyString = false
+     * )
      */
     private $lastname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Veuiller entrer plus de {{ limit }} caractères",
+     *      maxMessage = "Veuiller entrer moins de {{ limit }} caractères",
+     *      allowEmptyString = false
+     * )
      */
     private $role;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Choice({"Maire", "Adjoint", "Conseiller", "Agent", "Secrétaire général"})
      */
     private $type;
 
     /**
      * @ORM\Column(type="text")
+     *
+     * @Assert\NotBlank
      */
     private $text;
 
