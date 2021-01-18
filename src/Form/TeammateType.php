@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class TeammateType extends AbstractType
 {
@@ -15,8 +16,9 @@ class TeammateType extends AbstractType
         $builder
             ->add('firstname', null, ['label' => 'Prénom'])
             ->add('lastname', null, ['label' => 'Nom'])
-            ->add('role', ChoiceType::class, [
-                'label' => 'Fonction',
+            ->add('role', null, ['label' => 'Rôle'])
+            ->add('type', ChoiceType::class, [
+                'label' => 'Type',
                 'choices' => [
                     "Maire" => "Maire",
                     "Adjoint"=> "Adjoint",
@@ -25,9 +27,16 @@ class TeammateType extends AbstractType
                     "Secrétaire général" => "Secrétaire général"
                 ]
             ])
-            ->add('type', null, ['label' => 'Type'])
             ->add('text', null, ['label' => 'Présentation'])
-            ->add('picture', null, ['label' => 'Photo'])
+            ->add('pictureFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'download_label' => '...',
+                'download_uri' => false,
+                'image_uri' => true,
+                'asset_helper' => true,
+                'label' => 'Photo',
+            ])
         ;
     }
 
