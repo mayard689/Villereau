@@ -39,8 +39,8 @@ class VcardFixtures extends Fixture
             $adjectif = $faker->randomElement(["joyeux", "peureux", "fiers", "beaux", "sexy"]);
             $card = new Vcard();
             $card->setName(
-                $faker->randomElement(["Les", "Association des", "Fondation pour les"]).
-                $adjectif.
+                $faker->randomElement(["Les", "Association des", "Fondation pour les"])." ".
+                $adjectif." ".
                 $faker->randomElement(["joueur", "fleuriste", "tireurs", "fêtards", "gymnastes"])
             );
             $card->setEmail($adjectif.$faker->email);
@@ -48,7 +48,7 @@ class VcardFixtures extends Fixture
             $card->setText($faker->text(125));
             $card->setRole("Loisir");
             $card->setType("Association");
-            $card->setPicture('fixture_assoc_card_'.rand(1,6).'.jpeg');
+            $card->setPicture('fixture_assoc_card_'.rand(1,4).'.jpeg');
 
             $manager->persist($card);
         }
@@ -57,8 +57,8 @@ class VcardFixtures extends Fixture
             $adjectif = $faker->randomElement(["pirate", "ripoux", "social", "communiste", "neutre"]);
             $card = new Vcard();
             $card->setName(
-                $faker->randomElement(["Centre de", "Fond de", "Comité d'action de", "Bureau de"]).
-                $faker->randomElement(["maires", "perception", "l'urbanisme", "l'état civil", "médecine"]).
+                $faker->randomElement(["Centre de", "Fond de", "Comité d'action de", "Bureau de"])." ".
+                $faker->randomElement(["maires", "perception", "l'urbanisme", "l'état civil", "médecine"])." ".
                 $adjectif
 
             );
@@ -66,7 +66,7 @@ class VcardFixtures extends Fixture
             $card->setPhone($faker->phoneNumber);
             $card->setText($faker->text(125));
             $card->setRole($adjectif);
-            $card->setType("Administratif");
+            $card->setType("Service Administratif");
             $card->setPicture('fixture_admin_card_'.rand(1,4).'.jpeg');
 
             $manager->persist($card);

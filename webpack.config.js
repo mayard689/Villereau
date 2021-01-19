@@ -30,6 +30,7 @@ Encore
     .addEntry('contentpage', './assets/contentpage.js')
     .addEntry('eventpage', './assets/eventpage.js')
     .addEntry('teammatepage', './assets/teammatepage.js')
+    .addEntry('vcardpage', './assets/vcardpage.js')
     .addEntry('showevent', './assets/showevent.js')
     .addEntry('showcontent', './assets/showcontent.js')
     .addEntry('formReport', './assets/formReport.js')

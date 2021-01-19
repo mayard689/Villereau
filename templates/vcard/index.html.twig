@@ -1,46 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vcard index{% endblock %}
+{% block title %}Mairie{% endblock %}
+
+{% block javascripts %}
+    {{ parent()}}
+    {{ encore_entry_script_tags('vcardpage') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('vcardpage') }}
+{% endblock %}
 
 {% block body %}
-    <h1>Vcard index</h1>
+    <section class="container-fluid">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Role</th>
-                <th>Type</th>
-                <th>Text</th>
-                <th>Picture</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for vcard in vcards %}
-            <tr>
-                <td>{{ vcard.id }}</td>
-                <td>{{ vcard.name }}</td>
-                <td>{{ vcard.email }}</td>
-                <td>{{ vcard.phone }}</td>
-                <td>{{ vcard.role }}</td>
-                <td>{{ vcard.type }}</td>
-                <td>{{ vcard.text }}</td>
-                <td>{{ vcard.picture }}</td>
-                <td>
-                    <a href="{{ path('vcard_edit', {'id': vcard.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'SORTIR A VILLEREAU'} %}
 
-    <a href="{{ path('vcard_new') }}">Create new</a>
+        <div class="row card-container">
+            {% for vcard in vcards %}
+                {% if vcard.type == 'Association' %}
+                        {{ include('vcard/_vcardCard.html.twig', {'vcard': vcard}) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {%  include 'tools/_h1.html.twig' with {'title' : 'SERVICES ADMINISTRATIFS'} %}
+
+        <div class="row card-container">
+            {% for vcard in vcards %}
+                {% if vcard.type == 'Service Administratif' %}
+                    {{ include('vcard/_vcardCard.html.twig', {'vcard': vcard}) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {%  include 'tools/_h1.html.twig' with {'title' : 'LES ENTREPRISES DE LA COMMUNE'} %}
+
+        <div class="row card-container">
+            {% for vcard in vcards %}
+                {% if vcard.type == 'Entreprise' %}
+                    {{ include('vcard/_vcardCard.html.twig', {'vcard': vcard}) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel équipier',
+            'path': path('vcard_new')
+        } %}
+
+    </section>
 {% endblock %}

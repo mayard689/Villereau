@@ -1,0 +1,17 @@
+<div class="col-sm-12 col-md-4">
+    <div class = "card-right">
+        <div class="card-image">
+            <img class=""
+                 src="/pictures/card/{{ vcard.picture }}"
+                 alt="Photo de {{vcard.name}}">
+        </div>
+
+        <div class="card-text">
+            <p class="name">{{ vcard.name }}</p>
+            <p class="title">{{ vcard.role }}</p>
+            <p class="text">{{ vcard.text|u.truncate(160) }}</p>
+            <p class="email">{{ vcard.email }}</p>
+            <p class="phone">{{ vcard.phone }}</p>
+        </div>
+    </div>
+</div>
