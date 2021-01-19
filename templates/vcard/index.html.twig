@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vcard index{% endblock %}
+
+{% block body %}
+    <h1>Vcard index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Type</th>
+                <th>Text</th>
+                <th>Picture</th>
+                <th>PictureSize</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vcard in vcards %}
+            <tr>
+                <td>{{ vcard.id }}</td>
+                <td>{{ vcard.name }}</td>
+                <td>{{ vcard.email }}</td>
+                <td>{{ vcard.phone }}</td>
+                <td>{{ vcard.role }}</td>
+                <td>{{ vcard.type }}</td>
+                <td>{{ vcard.text }}</td>
+                <td>{{ vcard.picture }}</td>
+                <td>{{ vcard.pictureSize }}</td>
+                <td>{{ vcard.updatedAt ? vcard.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('vcard_show', {'id': vcard.id}) }}">show</a>
+                    <a href="{{ path('vcard_edit', {'id': vcard.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('vcard_new') }}">Create new</a>
+{% endblock %}
