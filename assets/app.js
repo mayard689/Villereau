@@ -17,3 +17,11 @@ require('bootstrap');
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 
+//installed with "yarn add aos@next"
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+AOS.init({
+    easing: "ease-out",
+    duration: 800,
+    mirror : true,
+});

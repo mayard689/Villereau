@@ -1,18 +1,16 @@
 @import "_vars";
 
-.teammate{
-  margin: $spacing-w-normal;
-  margin-top : $spacing-w-large;
-  margin-bottom : $spacing-w-large;
-
-  &:nth-of-type(2n){
-    flex-direction: row-reverse;
-  }
+.row {
+  justify-content: space-between;
 }
 
+.teammate{
+  margin-top : $spacing-w-small;
+  margin-bottom : $spacing-w-small;
+}
 
 .teammate-picture{
-  $width:250px;
+  $width:175px;
   width:$width;
   height:$width;
 
@@ -32,7 +30,7 @@
   vertical-align: bottom;
 }
 
-.teammatee-picture-wrapper{
+.teammate-picture-wrapper{
   display:flex;
   align-items: baseline;
   justify-content: center;

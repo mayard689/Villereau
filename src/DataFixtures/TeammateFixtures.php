@@ -109,7 +109,7 @@ class TeammateFixtures extends Fixture
             $mate = new Teammate();
             $mate->setFirstname($teammate['firstname']);
             $mate->setLastname($teammate['lastname']);
-            $mate->setText($faker->text(1000));
+            $mate->setText($faker->text(500));
             $mate->setRole($teammate['role']);
             $mate->setType($teammate['type']);
             $mate->setPicture('fixture_mate_'.rand(1,6).'.jpeg');

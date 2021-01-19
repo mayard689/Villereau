@@ -1,17 +1,21 @@
 {%  set modalName= 'modale-teammate-'~teammate.id %}
 
-<div class="teammate row">
+<div class="teammate">
 
-    <div class="col-sm-12 col-md-6 teammatee-picture-wrapper" data-aos="fade-up" data-aos-duration="1500" data-aos-easing="ease-in-out">
+    <div class="teammate-picture-wrapper" data-aos="fade-in" data-aos-duration="1500" data-aos-offset="10" data-aos-easing="ease-in-out">
         <img class="teammate-picture shadow"
              src="/pictures/teammate/{{ teammate.picture }}"
              alt="Photo de {{teammate.firstname}}">
     </div>
 
-    <div class="col-sm-12 col-md-6 teammate-data">
+    <div class="teammate-data">
         <p class="name">{{ teammate.firstname }} {{ teammate.lastname }}</p>
         <p class="title">{{ teammate.role }}</p>
-        <p class="story">{{ teammate.text }}</p>
+        <p class="story">{{teammate.text|u.truncate(125)}}...</p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal{{ teammate.id }}">
+            Lire la suite
+        </button>
         <div class="d-flex">
             {% if is_granted('ROLE_ADMIN') %}
                 <a class="btn btn-info mr-2 ml-2" href="{{ path('teammate_edit', {'id': teammate.id}) }}"><i class="far fa-edit mr-1"></i>edit</a>
@@ -20,3 +24,25 @@
     </div>
 </div>
 
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{ teammate.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ teammate.firstname }} {{ teammate.lastname }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{teammate.text}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

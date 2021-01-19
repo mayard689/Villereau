@@ -14,13 +14,56 @@
 
 {% block body %}
     <section class="container">
-        <h1>Mairie</h1>
 
-        {% for teammate in teammates %}
-            {{ include('teammate/_teammateCard.html.twig', {'teammate': teammate}) }}
-        {% else %}
-            <td colspan="8">no records found</td>
-        {% endfor %}
+        {%  include 'tools/_h1.html.twig' with {'title' : 'VOS AGENTS COMMUNAUX'} %}
+
+        <div class="row">
+            {% for teammate in teammates %}
+                {% if teammate.type == 'Secrétaire Général' %}
+                    <div class="col-sm-12 col-md-3">
+                        {{ include('teammate/_teammateCard.html.twig', {'teammate': teammate}) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% for teammate in teammates %}
+                {% if teammate.type == 'Agent' %}
+                    <div class="col-sm-12 col-md-3">
+                        {{ include('teammate/_teammateCard.html.twig', {'teammate': teammate}) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        {%  include 'tools/_h1.html.twig' with {'title' : 'VOTRE CONSEIL MUNICIPAL'} %}
+
+        <div class="row">
+            {% for teammate in teammates %}
+                {% if teammate.type == 'Maire' %}
+                    <div class="col-sm-12 col-md-3">
+                        {{ include('teammate/_teammateCard.html.twig', {'teammate': teammate}) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% for teammate in teammates %}
+                {% if teammate.type == 'Adjoint' %}
+                    <div class="col-sm-12 col-md-3">
+                        {{ include('teammate/_teammateCard.html.twig', {'teammate': teammate}) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <div class="col-12"></div>
+
+            {% for teammate in teammates %}
+                {% if teammate.type == 'Conseiller' %}
+                    <div class="col-sm-12 col-md-3">
+                        {{ include('teammate/_teammateCard.html.twig', {'teammate': teammate}) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
 
         {% include 'tools/_backButton.html.twig' with {
             'text': 'Revenir à la page d\'accueil',
