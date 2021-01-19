@@ -16,8 +16,6 @@
                 <th>Type</th>
                 <th>Text</th>
                 <th>Picture</th>
-                <th>PictureSize</th>
-                <th>UpdatedAt</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -32,10 +30,7 @@
                 <td>{{ vcard.type }}</td>
                 <td>{{ vcard.text }}</td>
                 <td>{{ vcard.picture }}</td>
-                <td>{{ vcard.pictureSize }}</td>
-                <td>{{ vcard.updatedAt ? vcard.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('vcard_show', {'id': vcard.id}) }}">show</a>
                     <a href="{{ path('vcard_edit', {'id': vcard.id}) }}">edit</a>
                 </td>
             </tr>

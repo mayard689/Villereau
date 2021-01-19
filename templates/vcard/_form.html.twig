@@ -1,4 +1,52 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="form-group row">
+        <div class="col-3">{{ form_label(form.name) }}</div>
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.name, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.name) }}</div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">{{ form_label(form.email) }}</div>
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.email, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.email) }}</div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">{{ form_label(form.phone) }}</div>
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.phone, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.phone) }}</div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">{{ form_label(form.role) }}</div>
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.role, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.role) }}</div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">{{ form_label(form.type) }}</div>
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.type, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.type) }}</div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-3">{{ form_label(form.text, 'Texte : ') }}</div>
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.text, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.text) }}</div>
+    </div>
+
+    <div class="form-group row ">
+        <div class="col-4">{{ form_label(form.pictureFile, 'Selectionnez l\'image : ') }}</div>
+        <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.pictureFile) }}</div></div>
+        <div class="col-12">{{ form_errors(form.pictureFile) }}</div>
+    </div>
+
+    {% include 'tools/_backButton.html.twig' with {
+        'text': 'Revenir à la liste des équipiers',
+        'path': path('teammate_index')
+    } %}
+
+    {% include 'tools/_formAdminValidateButton.html.twig' with {
+        'path': path('teammate_index')
+    } %}
 {{ form_end(form) }}

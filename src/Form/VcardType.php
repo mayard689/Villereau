@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Vcard;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class VcardType extends AbstractType
 {
@@ -16,11 +18,24 @@ class VcardType extends AbstractType
             ->add('email')
             ->add('phone')
             ->add('role')
-            ->add('type')
+            ->add('type', ChoiceType::class, [
+                'label' => 'Type',
+                'choices' => [
+                    "Association" => "Association",
+                    "Service administratif"=> "Service administratif",
+                    "Entreprise" => "Entreprise",
+                ]
+            ])
             ->add('text')
-            ->add('picture')
-            ->add('pictureSize')
-            ->add('updatedAt')
+            ->add('pictureFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'download_label' => '...',
+                'download_uri' => false,
+                'image_uri' => true,
+                'asset_helper' => true,
+                'label' => 'Photo',
+            ])
         ;
     }
 

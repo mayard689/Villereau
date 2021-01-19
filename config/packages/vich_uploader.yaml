@@ -22,6 +22,10 @@ vich_uploader:
             uri_prefix: /pictures/teammate
             upload_destination: '%kernel.project_dir%/public/pictures/teammate'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        card_picture:
+            uri_prefix: /pictures/card
+            upload_destination: '%kernel.project_dir%/public/pictures/card'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
 
     #mappings:
     #    products:

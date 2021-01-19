@@ -80,7 +80,7 @@ class Vcard
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\Choice({"Association", "Entreprise", "Administration & Utile"})
+     * @Assert\Choice({"Association", "Entreprise", "Service administratif"})
      */
     private $type;
 
@@ -99,7 +99,7 @@ class Vcard
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="vcard_picture", fileNameProperty="picture", size="pictureSize")
+     * @Vich\UploadableField(mapping="card_picture", fileNameProperty="picture", size="pictureSize")
      *
      * @var File|null
      */
