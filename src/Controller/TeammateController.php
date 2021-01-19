@@ -49,16 +49,6 @@ class TeammateController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="teammate_show", methods={"GET"})
-     */
-    public function show(Teammate $teammate): Response
-    {
-        return $this->render('teammate/show.html.twig', [
-            'teammate' => $teammate,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="teammate_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Teammate $teammate): Response
