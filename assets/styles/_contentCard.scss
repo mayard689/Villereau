@@ -24,6 +24,7 @@
     bottom : 0;
     transform : translateY(100%);
     transition: 1000ms ease-in-out;;
+    border-radius : 0;
 
     padding : 10px;
 
@@ -40,6 +41,7 @@
       padding: 10px;
 
       background : $thirdary-transparent;
+      border-radius : 0;
     }
 
     .content-text{

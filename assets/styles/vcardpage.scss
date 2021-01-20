@@ -52,7 +52,6 @@
 
 $boxSpacing: 23px;
 $gridSize: 200px;
-$cornerRadius: 0;
 
 * {
   box-sizing: border-box;
@@ -70,7 +69,6 @@ $cornerRadius: 0;
   flex-wrap: nowrap;
   height: 90%;
   width: 100%;
-  border-radius: $cornerRadius;
   box-shadow: 0px 3px 9px 1px rgba(0, 10, 20, 0.2);
   background-color : $background;
 }
@@ -116,22 +114,6 @@ $cornerRadius: 0;
 .card-image img {
   width: 100%;
   object-fit: cover;
-}
-
-.card-top img {
-  border-radius: $cornerRadius $cornerRadius 0 0;
-}
-
-.card-right img {
-  border-radius: 0 $cornerRadius $cornerRadius 0;
-}
-
-.card-bottom img {
-  border-radius: 0 0 $cornerRadius $cornerRadius;
-}
-
-.card-left img {
-  border-radius: $cornerRadius 0 0 $cornerRadius;
 }
 
 .card-text {
@@ -185,14 +167,6 @@ $cornerRadius: 0;
   .card-top .card-image, .card-bottom .card-image {
     height: 100%;
     width: 50%;
-  }
-
-  .card-top img {
-    border-radius: $cornerRadius 0 0 $cornerRadius;
-  }
-
-  .card-bottom img {
-    border-radius: 0 $cornerRadius $cornerRadius 0;
   }
 
   .card-top .card-text {
