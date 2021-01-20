@@ -14,7 +14,18 @@
 
 {% block body %}
     <section class="container">
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
 
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel équipier',
+            'path': path('teammate_new')
+        } %}
+    </section>
+
+    <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'VOS AGENTS COMMUNAUX'} %}
 
         <div class="row">
@@ -34,7 +45,9 @@
                 {% endif %}
             {% endfor %}
         </div>
+    </section>
 
+    <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'VOTRE CONSEIL MUNICIPAL'} %}
 
         <div class="row">
@@ -64,7 +77,9 @@
                 {% endif %}
             {% endfor %}
         </div>
+    </section>
 
+    <section class="container">
         {% include 'tools/_backButton.html.twig' with {
             'text': 'Revenir à la page d\'accueil',
             'path': path('home')

@@ -10,14 +10,15 @@
 }
 
 .teammate-picture{
-  $width:175px;
-  width:$width;
+  $width:150px;
+  //width:$width;
   height:$width;
+  width : 100%;
 
   max-width:70vw;
   max-height:70vw;
 
-  border-radius:50%;
+  //border-radius:50%;
 
   margin:auto;
 
@@ -34,14 +35,21 @@
   display:flex;
   align-items: baseline;
   justify-content: center;
+  padding-bottom:$spacing-h-small;
 }
 
-.title{
-  font-size:24px;
-  color:$primary;
+.modal-body .teammate-picture-wrapper{
+  width : 30%;
+  padding-bottom:0;
 }
 
-.name{
+.job{
   font-size:20px;
   font-style: italic;
+  color:$thirdary;
+}
+
+.person-name{
+  font-size:24px;
+  margin-bottom:0;
 }
