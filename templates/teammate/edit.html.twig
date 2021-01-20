@@ -4,7 +4,7 @@
 
 {% block body %}
     <section class="container">
-        <h1>Modification d'un équipier</h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'MODIFIER L\'EQUIPIER'} %}
 
         {{ include('teammate/_form.html.twig', {'button_label': 'Update'}) }}
 

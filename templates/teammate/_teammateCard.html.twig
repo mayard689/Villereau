@@ -15,18 +15,18 @@
         {% if teammate.text|length > 200 %}
             <p class="story">{{teammate.text|u.truncate(125)}}...</p>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal{{ teammate.id }}">
+            <button type="button" class="btn btn-sm btn-primary mt-2" data-toggle="modal" data-target="#exampleModal{{ teammate.id }}">
                 Lire la suite
             </button>
         {%  else %}
             <p class="story">{{teammate.text}}</p>
         {% endif %}
 
-        <div class="d-flex">
-            {% if is_granted('ROLE_ADMIN') %}
-                <a class="btn btn-info mr-2 ml-2" href="{{ path('teammate_edit', {'id': teammate.id}) }}"><i class="far fa-edit mr-1"></i>edit</a>
-            {% endif %}
-        </div>
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Modifier',
+            'path': path('teammate_edit', {'id': teammate.id})
+        } %}
+
     </div>
 </div>
 

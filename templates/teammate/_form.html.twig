@@ -1,37 +1,37 @@
 {{ form_start(form) }}
 
     <div class="form-group row">
-        <div class="col-3">{{ form_label(form.firstname) }}</div>
+        {{ form_label(form.firstname) }}
         <div class="col-sm-12 col-md-9">{{ form_widget(form.firstname, { 'attr': {'class': 'w-100'} }) }}</div>
         <div class="col-12">{{ form_errors(form.firstname) }}</div>
     </div>
 
     <div class="form-group row">
-        <div class="col-3">{{ form_label(form.lastname) }}</div>
+        {{ form_label(form.lastname) }}
         <div class="col-sm-12 col-md-9">{{ form_widget(form.lastname, { 'attr': {'class': 'w-100'} }) }}</div>
         <div class="col-12">{{ form_errors(form.lastname) }}</div>
     </div>
 
     <div class="form-group row">
-        <div class="col-3">{{ form_label(form.role) }}</div>
+        {{ form_label(form.role) }}
         <div class="col-sm-12 col-md-9">{{ form_widget(form.role, { 'attr': {'class': 'w-100'} }) }}</div>
         <div class="col-12">{{ form_errors(form.role) }}</div>
     </div>
 
     <div class="form-group row">
-        <div class="col-3">{{ form_label(form.type) }}</div>
+        {{ form_label(form.type) }}
         <div class="col-sm-12 col-md-9">{{ form_widget(form.type, { 'attr': {'class': 'w-100'} }) }}</div>
         <div class="col-12">{{ form_errors(form.type) }}</div>
     </div>
 
     <div class="form-group row">
-        <div class="col-3">{{ form_label(form.text, 'Texte : ') }}</div>
+        {{ form_label(form.text, 'Texte : ') }}
         <div class="col-sm-12 col-md-9">{{ form_widget(form.text, { 'attr': {'class': 'w-100'} }) }}</div>
         <div class="col-12">{{ form_errors(form.text) }}</div>
     </div>
 
     <div class="form-group row ">
-        <div class="col-4">{{ form_label(form.pictureFile, 'Selectionnez l\'image : ') }}</div>
+        {{ form_label(form.pictureFile, 'Selectionnez l\'image : ') }}
         <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.pictureFile) }}</div></div>
         <div class="col-12">{{ form_errors(form.pictureFile) }}</div>
     </div>
