@@ -99,10 +99,15 @@
 
                 {{ form_start(newsletterForm) }}
 
-                <div class="form-group row">
-                    <div class="col-6">{{ form_label(newsletterForm.email, 'Merci d\'indiquer votre email') }}</div>
-                    <div class="col-sm-12 col-md-6">{{ form_widget(newsletterForm.email, {'attr': {'class': 'w-100'}}) }}</div>
-                    <div class="col-12">{{ form_errors(newsletterForm.email) }}</div>
+                <div class="form-group">
+                    <label for="newsletter_email_email">Merci d'indiquer votre email ci dessous pour être informé des prochaines publications. </label>
+                    <div class="col-sm-12">{{ form_widget(newsletterForm.email) }}</div>
+
+                    <small>{{ form_help(newsletterForm.email) }}</small>
+
+                    <div class="form-error">
+                        {{ form_errors(newsletterForm.email) }}
+                    </div>
                 </div>
 
                 {% include 'tools/_backButton.html.twig' with {

@@ -4,6 +4,11 @@
             <img class=""
                  src="/pictures/card/{{ vcard.picture }}"
                  alt="Photo de {{vcard.name}}">
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Modifier',
+                'path': path('vcard_edit', {'id': vcard.id})
+            } %}
         </div>
 
         <div class="card-text">

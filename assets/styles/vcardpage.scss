@@ -116,6 +116,13 @@ $gridSize: 200px;
 
 .card-image {
   display: flex;
+  position: relative;
+
+  .btn{
+    position : absolute;
+    right : 5px;
+    top : 5px;
+  }
 }
 
 .card-top .card-image, .card-bottom .card-image {

@@ -3,9 +3,9 @@
 {% block title %}New Vcard{% endblock %}
 
 {% block body %}
-    <h1>Create new Vcard</h1>
+    <section class="container">
+        {%  include 'tools/_h1.html.twig' with {'title' : 'AJOUTER UNE CARTE'} %}
 
-    {{ include('vcard/_form.html.twig') }}
-
-    <a href="{{ path('vcard_index') }}">back to list</a>
+        {{ include('vcard/_form.html.twig') }}
+    </section>
 {% endblock %}

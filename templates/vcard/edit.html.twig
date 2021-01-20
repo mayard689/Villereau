@@ -3,11 +3,14 @@
 {% block title %}Edit Vcard{% endblock %}
 
 {% block body %}
-    <h1>Edit Vcard</h1>
+    <section class="container">
+        {%  include 'tools/_h1.html.twig' with {'title' : 'MODIFIER LA CARTE'} %}
 
-    {{ include('vcard/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('vcard/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('vcard_index') }}">back to list</a>
-
-    {{ include('vcard/_delete_form.html.twig') }}
+        {% include'tools/_deleteButton.html.twig' with {
+            'path': path('vcard_delete', {'id': vcard.id}),
+            'tokenIndex' : vcard.id
+        } %}
+    </section>
 {% endblock %}
