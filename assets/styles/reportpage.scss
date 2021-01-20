@@ -9,7 +9,8 @@
   justify-content: space-between;
 
   box-shadow: $shadow;
-  background-color : white;
+  background-color : $secondary;
+  color : $light;
   border-radius : 3px;
 
   padding : 5px;
@@ -24,7 +25,6 @@
     font-family: 'Julius', sans-serif;
     text-align : center;
     font-weight : bold;
-    text-shadow : $shadow;
   }
 
   .summary-title{
@@ -36,8 +36,6 @@
   ul li, .no-subject{
     text-align : center;
     margin : 0;
-    color : $secondary;
-    text-shadow : $shadow;
   }
 
 
