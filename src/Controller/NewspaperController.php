@@ -112,7 +112,7 @@ class NewspaperController extends AbstractController
     public function showLatest(
         Newspaper2Repository $newspaper2Repository,
         NewspaperRepository $newspaperRepository
-    ): BinaryFileResponse
+    ): Response
     {
         //get latest newspaper
         $latestNewspaper = $newspaperRepository->findOneBy([],['date'=>'DESC']);
@@ -120,14 +120,29 @@ class NewspaperController extends AbstractController
         //get latest newspaper 2
         $latestNewspaper2 = $newspaper2Repository->findOneBy([],['date'=>'DESC']);
 
+        $filename=null;
+
         //get the report filename according to the latest file
-        $filename = $latestNewspaper->getDocument();
-        if ($latestNewspaper->getDate() < $latestNewspaper2->getDate()) {
+        if ($latestNewspaper) {
+            $filename = $latestNewspaper->getDocument();
+        } elseif ($latestNewspaper2) {
             $filename = '/newspaper_'.$latestNewspaper2->getId().'.pdf';
+        }
+
+        if ($latestNewspaper!=null && $latestNewspaper2!=null) {
+            if ($latestNewspaper->getDate() < $latestNewspaper2->getDate()) {
+                $filename = '/newspaper_'.$latestNewspaper2->getId().'.pdf';
+            }
         }
 
         // to being viewed in the Browser
         $publicDirectory = './documents/newspapers/';
-        return new BinaryFileResponse($publicDirectory.$filename);
+
+        if ($filename) {
+            return new BinaryFileResponse($publicDirectory.$filename);
+        }
+
+        $this->addFlash('danger', 'Aucun bulletin n\'est enregistré dans le système');
+        return $this->redirectToRoute('home');
     }
 }
