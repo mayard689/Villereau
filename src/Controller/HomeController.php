@@ -84,7 +84,11 @@ class HomeController extends AbstractController
     public function currentWeather(MeteoCH $meteoCH)
     {
         $weatherData = $meteoCH->getWeather();
-        $iconURL = $meteoCH->getCurrentIcon($weatherData);
+
+        $iconURL = null;
+        if($weatherData) {
+            $iconURL = $meteoCH->getCurrentIcon($weatherData);
+        }
 
         return $this->render('home/_weatherWidget.html.twig', [
             'iconURL' => $iconURL,

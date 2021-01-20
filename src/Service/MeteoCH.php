@@ -4,6 +4,7 @@ namespace App\Service;
 
 
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class MeteoCH
 {
@@ -26,7 +27,12 @@ class MeteoCH
      */
     public function getCurrentIcon(array $meteoData) : String
     {
-        return $meteoData['current_condition']['icon_big'];
+        try{
+            return $meteoData['current_condition']['icon_big'];
+        } catch (TransportExceptionInterface $e) {
+        }
+
+        return null;
     }
 
     public function getWeather(String $cityName='villereau-45')
@@ -34,22 +40,27 @@ class MeteoCH
         $content=null;
         $data=array();
 
-        $response = $this->client->request(
-            'GET',
-            'https://prevision-meteo.ch/services/json/'.$cityName
-        );
+        try {
+            $response = $this->client->request(
+                'GET',
+                'https://prevision-meteo.ch/services/json/' . $cityName
+            );
 
-        $statusCode = $response->getStatusCode();
+            $statusCode = $response->getStatusCode();
 
-        if ($statusCode === 200) {
-            // get the response in JSON format
-            //$content = $response->getContent();
+            if ($statusCode === 200) {
+                // get the response in JSON format
+                //$content = $response->getContent();
 
-            // convert the response (here in JSON) to an PHP array
-            $data = $response->toArray();
+                // convert the response (here in JSON) to an PHP array
+                $data = $response->toArray();
 
+            }
+
+            return $data;
+        } catch (TransportExceptionInterface $e) {
         }
 
-        return $data;
+        return null;
     }
 }
