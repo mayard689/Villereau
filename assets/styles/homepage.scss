@@ -28,6 +28,14 @@
   }
 }
 
+.container .row {
+  justify-content: center;
+}
+
+.widget{
+  padding : 15px;
+}
+
 .widget-picture-wrapper{
   background-color:$secondary;
   min-width : 100%;
@@ -56,6 +64,12 @@
 
 .weather{
   height : 95%;
+}
+
+.ccf {
+  width: 100%;
+  height : auto;
+  color : white;
 }
 
 .svg-label{
