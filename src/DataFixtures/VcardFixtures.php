@@ -41,7 +41,7 @@ class VcardFixtures extends Fixture
             $card->setName(
                 $faker->randomElement(["Les", "Association des", "Fondation pour les"])." ".
                 $adjectif." ".
-                $faker->randomElement(["joueur", "fleuriste", "tireurs", "fêtards", "gymnastes"])
+                $faker->randomElement(["joueurs", "fleuristes", "tireurs", "fêtards", "gymnastes"])
             );
             $card->setEmail($adjectif.$faker->email);
             $card->setPhone($faker->phoneNumber);

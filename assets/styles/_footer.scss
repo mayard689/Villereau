@@ -1,31 +1,33 @@
 @import "_vars";
 
 .footer {
-  padding : $spacing-w-small;
+  padding: $spacing-w-small;
 
-  height : $footer-height;
+  height: $footer-height;
 
-  background : $dark;
-  color : $primary;
+  background: $dark;
+  color: $primary;
+
+  border-radius: 0;
 }
 
 .footer li{
   list-style: none;
 
-  font-size : $font-size-small;
-  font-weight : bold;
+  font-size: $font-size-small;
+  font-weight: bold;
 
-  color : $light;
+  color: $light;
 
-  margin-left : $spacing-w-small;
+  margin-left: $spacing-w-small;
 }
 
 .third-part{
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .first-part{
-  margin:auto;
+  margin: auto;
 }

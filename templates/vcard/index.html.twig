@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mairie{% endblock %}
+{% block title %}Annuaire{% endblock %}
 
 {% block javascripts %}
     {{ parent()}}
@@ -13,8 +13,8 @@
 {% endblock %}
 
 {% block body %}
-    <section class="container-fluid">
 
+    <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'SORTIR A VILLEREAU'} %}
 
         <div class="row card-container">
@@ -25,6 +25,18 @@
             {% endfor %}
         </div>
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel équipier',
+            'path': path('vcard_new')
+        } %}
+    </section>
+
+    <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'SERVICES ADMINISTRATIFS'} %}
 
         <div class="row card-container">
@@ -35,6 +47,18 @@
             {% endfor %}
         </div>
 
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Créer un nouvel équipier',
+            'path': path('vcard_new')
+        } %}
+    </section>
+
+    <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'LES ENTREPRISES DE LA COMMUNE'} %}
 
         <div class="row card-container">
@@ -54,6 +78,5 @@
             'text': 'Créer un nouvel équipier',
             'path': path('vcard_new')
         } %}
-
     </section>
 {% endblock %}
