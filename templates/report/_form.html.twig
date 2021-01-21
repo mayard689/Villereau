@@ -1,63 +1,56 @@
-<div class="modal-dialog modal-lg shadow">
-    <div class="modal-content">
-        <div class="modal-body">
-            {{ form_start(form) }}
+{{ form_start(form) }}
 
-                <div class="form-group row">
-                    <div class="col-3">{{ form_label(form.date, 'Indiquez la date : ') }}</div>
-                    <div class="col-sm-12 col-md-9">{{ form_widget(form.date, { 'attr': {'class': 'w-100'} }) }}</div>
-                    <div class="col-12">{{ form_errors(form.date) }}</div>
-                </div>
-
-                <div class="form-group row ">
-                    <div class="col-4">{{ form_label(form.documentFile, 'Sélectionnez le document : ') }}</div>
-                    <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.documentFile) }}</div></div>
-                    <div class="col-12">{{ form_errors(form.documentFile) }}</div>
-                </div>
-
-                {% include 'tools/_backButton.html.twig' with {
-                    'text': 'Revenir à la liste des rapports',
-                    'path': path('report_index')
-                } %}
-
-                {% include 'tools/_formAdminValidateButton.html.twig' with {
-                    'path': path('report_index')
-                } %}
-
-            {{ form_end(form) }}
-
-            <div class="subjects">
-                <p>Ordre du jour :</p>
-                <ul>
-                    {%  set subjects = report.reportSubjects %}
-                    {%  for subject in subjects %}
-                        <li class="subject">
-                            <div class="row">
-                                <p class="col-6">{{ subject.title }}</p>
-
-                                <div class="col-6">
-                                    {% include 'tools/_deleteButton.html.twig' with {
-                                    'path': path('report_subject_delete', {'id': subject.id}),
-                                    'tokenIndex' : subject.id
-                                    } %}
-                                </div>
-                            </div>
-
-                        </li>
-                    {% else %}
-                        <p>Aucun sujet à l'orde du jour actuellement. Enregistrez le rapport pour ajouter des sujets.</p>
-                    {% endfor %}
-                </ul>
-
-                {% if not report.id is null %}
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#subjectNew">
-                        Ajouter un sujet à l'ordre du jour
-                    </button>
-                {% endif %}
-            </div>
-
-        </div>
+    <div class="form-group row">
+        {{ form_label(form.date, 'Indiquez la date : ') }}
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.date, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.date) }}</div>
     </div>
+
+    <div class="form-group row ">
+        {{ form_label(form.documentFile, 'Sélectionnez le document : ') }}
+        <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.documentFile) }}</div></div>
+        <div class="col-12">{{ form_errors(form.documentFile) }}</div>
+    </div>
+
+    {% include 'tools/_backButton.html.twig' with {
+        'text': 'Revenir à la liste des rapports',
+        'path': path('report_index')
+    } %}
+
+    {% include 'tools/_formAdminValidateButton.html.twig' with {
+        'path': path('report_index')
+    } %}
+
+{{ form_end(form) }}
+
+<div class="subjects">
+    <p>Ordre du jour :</p>
+    <ul>
+        {%  set subjects = report.reportSubjects %}
+        {%  for subject in subjects %}
+            <li class="subject">
+                <div class="row">
+                    <p class="col-6">{{ subject.title }}</p>
+
+                    <div class="col-6">
+                        {% include 'tools/_deleteButton.html.twig' with {
+                        'path': path('report_subject_delete', {'id': subject.id}),
+                        'tokenIndex' : subject.id
+                        } %}
+                    </div>
+                </div>
+
+            </li>
+        {% else %}
+            <p>Aucun sujet à l'orde du jour actuellement. Enregistrez le rapport pour ajouter des sujets.</p>
+        {% endfor %}
+    </ul>
+
+    {% if not report.id is null %}
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#subjectNew">
+            Ajouter un sujet à l'ordre du jour
+        </button>
+    {% endif %}
 </div>
 
 <!-- Modal -->
