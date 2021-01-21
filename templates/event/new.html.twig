@@ -14,7 +14,7 @@
 
 {% block body %}
     <section class="container">
-        <h1>Créer un évènement</h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'AJOUTER UN EVENEMENT'} %}
 
         {{ include('event/_form.html.twig') }}
 

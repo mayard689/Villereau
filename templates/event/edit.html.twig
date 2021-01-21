@@ -14,7 +14,7 @@
 
 {% block body %}
     <section class="container">
-        <h1>Modifier l'évènement</h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'MODIFIER L\'EVENEMENT} %}
 
         {{ include('event/_form.html.twig', {'button_label': 'Update'}) }}
 
