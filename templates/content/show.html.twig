@@ -15,13 +15,7 @@
 {% block body %}
     <section class="container">
 
-        <h1>
-            {% set title=content.title %}
-            {{ title }}
-            <p class="titleStyle">
-                {{ title }}
-            </p>
-        </h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : content.title} %}
 
         <div class="main-picture-wrapper container">
             <img class="main-picture" src="/pictures/content/{{ content.picture ?? 'emptyContentPicture.jpg' }}" alt="{{ content.title }}">
@@ -49,13 +43,7 @@
     </section>
 
     <section class="container">
-        <h1>
-            {% set title="QUELQUES ARTICLES AU HASARD..." %}
-            {{ title }}
-            <p class="titleStyle">
-                {{ title }}
-            </p>
-        </h1>
+        {%  include 'tools/_h1.html.twig' with {'title' : 'QUELQUES ARTICLES AU HASARD'} %}
 
         <div class="card-deck">
             {% for content in contents %}
