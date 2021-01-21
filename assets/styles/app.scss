@@ -133,13 +133,13 @@ li{
 
     line-height: 100%;
 
-    &:after{
+    /*&:after{
         content :"";
         background : center / contain no-repeat  url("../pictures/corn-multiple.png");
         min-width : 200px;
         height : 100px;
         display:inline-block;
-    }
+    }*/
 
     .pre-title{
         font-size : $font-size;
@@ -150,6 +150,61 @@ li{
         margin-left : -30px;
         padding : 0;
         line-height: 100%;
+    }
+}
+
+.corn1 {
+    height : 100px;
+
+    animation: 3s ease-in-out infinite wind1;
+    animation-direction: alternate;
+}
+
+.corn2 {
+    height : 100px;
+    position : relative;
+    right : 75px;
+    transform: rotate(25deg);
+
+    animation: 2.5s ease-in-out infinite wind2;
+    animation-direction: alternate;
+}
+
+.corn3 {
+    height : 100px;
+    right : 75px;
+
+    animation: 3.5s ease-in-out infinite wind3;
+    animation-direction: alternate;
+}
+
+@keyframes wind3 {
+    0% {
+        transform: skew(-5deg) translateX(5px);
+    }
+
+    100% {
+        transform: skew(0deg);
+    }
+}
+
+@keyframes wind2 {
+    0% {
+        transform: rotate(25deg) skew(+2deg) translateX(-2px);
+    }
+
+    100% {
+        transform: rotate(25deg) skew(0deg);
+    }
+}
+
+@keyframes wind1 {
+    0% {
+        transform: skew(-4deg) translateX(4px);
+    }
+
+    100% {
+        transform: skew(0deg);
     }
 }
 
