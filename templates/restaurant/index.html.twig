@@ -24,7 +24,7 @@
                     <th>Id</th>
                     <th>StartDate</th>
                     <th>EndDate</th>
-                    <th>File</th>
+                    <th>Menu</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -34,9 +34,8 @@
                     <td>{{ restaurant.id }}</td>
                     <td>{{ restaurant.startDate ? restaurant.startDate|date('Y-m-d') : '' }}</td>
                     <td>{{ restaurant.endDate ? restaurant.endDate|date('Y-m-d') : '' }}</td>
-                    <td>{{ restaurant.file }}</td>
+                    <td>{{ restaurant.document }}</td>
                     <td>
-                        <a href="{{ path('restaurant_show', {'id': restaurant.id}) }}">show</a>
                         <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
                     </td>
                 </tr>

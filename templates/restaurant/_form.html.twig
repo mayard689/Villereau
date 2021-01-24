@@ -1,10 +1,28 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    <div class="form-group row">
+        {{ form_label(form.startDate, 'Indiquez la date : ') }}
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.startDate, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.startDate) }}</div>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.endDate, 'Indiquez la date : ') }}
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.endDate, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.endDate) }}</div>
+    </div>
+
+    <div class="form-group row ">
+        {{ form_label(form.documentFile, 'Sélectionnez le document : ') }}
+        <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.documentFile) }}</div></div>
+        <div class="col-12">{{ form_errors(form.documentFile) }}</div>
+    </div>
 
     {% include 'tools/_backButton.html.twig' with {
         'text': 'Revenir à la liste des menu',
         'path': path('restaurant_index')
     } %}
 
-    {% include 'tools/_formAdminValidateButton.html.twig' %}
+        {% include 'tools/_formAdminValidateButton.html.twig' %}
+
 {{ form_end(form) }}

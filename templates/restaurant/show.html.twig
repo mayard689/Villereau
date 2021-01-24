@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>File</th>
-                <td>{{ restaurant.file }}</td>
+                <td>{{ restaurant.document }}</td>
             </tr>
         </tbody>
     </table>
@@ -30,5 +30,5 @@
 
     <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
 
-    {{ include('restaurant/_delete_form.html.twig') }}
+
 {% endblock %}

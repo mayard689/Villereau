@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * @Route("/restaurant")
@@ -49,16 +50,6 @@ class RestaurantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="restaurant_show", methods={"GET"})
-     */
-    public function show(Restaurant $restaurant): Response
-    {
-        return $this->render('restaurant/show.html.twig', [
-            'restaurant' => $restaurant,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="restaurant_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Restaurant $restaurant): Response
@@ -90,5 +81,29 @@ class RestaurantController extends AbstractController
         }
 
         return $this->redirectToRoute('restaurant_index');
+    }
+
+    /**
+     * @Route("/dernier", name="restaurant_show_latest", methods={"GET"})
+     */
+    public function showLatest(RestaurantRepository $restaurantRepository): Response
+    {
+        //get latest newspaper
+        $latestMenu = $restaurantRepository->findOneBy([],['endDate'=>'DESC']);
+
+        $filename=null;
+        if ($latestMenu) {
+            $filename = $latestMenu->getDocument();
+        }
+
+        // to being viewed in the Browser
+        $publicDirectory = './documents/menus/';
+
+        if ($filename) {
+            return new BinaryFileResponse($publicDirectory.$filename);
+        }
+
+        //$this->addFlash('danger', 'Aucun menu n\'a ététrouvé dans le système');
+        return $this->redirectToRoute('home');
     }
 }

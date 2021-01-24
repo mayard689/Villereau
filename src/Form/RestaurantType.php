@@ -6,6 +6,7 @@ use App\Entity\Restaurant;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class RestaurantType extends AbstractType
 {
@@ -14,7 +15,14 @@ class RestaurantType extends AbstractType
         $builder
             ->add('startDate')
             ->add('endDate')
-            ->add('file')
+            ->add('documentFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'download_label' => '...',
+                'download_uri' => false,
+                'image_uri' => true,
+                'asset_helper' => true,
+            ])
         ;
     }
 
