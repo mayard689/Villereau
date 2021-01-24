@@ -44,6 +44,28 @@ class Report
     private $documentSize;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $annex;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="report_document", fileNameProperty="annex", size="annexSize")
+     *
+     * @var File|null
+     */
+    private $annexFile;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     *
+     * @var int|null
+     */
+    private $annexSize;
+
+
+    /**
      * @ORM\Column(type="datetime", nullable=true)
      *
      * @var \DateTimeInterface|null
@@ -157,6 +179,53 @@ class Report
     public function getDocumentSize(): ?int
     {
         return $this->documentSize;
+    }
+
+    public function getAnnex(): ?string
+    {
+        return $this->annex;
+    }
+
+    public function setAnnex(?string $annex): self
+    {
+        $this->annex = $annex;
+
+        return $this;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setAnnexFile(?File $annexFile = null): void
+    {
+        $this->annexFile = $annexFile;
+
+        if (null !== $annexFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getAnnexFile(): ?File
+    {
+        return $this->annexFile;
+    }
+
+    public function setAnnexSize(?int $annexSize): void
+    {
+        $this->annexSize = $annexSize;
+    }
+
+    public function getAnnexSize(): ?int
+    {
+        return $this->annexSize;
     }
 
     public function getMonth() : String

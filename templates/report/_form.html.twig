@@ -12,6 +12,12 @@
         <div class="col-12">{{ form_errors(form.documentFile) }}</div>
     </div>
 
+    <div class="form-group row ">
+        {{ form_label(form.annexFile, 'Sélectionnez la note de synthèse : ') }}
+        <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.annexFile) }}</div></div>
+        <div class="col-12">{{ form_errors(form.annexFile) }}</div>
+    </div>
+
     {% include 'tools/_backButton.html.twig' with {
         'text': 'Revenir à la liste des rapports',
         'path': path('report_index')

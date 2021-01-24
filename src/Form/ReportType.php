@@ -24,6 +24,14 @@ class ReportType extends AbstractType
                 'image_uri' => true,
                 'asset_helper' => true,
             ])
+            ->add('annexFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => false,
+                'download_label' => '...',
+                'download_uri' => false,
+                'image_uri' => true,
+                'asset_helper' => true,
+            ])
         ;
     }
 

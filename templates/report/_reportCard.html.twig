@@ -22,6 +22,14 @@
             'path': "../documents/reports/"~report.document
         } %}
 
+        {%  if report.annex is not null %}
+            {% include 'tools/_seeButton.html.twig' with {
+                'text': 'Voir la note de synthèse',
+                'path': "../documents/reports/"~report.annex
+            } %}
+        {%  endif %}
+
+
         {% include 'tools/_adminButton.html.twig' with {
             'text': 'Modifier',
             'path': path('report_edit', {'id': report.id})
