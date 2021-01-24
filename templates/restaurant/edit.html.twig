@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le menu{% endblock %}
+
+{% block body %}
+
+    <section class="container">
+        {%  include 'tools/_h1.html.twig' with {'title' : 'MODIFIER LE MENU'} %}
+
+        {{ include('restaurant/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {% include'tools/_deleteButton.html.twig' with {
+            'path': path('restaurant_delete', {'id': restaurant.id}),
+            'tokenIndex' : restaurant.id
+        } %}
+    </section>
+{% endblock %}

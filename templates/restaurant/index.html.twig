@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des menus{% endblock %}
+
+{% block body %}
+    <section class="container">
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Ajouter un menu',
+            'path': path('restaurant_new')
+        } %}
+    </section>
+
+    <section class="container">
+        {%  include 'tools/_h1.html.twig' with {'title' : 'LISTE DES MENUS'} %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>StartDate</th>
+                    <th>EndDate</th>
+                    <th>File</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for restaurant in restaurants %}
+                <tr>
+                    <td>{{ restaurant.id }}</td>
+                    <td>{{ restaurant.startDate ? restaurant.startDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ restaurant.endDate ? restaurant.endDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ restaurant.file }}</td>
+                    <td>
+                        <a href="{{ path('restaurant_show', {'id': restaurant.id}) }}">show</a>
+                        <a href="{{ path('restaurant_edit', {'id': restaurant.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+
+    <section class="container">
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
+
+        {% include 'tools/_adminButton.html.twig' with {
+            'text': 'Ajouterer un menu',
+            'path': path('restaurant_new')
+        } %}
+    </section>
+{% endblock %}

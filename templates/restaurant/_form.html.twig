@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    {% include 'tools/_backButton.html.twig' with {
+        'text': 'Revenir à la liste des menu',
+        'path': path('restaurant_index')
+    } %}
+
+    {% include 'tools/_formAdminValidateButton.html.twig' %}
+{{ form_end(form) }}
