@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Partyroom{% endblock %}
+
+{% block body %}
+    <h1>Edit Partyroom</h1>
+
+    {{ include('partyroom/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('partyroom_index') }}">back to list</a>
+
+    {{ include('partyroom/_delete_form.html.twig') }}
+{% endblock %}

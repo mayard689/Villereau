@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Partyroom index{% endblock %}
+
+{% block body %}
+    <h1>Partyroom index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Booker</th>
+                <th>Validated</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for partyroom in partyrooms %}
+            <tr>
+                <td>{{ partyroom.id }}</td>
+                <td>{{ partyroom.date ? partyroom.date|date('Y-m-d') : '' }}</td>
+                <td>{{ partyroom.booker }}</td>
+                <td>{{ partyroom.validated ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('partyroom_show', {'id': partyroom.id}) }}">show</a>
+                    <a href="{{ path('partyroom_edit', {'id': partyroom.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('partyroom_new') }}">Create new</a>
+{% endblock %}
