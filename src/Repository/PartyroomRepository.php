@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Partyroom;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,24 @@ class PartyroomRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Partyroom::class);
+    }
+
+    /**
+     * Return the partyroom event between the two given dates
+     * @return mixed
+     * @throws \Exception
+     */
+    public function findEvents(Datetime $startDate, Datetime $endDate)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.date < :end')
+            ->setParameter('end', $endDate)
+            ->andWhere('p.date > :start')
+            ->setParameter('start', $startDate)
+            ->orderBy('p.date', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
     }
 
     // /**

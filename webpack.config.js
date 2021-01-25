@@ -36,6 +36,7 @@ Encore
     .addEntry('formReport', './assets/formReport.js')
     .addEntry('formEvent', './assets/formEvent.js')
     .addEntry('formContent', './assets/formContent.js')
+    .addEntry('partyroom', './assets/partyroom.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

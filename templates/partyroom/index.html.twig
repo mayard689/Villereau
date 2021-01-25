@@ -2,38 +2,71 @@
 
 {% block title %}Partyroom index{% endblock %}
 
+{% block stylesheets %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('partyroom') }}
+{% endblock %}
+
 {% block body %}
-    <h1>Partyroom index</h1>
+    <section class="container">
+        {%  include 'tools/_h1.html.twig' with {'title' : 'Planning de la salle de fêtes'} %}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Booker</th>
-                <th>Validated</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for partyroom in partyrooms %}
-            <tr>
-                <td>{{ partyroom.id }}</td>
-                <td>{{ partyroom.date ? partyroom.date|date('Y-m-d') : '' }}</td>
-                <td>{{ partyroom.booker }}</td>
-                <td>{{ partyroom.validated ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('partyroom_show', {'id': partyroom.id}) }}">show</a>
-                    <a href="{{ path('partyroom_edit', {'id': partyroom.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir à la page d\'accueil',
+            'path': path('home')
+        } %}
 
-    <a href="{{ path('partyroom_new') }}">Create new</a>
+        {# get the french written currently shown month #}
+        {% if currentMonth is not null %}
+            {%  if currentMonth == 1 %} {% set textMonth = 'Janvier' %} {% endif %}
+            {%  if currentMonth == 2 %} {% set textMonth = 'Fevrier' %} {% endif %}
+            {%  if currentMonth == 3 %} {% set textMonth = 'Mars' %} {% endif %}
+            {%  if currentMonth == 4 %} {% set textMonth = 'Avril' %} {% endif %}
+            {%  if currentMonth == 5 %} {% set textMonth = 'Mai' %} {% endif %}
+            {%  if currentMonth == 6 %} {% set textMonth = 'Juin' %} {% endif %}
+            {%  if currentMonth == 7 %} {% set textMonth = 'Juillet' %} {% endif %}
+            {%  if currentMonth == 8 %} {% set textMonth = 'Aout' %} {% endif %}
+            {%  if currentMonth == 9 %} {% set textMonth = 'Septembre' %} {% endif %}
+            {%  if currentMonth == 10 %} {% set textMonth = 'Octobre' %} {% endif %}
+            {%  if currentMonth == 11 %} {% set textMonth = 'Novembre' %} {% endif %}
+            {%  if currentMonth == 12 %} {% set textMonth = 'Décembre' %} {% endif %}
+        {% endif %}
+
+        <div class="calendar">
+            {{ include('tools/calendar/_calendar.html.twig') }}
+
+            <div class="button-panel">
+                {# previous button #}
+                {% set previousYear = currentYear %}
+                {% set previousMonth = currentMonth - 1 %}
+                {% if previousMonth < 1 %}
+                    {% set previousMonth = 12 %}
+                    {% set previousYear = previousYear - 1 %}
+                {% endif %}
+
+                {% include 'tools/_seeButton.html.twig' with {
+                    'text': previousMonth~'/'~previousYear,
+                    'path': path('partyroom_index', {'year' : previousYear, 'month' : previousMonth})
+                } %}
+
+                {# next button #}
+                {% set nextYear = currentYear %}
+                {% set nextMonth = currentMonth + 1 %}
+                {% if nextMonth > 12 %}
+                    {% set nextMonth = 1 %}
+                    {% set nextYear = nextYear +1 %}
+                {% endif %}
+
+                {% include 'tools/_seeButton.html.twig' with {
+                    'text': nextMonth~'/'~nextYear,
+                    'path': path('partyroom_index', {'year' : nextYear, 'month' : nextMonth})
+                } %}
+            </div>
+        </div>
+
+
+
+
+        <a href="{{ path('partyroom_new') }}">Create new</a>
+    </section>
 {% endblock %}

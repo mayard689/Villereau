@@ -1,0 +1,88 @@
+{#
+
+ source taken from https://gist.github.com/aknosis/3932192
+
+ time can be any string acceptable by http://www.php.net/strtotime, the
+ template will output that time's month.
+ If you don't want to pass in a date you can set time like this:
+ {% set time = "now"|date("U") %}
+ {% set time = "December 2012"|date("U") %}
+ How ever you want to output items onto the calendar is a different issue,
+ but I'd assume pushing everything into an array numerically indexed by that day:
+ $days = array(1=>array('Something on the first'),31=>array('Halloween'));
+#}
+
+
+    <div class="row justify-content-center">
+        <div class="col titles">
+            <p class="current-month">{{ textMonth }}</p>
+            <p class="current-year">{{ currentYear }}</p>
+        </div>
+    </div>
+    <div class="row justify-content-center calendar-header">
+        <div class="col">Dimande</div>
+        <div class="col">Lundi</div>
+        <div class="col">Mardi</div>
+        <div class="col">Mercredi</div>
+        <div class="col">Jeudi</div>
+        <div class="col">Vendredi</div>
+        <div class="col">Samedi</div>
+    </div>
+
+    <div class="row justify-content-center">
+        {% set daysInMonth = time|date('t') %}
+        {% set startDow = time|date('F 1\\s\\t Y')|date('w') %}
+        {% set dow = startDow %}
+        {% for day in range(1,daysInMonth) %}
+        {% if loop.first and startDow != 0 %}
+            {% for i in 1..startDow %}
+                <div class="col"></div>
+            {% endfor %}
+        {% endif %}
+        <div class="col">
+
+            {# calculate the class to be associated with this day div#}
+            {% set class = 'day' %}
+            {% if planning[day] is defined %}
+                {% set class = 'day pre-booked' %}
+                {% for event in planning[day] %}
+                    {% if event.validated %}
+                        {% set class = 'day booked' %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <div class="{{ class }}">
+                <div class="daynumber">{{ day }}</div>
+                <ul class="event-list">
+                    {% if planning[day] is defined %}
+                        {% for event in planning[day] %}
+                            <li>
+                                {{ event.booker }}
+
+                                {% include 'tools/_adminButton.html.twig' with {
+                                    'text': 'Valider',
+                                    'path': path('partyroom_validate', {'id' : event.id})
+                                } %}
+                            </li>
+
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% if loop.last and dow != 6 %}
+            {% for i in 1..(6 - dow) %}
+                <div class="col">&nbsp;</div>
+            {% endfor %}
+
+        {% endif %}
+        {% if dow == 6 %}
+        {% set dow = 0 %}
+    </div>
+    <div class="row justify-content-center">
+        {% else %}
+            {% set dow = dow + 1 %}
+        {% endif %}
+        {% endfor %}
+    </div>
