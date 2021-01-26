@@ -13,14 +13,9 @@
 #}
 
 
-    <div class="row justify-content-center">
-        <div class="col titles">
-            <p class="current-month">{{ textMonth }}</p>
-            <p class="current-year">{{ currentYear }}</p>
-        </div>
-    </div>
+
     <div class="row justify-content-center calendar-header">
-        <div class="col">Dimande</div>
+        <div class="col">Dimanche</div>
         <div class="col">Lundi</div>
         <div class="col">Mardi</div>
         <div class="col">Mercredi</div>
@@ -55,19 +50,8 @@
             <div class="{{ class }}">
                 <div class="daynumber">{{ day }}</div>
                 <ul class="event-list">
-                    {% if planning[day] is defined %}
-                        {% for event in planning[day] %}
-                            <li>
-                                {{ event.booker }}
-
-                                {% include 'tools/_adminButton.html.twig' with {
-                                    'text': 'Valider',
-                                    'path': path('partyroom_validate', {'id' : event.id})
-                                } %}
-                            </li>
-
-                        {% endfor %}
-                    {% endif %}
+                    {# calendar content #}
+                    {{ include('partyroom/_partyroomCard.html.twig') }}
                 </ul>
             </div>
         </div>

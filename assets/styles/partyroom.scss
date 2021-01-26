@@ -12,24 +12,30 @@
     display : flex;
     flex-direction : column;
     justify-items : flex-start;
-    height : 10vh;
 
-    _border : thin solid $secondary;
 
     .daynumber {
-        background-color : $medium;
-
         text-align : center;
         height : 35%;
     }
 
     .event-list {
         height : 65%;
+        text-align: center;
 
         li {
             list-style: none;
             margin : 0;
             padding : 10px;
+        }
+
+        .btn {
+            width : 90%;
+        }
+
+        > .btn{
+            background-color : $secondary;
+            border-color : $secondary;
         }
     }
 
@@ -39,6 +45,7 @@
     text-align : center;
     height : 35%;
     color: $primary;
+    margin-top : $spacing-h-small;
 }
 
 .calendar {
@@ -46,24 +53,36 @@
     flex-direction : column;
     justify-content: center;
     align-self : center;
-}
 
-.button-panel {
-    display : flex;
-    justify-content: space-around;
-}
+    border : thin solid $dark;
+    background-color : white;
 
-.titles {
-    text-align: center;
-    color : $light;
-    background-color : $secondary;
+    .calendar-bar {
+        background-color : $secondary;
+        border-radius : 0;
 
-    .current-month {
-        font-size : $font-size-verybig;
+        .next, .previous {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .titles {
+            text-align: center;
+            color : $light;
+
+            .current-month {
+                font-size : 2 * $font-size-verybig;
+            }
+
+            .current-year {
+                font-size : $font-size-big;
+            }
+        }
     }
-
-    .current-year {
-        font-size : $font-size-big;
-    }
 }
+
+
+
+
 

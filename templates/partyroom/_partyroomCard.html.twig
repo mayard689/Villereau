@@ -1,0 +1,27 @@
+{% if planning[day] is defined %}
+    {% for event in planning[day] %}
+        <li>
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ event.booker }}
+            {% endif %}
+
+            {% include'tools/_deleteButton.html.twig' with {
+                'path': path('partyroom_delete', {'id': event.id}),
+                'tokenIndex' : event.id
+            } %}
+
+            {% include 'tools/_adminButton.html.twig' with {
+                'text': 'Valider',
+                'path': path('partyroom_validate', {'id' : event.id})
+            } %}
+        </li>
+
+    {% endfor %}
+{% else %}
+    {%  set timestamp = time|date_modify("+"~day~" day")|date('U') %}
+    {% include 'tools/__genericButton.html.twig' with {
+        'text': 'Reserver',
+        'path': path('partyroom_new', {'timestamp' : timestamp}),
+        'icon': 'pen'
+    } %}
+{% endif %}

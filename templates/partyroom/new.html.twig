@@ -3,9 +3,12 @@
 {% block title %}New Partyroom{% endblock %}
 
 {% block body %}
-    <h1>Create new Partyroom</h1>
+    <section class="container">
+        {%  include 'tools/_h1.html.twig' with {'title' : 'Demander une reservation'} %}
+        <p>Pour la date du {{ partyroom.date ? partyroom.date|date('d/m/Y') : '' }}</p>
 
-    {{ include('partyroom/_form.html.twig') }}
+        {{ include('partyroom/_form.html.twig') }}
 
-    <a href="{{ path('partyroom_index') }}">back to list</a>
+        <a href="{{ path('partyroom_index') }}">back to list</a>
+    </section>
 {% endblock %}

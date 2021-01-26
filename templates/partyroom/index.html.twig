@@ -15,7 +15,9 @@
             'text': 'Revenir à la page d\'accueil',
             'path': path('home')
         } %}
+    </section>
 
+    <section class="container">
         {# get the french written currently shown month #}
         {% if currentMonth is not null %}
             {%  if currentMonth == 1 %} {% set textMonth = 'Janvier' %} {% endif %}
@@ -32,41 +34,46 @@
             {%  if currentMonth == 12 %} {% set textMonth = 'Décembre' %} {% endif %}
         {% endif %}
 
-        <div class="calendar">
+        <div class="calendar container shadow">
+            <div class="calendar-bar row">
+
+                <div class="col-2 previous">
+                    {% set previousYear = currentYear %}
+                    {% set previousMonth = currentMonth - 1 %}
+                    {% if previousMonth < 1 %}
+                        {% set previousMonth = 12 %}
+                        {% set previousYear = previousYear - 1 %}
+                    {% endif %}
+
+                    {% include 'tools/_seeButton.html.twig' with {
+                        'text': 'Mois précédent',
+                        'path': path('partyroom_index', {'year' : previousYear, 'month' : previousMonth})
+                    } %}
+                </div>
+
+                <div class="col titles">
+                    <p class="current-month">{{ textMonth }}</p>
+                    <p class="current-year">{{ currentYear }}</p>
+                </div>
+
+                <div class="col-2 next justify-center">
+                    {% set nextYear = currentYear %}
+                    {% set nextMonth = currentMonth + 1 %}
+                    {% if nextMonth > 12 %}
+                        {% set nextMonth = 1 %}
+                        {% set nextYear = nextYear +1 %}
+                    {% endif %}
+
+                    {% include 'tools/_seeButton.html.twig' with {
+                        'text': 'mois suivant',
+                        'path': path('partyroom_index', {'year' : nextYear, 'month' : nextMonth})
+                    } %}
+                </div>
+            </div>
+
             {{ include('tools/calendar/_calendar.html.twig') }}
 
-            <div class="button-panel">
-                {# previous button #}
-                {% set previousYear = currentYear %}
-                {% set previousMonth = currentMonth - 1 %}
-                {% if previousMonth < 1 %}
-                    {% set previousMonth = 12 %}
-                    {% set previousYear = previousYear - 1 %}
-                {% endif %}
-
-                {% include 'tools/_seeButton.html.twig' with {
-                    'text': previousMonth~'/'~previousYear,
-                    'path': path('partyroom_index', {'year' : previousYear, 'month' : previousMonth})
-                } %}
-
-                {# next button #}
-                {% set nextYear = currentYear %}
-                {% set nextMonth = currentMonth + 1 %}
-                {% if nextMonth > 12 %}
-                    {% set nextMonth = 1 %}
-                    {% set nextYear = nextYear +1 %}
-                {% endif %}
-
-                {% include 'tools/_seeButton.html.twig' with {
-                    'text': nextMonth~'/'~nextYear,
-                    'path': path('partyroom_index', {'year' : nextYear, 'month' : nextMonth})
-                } %}
-            </div>
         </div>
 
-
-
-
-        <a href="{{ path('partyroom_new') }}">Create new</a>
     </section>
 {% endblock %}

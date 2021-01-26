@@ -70,11 +70,18 @@ class PartyroomController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="partyroom_new", methods={"GET","POST"})
+     * @Route("/reserver/{timestamp}", name="partyroom_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(int $timestamp, Request $request): Response
     {
+        //if the timestamp is past or if it is more than one year after today
+        if ($timestamp < time() || $timestamp > (time() + (365 * 24 * 60 * 60))) {
+            return $this->redirectToRoute('partyroom_index');
+        }
+
         $partyroom = new Partyroom();
+        $partyroom->setValidated(false);
+        $partyroom->setDate(new DateTime('@'.$timestamp));
         $form = $this->createForm(PartyroomType::class, $partyroom);
         $form->handleRequest($request);
 
