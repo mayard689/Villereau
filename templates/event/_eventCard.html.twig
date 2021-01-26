@@ -1,12 +1,13 @@
-<div class="card event-card" >
+<div class="col-sm-12 col-md-6 col-lg-4 " >
+    <div class="event-card">
+        <div class="date">
+            <p class="day">{{event.date|date("d/m")}}</p>
+            <p class="hour">{{event.date|date("h\\hi")}}</p>
+        </div>
 
-    <div class="date">
-        <p class="day">{{event.date|date("d/m")}}</p>
-        <p class="hour">{{event.date|date("h\\hi")}}</p>
-    </div>
-
-
-        <img class="card-img" src="/pictures/event/{{ event.picture ?? 'emptyEventPicture.jpg' }}" alt="Card image cap">
+        <div class="img-wrapper">
+            <img class="event-img" src="/pictures/event/{{ event.picture ?? 'emptyEventPicture.jpg' }}" alt="Card image cap">
+        </div>
 
         <div class="card-body">
             <h2 class="content-name">{{event.name}}</h2>
@@ -27,6 +28,6 @@
             } %}
 
         </div>
-
+    </div>
 </div>
 

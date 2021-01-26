@@ -133,29 +133,25 @@ li{
 
     line-height: 100%;
 
-    /*&:after{
-        content :"";
-        background : center / contain no-repeat  url("../pictures/corn-multiple.png");
-        min-width : 200px;
-        height : 100px;
-        display:inline-block;
-    }*/
-
     .pre-title{
         font-size : $font-size;
         font-family: 'Source Sans';
         color : $secondary;
         margin-bottom :0;
         margin-top : 30px;
-        margin-left : -30px;
+        margin-left : calc(10px - 3vw);//-30px;
         padding : 0;
         line-height: 100%;
     }
 }
 
+.row {
+    justify-content: center;
+}
+
 .corn1 {
     height : 100px;
-
+    padding : 10px;
     animation: 3s ease-in-out infinite wind1;
     animation-direction: alternate;
 }
@@ -164,6 +160,7 @@ li{
     height : 100px;
     position : relative;
     right : 75px;
+    bottom : 10px;
     transform: rotate(25deg);
 
     animation: 2.5s ease-in-out infinite wind2;
@@ -172,8 +169,7 @@ li{
 
 .corn3 {
     height : 100px;
-    right : 100px;
-
+    padding : 10px;
     animation: 3.5s ease-in-out infinite wind3;
     animation-direction: alternate;
 }

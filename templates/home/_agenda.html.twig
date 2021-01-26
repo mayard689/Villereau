@@ -1,7 +1,7 @@
 <section class="agenda container">
     {%  include 'tools/_h1.html.twig' with {'title' : 'AGENDA'} %}
 
-    <div class="card-deck justify-content-around">
+    <div class="row justify-content-around">
         {%  for event in events %}
             {{ include('event/_eventCard.html.twig') }}
         {% endfor %}
