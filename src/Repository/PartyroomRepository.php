@@ -28,9 +28,9 @@ class PartyroomRepository extends ServiceEntityRepository
     public function findEvents(Datetime $startDate, Datetime $endDate)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.date < :end')
+            ->andWhere('p.date <= :end')
             ->setParameter('end', $endDate)
-            ->andWhere('p.date > :start')
+            ->andWhere('p.date >= :start')
             ->setParameter('start', $startDate)
             ->orderBy('p.date', 'ASC')
             ->getQuery()

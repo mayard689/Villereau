@@ -72,11 +72,24 @@ class PartyroomController extends AbstractController
     /**
      * @Route("/reserver/{timestamp}", name="partyroom_new", methods={"GET","POST"})
      */
-    public function new(int $timestamp, Request $request): Response
+    public function new(int $timestamp, Request $request, PartyroomRepository $partyroomRepository): Response
     {
+        $year = date("Y", $timestamp);
+        $month = date("m", $timestamp);
+        $day = date("d", $timestamp);
+
         //if the timestamp is past or if it is more than one year after today
         if ($timestamp < time() || $timestamp > (time() + (365 * 24 * 60 * 60))) {
-            return $this->redirectToRoute('partyroom_index');
+            $this->addFlash("danger", "La date que vous essayez de réserver est passée.");
+            return $this->redirectToRoute('partyroom_index', ['year' => $year, 'month' => $month]);
+        }
+
+        //check if the date has no booking
+        $startDate = new Datetime($day."-".$month."-".$year);
+        $events = $partyroomRepository->findEvents($startDate, $startDate);
+        if (count($events) != 0) {
+            $this->addFlash("danger", "La date que vous essayez de réserver n'est pas disponible.");
+            return $this->redirectToRoute('partyroom_index', ['year' => $year, 'month' => $month]);
         }
 
         $partyroom = new Partyroom();
@@ -90,7 +103,8 @@ class PartyroomController extends AbstractController
             $entityManager->persist($partyroom);
             $entityManager->flush();
 
-            return $this->redirectToRoute('partyroom_index');
+            $this->addFlash("success", "Votre demande de réservation a bien été envoyée à la mairie. Vous recevrez un email dés qu'elle sera confirmée.");
+            return $this->redirectToRoute('partyroom_index', ['year' => $year, 'month' => $month]);
         }
 
         return $this->render('partyroom/new.html.twig', [

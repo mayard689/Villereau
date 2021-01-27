@@ -19,9 +19,11 @@
     {% endfor %}
 {% else %}
     {%  set timestamp = time|date_modify("+"~day~" day")|date('U') %}
-    {% include 'tools/__genericButton.html.twig' with {
-        'text': 'Reserver',
-        'path': path('partyroom_new', {'timestamp' : timestamp}),
-        'icon': 'pen'
-    } %}
+    {%  if timestamp > ("now"|date('U')) %}
+        {% include 'tools/__genericButton.html.twig' with {
+            'text': 'Reserver',
+            'path': path('partyroom_new', {'timestamp' : timestamp}),
+            'icon': 'pen'
+        } %}
+    {% endif %}
 {% endif %}
