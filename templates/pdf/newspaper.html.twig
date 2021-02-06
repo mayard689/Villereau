@@ -1,20 +1,113 @@
 {% extends 'pdf.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent()}}
-    {{ encore_entry_link_tags('homepage') }}
+    <style>
+
+        @page {
+            margin: 150px 100px;
+        }
+
+        .article {
+            font-size : 12pt;
+            width : 100%;
+        }
+
+        .article:nth-of-type(2) {
+
+        }
+
+       .text-block {
+           min-width : 50%;
+           border:thin solid #000000;
+       }
+
+        .picture-block {
+            max-width : 50%;
+            border:thin solid #000000;
+            vertical-align: baseline;
+        }
+
+        .picture {
+            border:thin solid #000000;
+            vertical-align: baseline;
+            text-align: center;
+        }
+
+        .details {
+            float: left;
+            text-align : left;
+
+            color : #999999;
+            font-style: italic;
+            font-size : 8pt;
+            border-top : thin solid #999999;
+        }
+
+
+    </style>
 {% endblock %}
 
 {% block body %}
-    <h1>Bulletin municipal de la commune de VILLEREAU</h1>
+    <h1>Le Bulletin de VILLEREAU</h1>
     <p>Edité le {{ newspaper2.date ? newspaper2.date|date('d ') ~ newspaper2.month ~ newspaper2.date|date(' Y'): '' }}</p>
 
-    {% for subject in newspaper2.newspaperSubject2s %}
-        <section>
-            <h2>{{ subject.content.title }}</h2>
+    <section class="summary">
+        <h1>Au sommaire : </h1>
+        {% for subject in newspaper2.newspaperSubject2s %}
             {% set base64 = pictures[subject.content.picture] %}
-            <p><img src="{{base64}}" width="150" height="150"/>
-            {{ subject.content.text }}</p>
+
+            <h2><img src="{{base64}}" width="30" height="30"/>{{ subject.content.title }}</h2>
+        {% endfor %}
+    </section>
+
+
+
+    {% for subject in newspaper2.newspaperSubject2s %}
+        <section class="article">
+
+                <div class="text-block">
+                    <h2>{{ subject.content.title }}</h2>
+                    <p>{{ subject.content.text }}</p>
+                    <div class="details">
+                        <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
+                        <p class="category">Dans la catégorie {{ subject.content.category.name }}</p>
+                    </div>
+
+                </div>
+                <div class="picture-block">
+                    {% set base64 = pictures[subject.content.picture] %}
+                    <p><img class="picture" src="{{base64}}"/>
+                </div>
+
+
+
+            <table>
+                <thead>
+                <tr>
+                    <th colspan="2"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="article">
+                    <td class="text-block">
+
+                        <h2>{{ subject.content.title }}</h2>
+                        <p>{{ subject.content.text }}</p>
+                        <div class="details">
+                            <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
+                            <p class="category">Dans la catégorie {{ subject.content.category.name }}</p>
+                        </div>
+                    </td>
+
+                    <td class="picture-block">
+                        {% set base64 = pictures[subject.content.picture] %}
+                        <p><img class="picture" src="{{base64}}"/>
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
         </section>
     {% endfor %}
 {% endblock %}

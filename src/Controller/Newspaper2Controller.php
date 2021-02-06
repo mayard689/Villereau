@@ -136,4 +136,28 @@ class Newspaper2Controller extends AbstractController
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
     }
+
+    /**
+     * @Route("/preview/{id}", name="newspaper2_preview", methods={"GET"})
+     */
+    public function previewNewspaper(Newspaper2 $newspaper2){
+        //convert the picture
+        $pictures = [];
+        $subjects = $newspaper2->getNewspaperSubject2s();
+        foreach ($subjects as $subject) {
+            $picture = $subject->getContent()->getPicture();
+
+            $path = "./pictures/content/".$picture;
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+            $pictures[$picture] = $base64;
+        }
+
+        return $this->render('pdf/newspaper.html.twig', [
+            'newspaper2' => $newspaper2,
+            'pictures' => $pictures,
+        ]);
+    }
 }
