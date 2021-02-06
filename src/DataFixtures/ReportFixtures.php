@@ -29,7 +29,7 @@ class ReportFixtures extends Fixture
             if ($i < count(self::REPORT)) {
                 $report->setDocument(self::REPORT[$i]['document']);
             } else {
-                $report->setDocument('report-'.rand(1,2).'.pdf');
+                $report->setDocument('fixture_report-'.rand(1,2).'.pdf');
             }
 
             $report->setDate($faker->dateTimeThisYear($max = 'now'));
