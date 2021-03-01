@@ -178,6 +178,11 @@ li{
     animation-direction: alternate;
 }
 
+.blason {
+    height : 100px;
+    padding : 10px;
+}
+
 @keyframes wind3 {
     0% {
         transform: skew(-5deg) translateX(5px);
