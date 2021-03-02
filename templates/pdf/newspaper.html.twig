@@ -4,45 +4,72 @@
     <style>
 
         @page {
-            margin: 150px 100px;
+            margin: 100px 100px;
+        }
+
+        .summary {
+            page-break-after: always;
         }
 
         .article {
             font-size : 12pt;
-            width : 100%;
+            width : 100vw;
         }
 
-        .article:nth-of-type(2) {
-
+        .article:nth-of-type(even) .before{
+            display:none;
         }
+        .article:nth-of-type(odd) .after{
+            display:none;
+        }
+
+        .title-in-text {  }
+        .title-before-everything { display:none; }
+        .title-before-image { display:none; }
 
        .text-block {
            min-width : 50%;
-           border:thin solid #000000;
+           max-width : 50%;
+           xborder:thin solid #FF0000;
+       }
+
+       .text-block-body {
+           text-align: justify;
+           text-justify: inter-word;
        }
 
         .picture-block {
-            max-width : 50%;
-            border:thin solid #000000;
-            vertical-align: baseline;
+            border:thin solid #00FF00;
+            padding:0;
+            margin:0;
+            height:auto;
         }
 
-        .picture {
-            border:thin solid #000000;
-            vertical-align: baseline;
-            text-align: center;
+        .picture{
+            width : 250px;
+            border:thin solid #0000FF;
+            margin:0%;
+            xpadding:10px;
         }
 
         .details {
             float: left;
             text-align : left;
-
+            width:100%;
             color : #999999;
             font-style: italic;
             font-size : 8pt;
             border-top : thin solid #999999;
         }
 
+        .page_break {
+            page-break-before: always;
+        }
+
+        h2{
+            padding-top:0;
+            margin-top:0;
+        }
 
     </style>
 {% endblock %}
@@ -63,51 +90,43 @@
 
 
     {% for subject in newspaper2.newspaperSubject2s %}
+        {% set base64 = pictures[subject.content.picture] %}
         <section class="article">
-
-                <div class="text-block">
-                    <h2>{{ subject.content.title }}</h2>
-                    <p>{{ subject.content.text }}</p>
-                    <div class="details">
-                        <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
-                        <p class="category">Dans la catégorie {{ subject.content.category.name }}</p>
-                    </div>
-
-                </div>
-                <div class="picture-block">
-                    {% set base64 = pictures[subject.content.picture] %}
-                    <p><img class="picture" src="{{base64}}"/>
-                </div>
-
-
-
             <table>
-                <thead>
-                <tr>
-                    <th colspan="2"></th>
-                </tr>
-                </thead>
                 <tbody>
-                <tr class="article">
-                    <td class="text-block">
+                    <tr>
+                        <td class="title-before-everything" colspan="2">
+                            <h2>{{ subject.content.title }}</h2>
+                        </td>
+                    </tr>
 
-                        <h2>{{ subject.content.title }}</h2>
-                        <p>{{ subject.content.text }}</p>
-                        <div class="details">
-                            <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
-                            <p class="category">Dans la catégorie {{ subject.content.category.name }}</p>
-                        </div>
-                    </td>
+                    <tr class="">
+                        <td class="picture-block before">
+                            <h2 class="title-before-image">{{ subject.content.title }}</h2>
+                            <img class="picture" src="{{base64}}"/>
 
-                    <td class="picture-block">
-                        {% set base64 = pictures[subject.content.picture] %}
-                        <p><img class="picture" src="{{base64}}"/>
+                        </td>
 
-                    </td>
-                </tr>
+                        <td class="text-block">
+                            <h2 class="title-in-text">{{ subject.content.title }}</h2>
+                            <p class="text-block-body">{{ subject.content.text }}</p>
+                            <div class="details">
+                                <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
+                                <p class="category">Dans la catégorie {{ subject.content.category.name }}</p>
+                            </div>
+                        </td>
+
+                        <td class="picture-block after">
+                            <h2 class="title-before-image">{{ subject.content.title }}</h2>
+                            <img class="picture" src="{{base64}}"/>
+
+                        </td>
+                        <br>
+                    </tr>
                 </tbody>
             </table>
 
         </section>
+        <br>
     {% endfor %}
 {% endblock %}
