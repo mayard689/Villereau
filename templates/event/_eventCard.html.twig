@@ -1,5 +1,8 @@
 <div class="col-sm-12 col-md-6 col-lg-4 " >
-    <div class="event-card">
+    <div class="
+        event-card
+        {% if event.restricted %}event-restricted{% endif %}
+    ">
         <div class="date">
             <p class="day">{{event.date|date("d/m")}}</p>
             <p class="hour">{{event.date|date("h\\hi")}}</p>

@@ -61,7 +61,11 @@
 
     padding : 5px;
   }
+}
 
-
-
+.event-restricted {
+  .date{
+    background-color : $warning;
+    color:$dark;
+  }
 }
