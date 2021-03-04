@@ -1,30 +1,48 @@
 {% extends 'email.html.twig' %}
 
-{% block title %}Un nouvel évenement a été créé{% endblock %}
+{% block title %}
+    {%  if isModified %}
+        Un évenement a été mis à jour
+    {% else %}
+        Un nouvel évenement a été créé
+    {% endif %}
+{% endblock %}
 
 {% block stylesheets %}
 
 {% endblock %}
 
 {% block message %}
-    <h2 style="
-        color:#D72C16;
-    ">La mairie de Villereau souhaite vous informer de l'évolution de l'évenement \"{{ event.name }}\"</h2>
-
+    <h2 style="color:#D72C16;">
+        {%  if isModified %}
+            La mairie de Villereau souhaite vous informer de l'évolution de l'évenement "{{ event.name }}"
+        {% else %}
+            La mairie de Villereau souhaite vous informer d'un évenement à venir : "{{ event.name }}"
+        {% endif %}
+    </h2>
+    
     <div class="card content-card">
         <h5 class="card-title">{{event.name}}</h5>
         <img class="card-img-top" src="{{ email.image('@pictures/event/emptyEventPicture.jpg') }}" alt="Card image cap">
-        <h6 class="card-title">Publié le {{event.date|date("d/m/Y")}}</h6>
+        <h6 class="card-title">Publié le {{"now"|date("d/m/Y")}}</h6>
 
         <div class="card-body">
-            <p class="card-text">{{event.date|date("d/m/Y h\\hi")}}...</p>
-            <p class="card-text">{{event.place}}...</p>
+            <p class="card-text">{{event.date|date("d/m/Y h\\hi")}}</p>
+            <p class="card-text">{{event.place}}</p>
             <p class="card-text">{{event.text|u.truncate(125)}}...</p>
 
-            {% include 'tools/_seeButton.html.twig' with {
-                'text': 'Voir l\'évènement',
-                'path': path('event_show', {'id': event.id})
-            } %}
+            <a style="
+                    font-size: 1.0rem;
+                    color: #333333;
+                    border-radius: 5px;
+                    background-color: #EF9F9F;
+                    border-color: #EF9F9F;
+                    text-decoration: none;
+                    padding: 0.25rem 0.5rem;
+                "
+               href="{{ app.request.schemeAndHttpHost }}{{ path('event_show', {'id': event.id}) }}">
+                Voir l'évènement
+            </a>
         </div>
     </div>
 {% endblock %}

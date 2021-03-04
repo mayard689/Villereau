@@ -9,6 +9,7 @@ use App\Service\MailSender;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -36,7 +37,7 @@ class EventController extends AbstractController
     /**
      * @Route("/new", name="event_new", methods={"GET","POST"})
      */
-    public function new(Request $request, MailerInterface $mailer): Response
+    public function new(Request $request, MailSender $mailSender): Response
     {
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
@@ -47,7 +48,13 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre évènement a bien été créé.');
+            //notify people who have a registered and verified account
+            try {
+                $mailSender->notifyEventToSubscribers($event, false);
+                $this->addFlash('success', 'Votre évènement a bien été créé. Le conseil a été informé par email.');
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash('danger', 'Votre évènement a bien été créé. Un probleme est survenu pendant l\'envoie des emails au conseil.');
+            }
 
             return $this->redirectToRoute('event_index');
         }
@@ -71,7 +78,7 @@ class EventController extends AbstractController
     /**
      * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Event $event): Response
+    public function edit(Request $request, Event $event, MailSender $mailSender): Response
     {
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
@@ -79,7 +86,13 @@ class EventController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'L\'évènement a bien été modifié');
+            //notify people who have a registered and verified account
+            try {
+                $mailSender->notifyEventToSubscribers($event, true);
+                $this->addFlash('success', 'Votre évènement a bien été modifié. Le conseil a été informé par email.');
+            } catch (TransportExceptionInterface $e) {
+                $this->addFlash('danger', 'Votre évènement a bien été modifié. Un probleme est survenu pendant l\'envoie des emails au conseil.');
+            }
 
             return $this->redirectToRoute('event_index');
         }
@@ -109,12 +122,14 @@ class EventController extends AbstractController
      */
     public function notify(Event $event, MailSender $mailSender): Response
     {
-        $mailSender->notifyEventToMembers($event);
 
-        $this->addFlash(
-            'success',
-            'Un email a bien été envoyé à tous les abonnés concernant l\'évènement .'.$event->getName()
-        );
+        //notify people who subscribed to the newsletter
+        try {
+            $mailSender->notifyEventToMembers($event);
+            $this->addFlash('success', 'Un email a bien été envoyé à tous les abonnés concernant l\'évènement .'.$event->getName());
+        } catch (TransportExceptionInterface $e) {
+            $this->addFlash('danger', 'Un problème est survenu pendant l\'envoie des emails');
+        }
 
         return $this->redirectToRoute('event_index');
     }
