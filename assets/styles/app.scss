@@ -190,6 +190,10 @@ li{
     top: calc( 2px + 0.7rem );
 }
 
+.form-control{
+    font-size: $font-size;
+}
+
 @keyframes wind3 {
     0% {
         transform: skew(-5deg) translateX(5px);

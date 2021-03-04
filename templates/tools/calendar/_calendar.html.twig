@@ -15,13 +15,13 @@
 
 
     <div class="row justify-content-center calendar-header">
-        <div class="col">Dimanche</div>
-        <div class="col">Lundi</div>
-        <div class="col">Mardi</div>
-        <div class="col">Mercredi</div>
-        <div class="col">Jeudi</div>
-        <div class="col">Vendredi</div>
-        <div class="col">Samedi</div>
+        <div class="col-1">Dimanche</div>
+        <div class="col-1">Lundi</div>
+        <div class="col-1">Mardi</div>
+        <div class="col-1">Mercredi</div>
+        <div class="col-1">Jeudi</div>
+        <div class="col-1">Vendredi</div>
+        <div class="col-1">Samedi</div>
     </div>
 
     <div class="row justify-content-center">
@@ -29,44 +29,45 @@
         {% set startDow = time|date('F 1\\s\\t Y')|date('w') %}
         {% set dow = startDow %}
         {% for day in range(1,daysInMonth) %}
-        {% if loop.first and startDow != 0 %}
-            {% for i in 1..startDow %}
-                <div class="col"></div>
-            {% endfor %}
-        {% endif %}
-        <div class="col">
+            {% if loop.first and startDow != 0 %}
+                {% for i in 1..startDow %}
+                    <div class="col-1"></div>
+                {% endfor %}
+            {% endif %}
+            <div class="col-1">
+                {# calculate the class to be associated with this day div#}
+                {% set class = 'day' %}
+                {% if planning[day] is defined %}
+                    {% set class = 'day pre-booked' %}
+                    {% for event in planning[day] %}
+                        {% if event.validated %}
+                            {% set class = 'day booked' %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
 
-            {# calculate the class to be associated with this day div#}
-            {% set class = 'day' %}
-            {% if planning[day] is defined %}
-                {% set class = 'day pre-booked' %}
-                {% for event in planning[day] %}
-                    {% if event.validated %}
-                        {% set class = 'day booked' %}
-                    {% endif %}
+                <div class="{{ class }}">
+                    <div class="daynumber">{{ day }}</div>
+                    <ul class="event-list">
+                        {# calendar content #}
+                        {{ include('partyroom/_partyroomCard.html.twig') }}
+                    </ul>
+                </div>
+            </div>
+
+            {% if loop.last and dow != 6 %}
+                {% for i in 1..(6 - dow) %}
+                    <div class="col-1">&nbsp;</div>
                 {% endfor %}
             {% endif %}
 
-            <div class="{{ class }}">
-                <div class="daynumber">{{ day }}</div>
-                <ul class="event-list">
-                    {# calendar content #}
-                    {{ include('partyroom/_partyroomCard.html.twig') }}
-                </ul>
-            </div>
-        </div>
-        {% if loop.last and dow != 6 %}
-            {% for i in 1..(6 - dow) %}
-                <div class="col">&nbsp;</div>
-            {% endfor %}
-
-        {% endif %}
-        {% if dow == 6 %}
-        {% set dow = 0 %}
-    </div>
-    <div class="row justify-content-center">
-        {% else %}
-            {% set dow = dow + 1 %}
-        {% endif %}
+            {% if dow == 6 %}
+                {% set dow = 0 %}
+                {# close and open a new row #}
+                </div>
+                <div class="row justify-content-center">
+            {% else %}
+                {% set dow = dow + 1 %}
+            {% endif %}
         {% endfor %}
     </div>
