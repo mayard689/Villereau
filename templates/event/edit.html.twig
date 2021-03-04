@@ -19,7 +19,7 @@
         {{ include('event/_form.html.twig', {'button_label': 'Update'}) }}
 
         {% include'tools/_deleteButton.html.twig' with {
-            'path': path('content_delete', {'id': event.id}),
+            'path': path('event_delete', {'id': event.id}),
             'tokenIndex' : event.id
         } %}
 

@@ -22,8 +22,14 @@ class EventController extends AbstractController
      */
     public function index(EventRepository $eventRepository): Response
     {
+        //chek if user can see restricted events
+        $criteria = array();
+        if (!$this->isGranted('ROLE_SUBSCRIBER')) {
+            $criteria = array("restricted" => 0);
+        }
+
         return $this->render('event/index.html.twig', [
-            'events' => $eventRepository->findBy(array(), array('date' => 'DESC')),
+            'events' => $eventRepository->findBy($criteria, array('date' => 'DESC')),
         ]);
     }
 

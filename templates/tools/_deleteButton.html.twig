@@ -1,4 +1,4 @@
-{% if is_granted('ROLE_ADMIN') %}
+{% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_SUBSCRIBER')%}
     <form method="post" action="{{ path }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer cet élément ?');">
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tokenIndex) }}">

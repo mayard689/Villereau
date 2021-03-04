@@ -183,6 +183,13 @@ li{
     padding : 10px;
 }
 
+.custom-switch .custom-control-label::before {
+    top: 0.7rem;
+}
+.custom-switch .custom-control-label::after {
+    top: calc( 2px + 0.7rem );
+}
+
 @keyframes wind3 {
     0% {
         transform: skew(-5deg) translateX(5px);

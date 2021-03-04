@@ -68,6 +68,11 @@ class Event
      */
     private $place;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $restricted;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -198,5 +203,17 @@ class Event
             case "12":
                 return "Décembre";
         }
+    }
+
+    public function getRestricted(): ?bool
+    {
+        return $this->restricted;
+    }
+
+    public function setRestricted(bool $restricted): self
+    {
+        $this->restricted = $restricted;
+
+        return $this;
     }
 }

@@ -25,8 +25,18 @@
     </div>
 
     <div class="form-group row ">
+        {{ form_label(form.restricted, 'Your name', {
+            'label_attr': {'class': 'switch-custom custom-control-label'}
+        }) }}
+        <div class="col-sm-11">{{ form_widget(form.restricted, { 'attr': {'class': ''} }) }}</div>
+        <div class="col-12">{{ form_errors(form.restricted) }}</div>
+    </div>
+
+    <div class="form-group row ">
         {{ form_label(form.pictureFile, 'Sélectionnez l\'image : ') }}
-        <div class="img-wrapper w-50 overflow-hidden"><div class="col-sm-12 col-md-8">{{ form_widget(form.pictureFile) }}</div></div>
+        <div class="img-wrapper w-75 overflow-hidden">
+            <div class="col-sm-12 col-md-8">{{ form_widget(form.pictureFile) }}</div>
+        </div>
         <div class="col-12">{{ form_errors(form.pictureFile) }}</div>
     </div>
 

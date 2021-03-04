@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -17,6 +18,12 @@ class EventType extends AbstractType
             ->add('text')
             ->add('date')
             ->add('place')
+            ->add('restricted',CheckboxType::class, [
+                'label' => 'Reserver cet évenement au conseil municipal',
+                'label_attr' => [
+                    'class' => 'switch-custom'
+                ]
+            ])
             ->add('pictureFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => false,
