@@ -1,0 +1,27 @@
+{% extends 'email.html.twig' %}
+
+{% block title %}Votre inscription à Villereau{% endblock %}
+
+
+{% block message %}
+    <h1 style="color:#D72C16;">Merci de confirmer votre email !</h1>
+
+    <p style="
+        color:#D72C16;
+    ">
+    Pour finaliser votre inscription sur le site internet de Villereau, merci de cliquer sur le lien suivant : <br><br>
+    <a href="{{ signedUrl|raw }}">Confirmer mon email</a>.
+    Ce lien expirera dans {{ expiresAt|date('g') }} heure(s).</p>
+
+    <p>Pour acceder à votre compte, vous devez être en possession de votre mot de passe.
+    Si vous n'avez pas reçu de mot de passe temporaire, veuillez vous rapprocher de la mairie.</p>
+
+    <p>Votre compte est destiné à votre usage exclusif. Il vous donne la possibilité de réaliser des actions reservées
+        aux conseillers municipaux ou aux agents de la mairie. Vous ne devez conserver vos identifiants et mots de passe
+        secrets; ne les confiez ni à vos proches ni à d'autres conseillers.</p>
+
+</p>{% endblock %}
+
+
+
+
