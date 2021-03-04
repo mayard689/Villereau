@@ -5,12 +5,11 @@ namespace App\Entity;
 use App\Repository\NewsletterEmailRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Ambta\DoctrineEncryptBundle\Configuration\Encrypted;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=NewsletterEmailRepository::class)
- *
- * @ORM\Entity
  * @UniqueEntity("email", message="Cette adresse est déjà enregistrée")
  */
 class NewsletterEmail
@@ -24,6 +23,7 @@ class NewsletterEmail
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Encrypted
      *
      * @Assert\Email(
      *     message = "L'email '{{ value }}' n'est pas valide."
@@ -35,6 +35,11 @@ class NewsletterEmail
      * @ORM\Column(type="date")
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $secret;
 
     public function getId(): ?int
     {
@@ -61,6 +66,18 @@ class NewsletterEmail
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getSecret(): ?string
+    {
+        return $this->secret;
+    }
+
+    public function setSecret(string $secret): self
+    {
+        $this->secret = $secret;
 
         return $this;
     }

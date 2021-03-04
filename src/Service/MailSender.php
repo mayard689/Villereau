@@ -38,7 +38,7 @@ class MailSender
                 ->to($member->getEmail())
                 ->htmlTemplate('email/contentNotification.html.twig')
                 ->context([
-                    'destination' => $member,
+                    'secret' => $member->getSecret(),
                     'content' => $content,
                 ]);
 
@@ -59,7 +59,7 @@ class MailSender
                 ->to($member->getEmail())
                 ->htmlTemplate('email/eventNotification.html.twig')
                 ->context([
-                    'destination' => $member,
+                    'secret' => $member->getSecret(),
                     'event' => $event,
                 ]);
 

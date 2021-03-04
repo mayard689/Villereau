@@ -9,33 +9,50 @@
             <header>
 
             </header>
+
             <div class="container" style="
                 background-color: #F0EFEA;
                 width:100%;
                 height:100%;
                 padding:100px;
             ">
-                {% block main %}{% endblock %}
+                {% block main %}
+                    <p style="color:#EF9F9F;">{% block intro %}
+                            Bonjour,
+                    {% endblock %}</p>
 
-                <p style="
-        color:#000000;
-    ">Nous vous remerçions pour l'interêt que vous portez à nos messages.</p>
+                    <p>{% block regards %}
+                            Cordialement
+                    {% endblock %}</p>
 
-                <p style="
-        color:#000000;
-    ">Cordialement,</p>
-
-                <p style="
-        color:#000000;
-    ">Le conseil municipal.</p>
+                    <p style="color:#000000;">{% block conclusion %}
+                            Le conseil municipal,
+                    {% endblock %}</p>
+                {% endblock %}
             </div>
 
-            {% if destination is defined %}
-            <div class="container">
-                <p> Pour ne plus recevoir de notification, cliquez sur le lien suivant :</p>
-                <a href=" {{ app.request.schemeAndHttpHost~path('unregister',{'address':destination}) }}"> Desinscription </a>
-            </div>
-            {%  endif %}
+            <footer>
+                <p style="color:#C4D9AE; text-align:center; font-size : 10pt;">
+                    {% block footer %}{% endblock %}
+                </p>
+
+                {% if secret is defined %}
+                    <p>Si vous ne souhaitez plus recevoir nos messages, vous pouvez vous désinscrire grâce au bouton ci dessous :</p>
+                    <a style="
+                    font-size: 1.0rem;
+                    color: #333333;
+                    border-radius: 5px;
+                    background-color: #EF9F9F;
+                    border-color: #EF9F9F;
+                    text-decoration: none;
+                    padding: 0.25rem 0.5rem;
+                "
+                       href="{{ app.request.schemeAndHttpHost }}{{ path('confirmStopPub', {'secret':secret}) }}">
+                        Me désinscrire
+                    </a>
+                {% endif %}
+            </footer>
+
         {% endblock %}
     </body>
 </html>

@@ -6,9 +6,11 @@ use App\Entity\NewsletterEmail;
 use App\Form\NewsletterEmailType;
 use App\Repository\ContentRepository;
 use App\Repository\EventRepository;
+use App\Repository\NewsletterEmailRepository;
 use App\Repository\ReportRepository;
 use App\Service\MeteoCH;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,21 +38,24 @@ class HomeController extends AbstractController
 
         if ($newsletterForm->isSubmitted()) {
             if ($newsletterForm->isValid()) {
+                //make $s a random string
+                for ($secret = '', $i = 0, $z = strlen($a = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')-1; $i != 32; $x = rand(0,$z), $secret .= $a{$x}, $i++);
 
                 $newsletterEmail->setDate(new DateTime());
-                $entityManager = $this->getDoctrine()->getManager();
+                $newsletterEmail->setSecret($secret);
 
+                $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($newsletterEmail);
                 $entityManager->flush();
 
                 $this->addFlash('success', 'Votre inscription à la newsletter a été enregistrée');
 
                 $email = (new Email())
-                    ->from('doc-albert@laposte.net')
+                    ->from($this->getParameter("mailer_from"))
                     ->to($newsletterEmail->getEmail())
                     ->subject('Newsletter de Villereau')
                     ->html($this->renderView('email/inscription.html.twig', [
-                        'destination' => $newsletterEmail->getEmail()
+                        'secret' => $secret,
                     ]));
 
                 $mailer->send($email);
@@ -76,6 +81,26 @@ class HomeController extends AbstractController
             'newsletterForm' => $newsletterForm->createView(),
             'latestReport' => $latestReport,
         ]);
+    }
+
+    /**
+     * @Route("/stop-email/{secret}", name="confirmStopPub")
+     */
+    public function confirmStopPub(
+        String $secret,
+        NewsletterEmailRepository $newsletterEmailRepository,
+        EntityManagerInterface $entityManager
+    ) {
+        $email = $newsletterEmailRepository->findOneBy(['secret'=>$secret]);
+
+        if ($email) {
+            $entityManager->remove($email);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Vous avez été désinscrit de la liste de diffusion.');
+        }
+
+        return $this->redirectToRoute('home');
     }
 
     /**
