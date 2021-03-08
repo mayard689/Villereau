@@ -1,29 +1,61 @@
 {% if planning[day] is defined %}
     {% for event in planning[day] %}
-        <li>
-            {% if is_granted('ROLE_ADMIN') %}
-                {{ event.booker }}
-            {% endif %}
+        {% if is_granted('ROLE_SUBSCRIBER') %}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-{{ day }}">
+                Planning
+            </button>
 
-            {% include'tools/_deleteButton.html.twig' with {
-                'path': path('partyroom_delete', {'id': event.id}),
-                'tokenIndex' : event.id
-            } %}
+            <!-- Modal -->
+            <div class="modal fade" id="modal-{{ day }}" tabindex="-1" role="dialog" aria-labelledby="modal-{{ day }}-Label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-{{ day }}-Label">Evenements de la journée du {{ day }}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <li>
 
-            {% include 'tools/_adminButton.html.twig' with {
-                'text': 'Valider',
-                'path': path('partyroom_validate', {'id' : event.id})
-            } %}
-        </li>
+                                Client : {{ event.booker }}
+
+                                {% include'tools/_deleteButton.html.twig' with {
+                                    'path': path('partyroom_delete', {'id': event.id}),
+                                    'tokenIndex' : event.id
+                                } %}
+
+                                {% if not event.validated %}
+                                    {% include 'tools/_adminButton.html.twig' with {
+                                        'text': 'Valider',
+                                        'path': path('partyroom_validate', {'id' : event.id})
+                                    } %}
+                                {% else %}
+                                    <div class="mt-2">Déjà validé !</div>
+                                {% endif %}
+
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="mt-2">Déjà pris !</div>
+        {% endif %}
 
     {% endfor %}
 {% else %}
     {%  set timestamp = time|date_modify("+"~day~" day")|date('U') %}
     {%  if timestamp > ("now"|date('U')) %}
-        {% include 'tools/__genericButton.html.twig' with {
-            'text': 'Reserver',
-            'path': path('partyroom_new', {'timestamp' : timestamp}),
-            'icon': 'pen'
-        } %}
+
+        <a class = "btn btn-primary" href = "{{ path('partyroom_new', {'timestamp' : timestamp})}}">
+            Reserver
+        </a>
+
     {% endif %}
 {% endif %}
+
+
+
+

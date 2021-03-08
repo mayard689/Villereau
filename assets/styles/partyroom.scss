@@ -8,19 +8,32 @@
     background-color : $primary;
 }
 
+.col-1 {
+    flex: 0 0 14.28%;
+    max-width: 14.28%;
+}
+
+.day-wrapper {
+    padding : 5px;
+}
+
 .day {
+    position : relative;
+
     display : flex;
     flex-direction : column;
     justify-items : flex-start;
-
 
     .daynumber {
         text-align : center;
         height : 35%;
     }
 
+    &:hover .event-list {
+
+    }
+
     .event-list {
-        height : 65%;
         text-align: center;
 
         li {
@@ -65,6 +78,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            min-width : 70px;
         }
 
         .titles {
