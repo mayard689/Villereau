@@ -119,12 +119,4 @@ class HomeController extends AbstractController
             'iconURL' => $iconURL,
         ]);
     }
-
-    /**
-     * @Route("/unregister", name="unregister")
-     */
-    public function unregister()
-    {
-
-    }
 }

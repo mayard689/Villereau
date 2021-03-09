@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\ContactType;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use App\Service\MailSender;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -132,5 +134,43 @@ class EventController extends AbstractController
         }
 
         return $this->redirectToRoute('event_index');
+    }
+
+    /**
+     * @Route("/contact/{event}", name="event_contact")
+     */
+    public function contact(Event $event, Request $request, MailerInterface $mailer)
+    {
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contactFormData = $form->getData();
+
+            $email = (new TemplatedEmail())
+                ->from($this->getParameter("mailer_from"))
+                ->subject('Nouveau message via le site internet')
+                ->to($event->getContact())
+                ->htmlTemplate('email/contact.html.twig')
+                ->context([
+                    'name' => $contactFormData['name'],
+                    'from' => $contactFormData['from'],
+                    'message' => $contactFormData['message'],
+                ]);
+
+            $mailer->send($email);
+
+            $this->addFlash(
+                'success',
+                'Votre message a bien été envoyé'
+            );
+
+            return $this->redirectToRoute('home_index');
+        }
+
+        return $this->render('contact/contact.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

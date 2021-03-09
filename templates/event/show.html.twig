@@ -62,9 +62,11 @@
                     {{ event.text }}
                 </div>
 
-                <div class="col-12">
-                    <div class="btn btn-primary">s'inscrire</div>
-                </div>
+                {% if event.contact is not null %}
+                    <div class="col-12">
+                        <div class="btn btn-primary">s'inscrire</div>
+                    </div>
+                {% endif %}
 
             </div>
         </div>

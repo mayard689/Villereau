@@ -20,13 +20,15 @@ class ContactController extends AbstractController
 
         $form->handleRequest($request);
 
+        $adminEmail = $this->getParameter("admin_email");
+
         if ($form->isSubmitted() && $form->isValid()) {
             $contactFormData = $form->getData();
 
             $email = (new TemplatedEmail())
                 ->from($this->getParameter("mailer_from"))
-                ->subject('Nouveau message d\'un client')
-                ->to('contact@luckybot.fr')
+                ->subject('Nouveau message via le site internet')
+                ->to($adminEmail)
                 ->htmlTemplate('email/contact.html.twig')
                 ->context([
                     'name' => $contactFormData['name'],
