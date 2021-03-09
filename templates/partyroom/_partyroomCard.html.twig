@@ -51,7 +51,7 @@
 
     {% endfor %}
 {% else %}
-    {%  set timestamp = time|date_modify("+"~day~" day")|date('U') %}
+    {%  set timestamp = time|date_modify("+"~day~" day")|date('U')-1 %}
     {%  if timestamp > ("now"|date('U')) %}
 
         <a class = "btn btn-primary" href = "{{ path('partyroom_new', {'timestamp' : timestamp})}}">
