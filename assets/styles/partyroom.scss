@@ -1,16 +1,13 @@
 @import "_vars";
 
-.pre-booked {
-    background-color : $thirdary;
-}
-
-.booked {
-    background-color : $primary;
+.legend {
+    width: 300px;
 }
 
 .col-1 {
     flex: 0 0 14.28%;
     max-width: 14.28%;
+    padding : 5px;
 }
 
 .day-wrapper {
@@ -23,6 +20,8 @@
     display : flex;
     flex-direction : column;
     justify-items : flex-start;
+
+    background-color : $light;
 
     .daynumber {
         text-align : center;
@@ -54,6 +53,14 @@
 
 }
 
+.pre-booked {
+    background-color : $thirdary;
+}
+
+.booked {
+    background-color : $primary;
+}
+
 .calendar-header {
     text-align : center;
     height : 35%;
@@ -78,7 +85,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-width : 70px;
+            width : 70px;
+            margin : calc(1vw - 3px);
         }
 
         .titles {
