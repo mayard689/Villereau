@@ -137,7 +137,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/contact/{event}", name="event_contact")
+     * @Route("/contact/{id}", name="event_contact")
      */
     public function contact(Event $event, Request $request, MailerInterface $mailer)
     {
@@ -166,7 +166,7 @@ class EventController extends AbstractController
                 'Votre message a bien été envoyé'
             );
 
-            return $this->redirectToRoute('home_index');
+            return $this->redirectToRoute('event_show', ['id' => $event->getId()]);
         }
 
         return $this->render('contact/contact.html.twig', [

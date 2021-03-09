@@ -63,8 +63,13 @@
                 </div>
 
                 {% if event.contact is not null %}
+
                     <div class="col-12">
-                        <div class="btn btn-primary">s'inscrire</div>
+                        <p>Informations complémentaires : {{ event.contact}}</p>
+                        {% include 'tools/_backButton.html.twig' with {
+                            'text': 'Contacter l\'organisateur',
+                            'path': path('event_contact', {'id':event.id})
+                        } %}
                     </div>
                 {% endif %}
 
