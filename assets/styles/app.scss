@@ -159,14 +159,12 @@ li{
 }
 
 .corn1 {
-    height : 100px;
     padding : 10px;
     animation: 3s ease-in-out infinite wind1;
     animation-direction: alternate;
 }
 
 .corn2 {
-    height : 100px;
     position : relative;
     right : 75px;
     bottom : 10px;
@@ -177,15 +175,20 @@ li{
 }
 
 .corn3 {
-    height : 100px;
     padding : 10px;
     animation: 3.5s ease-in-out infinite wind3;
     animation-direction: alternate;
 }
 
 .blason {
-    height : 100px;
     padding : 10px;
+    height : 100px;
+    max-height : 25vh;
+}
+
+.corn1, .corn2, .corn3 {
+    height : 100px;
+    max-height : 15vh;
 }
 
 .custom-switch .custom-control-label::before {
