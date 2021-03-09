@@ -1,14 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Partyroom{% endblock %}
+{% block title %}Reserver la salle des fêtes{% endblock %}
 
 {% block body %}
     <section class="container">
         {%  include 'tools/_h1.html.twig' with {'title' : 'Demander une reservation'} %}
-        <p>Pour la date du {{ partyroom.date ? partyroom.date|date('d/m/Y') : '' }}</p>
+        <p>Vous souhaitez reserver la salle des fêtes de Villereau pour la date du {{ partyroom.date ? partyroom.date|date('d/m/Y') : '' }}</p>
+
+        Le tarif est de xx€ pour une journée et de xx€ pour un WE complet.
+        Votre reservation ne sera effective qu'apres validation par le secrétariat de la mairie.
 
         {{ include('partyroom/_form.html.twig') }}
 
-        <a href="{{ path('partyroom_index') }}">back to list</a>
     </section>
 {% endblock %}

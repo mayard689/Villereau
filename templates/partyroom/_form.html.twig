@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+    <div class="form-group row justify-content-start">
+        {{ form_label(form.booker, 'Votre nom : ') }}
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.booker, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.booker) }}</div>
+    </div>
+
+        {% include 'tools/_formAnonymValidateButton.html.twig' %}
+
+        {% include 'tools/_backButton.html.twig' with {
+            'text': 'Revenir au calendrier',
+            'path': path('partyroom_index')
+        } %}
+
 {{ form_end(form) }}

@@ -51,6 +51,8 @@ section {
 }
 
 h1 {
+    max-width : 100%;
+    min-width : 100%;
 
     $thisFontSize : $font-size-verybig;
 
@@ -66,7 +68,7 @@ h1 {
     .titleStyle{
         position : absolute;
         top : - $thisFontSize;
-        left : 2 * $thisFontSize;
+        padding-left : 2 * $thisFontSize;
 
         white-space: nowrap;
 
@@ -78,6 +80,9 @@ h1 {
         color : #DDDDDD;
 
         z-index:-1;
+
+        max-width:100%;
+        overflow: hidden;
     }
 }
 
