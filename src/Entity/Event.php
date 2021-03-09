@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Ambta\DoctrineEncryptBundle\Configuration\Encrypted;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -75,6 +76,11 @@ class Event
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Encrypted
+     *
+     * @Assert\Email(
+     *     message = "L'email '{{ value }}' n'est pas valide."
+     * )
      */
     private $contact;
 
