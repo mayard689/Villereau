@@ -21,6 +21,7 @@ class EventType extends AbstractType
             ->add('contact')
             ->add('restricted',CheckboxType::class, [
                 'label' => 'Reserver cet évenement au conseil municipal',
+                'required' => false,
                 'label_attr' => [
                     'class' => 'switch-custom'
                 ]
