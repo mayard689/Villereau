@@ -73,6 +73,11 @@ class Event
      */
     private $restricted;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $contact;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -213,6 +218,18 @@ class Event
     public function setRestricted(bool $restricted): self
     {
         $this->restricted = $restricted;
+
+        return $this;
+    }
+
+    public function getContact(): ?string
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?string $contact): self
+    {
+        $this->contact = $contact;
 
         return $this;
     }
