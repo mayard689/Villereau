@@ -24,6 +24,12 @@
         <div class="col-12">{{ form_errors(form.place) }}</div>
     </div>
 
+    <div class="form-group row">
+        {{ form_label(form.contact, 'Email de contact (optionnel) : ') }}
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.contact, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.contact) }}</div>
+    </div>
+
     <div class="form-group row ">
         {{ form_label(form.restricted, 'Your name', {
             'label_attr': {'class': 'switch-custom custom-control-label'}
