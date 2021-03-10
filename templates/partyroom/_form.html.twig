@@ -6,11 +6,17 @@
         <div class="col-12">{{ form_errors(form.booker) }}</div>
     </div>
 
-        {% include 'tools/_formAnonymValidateButton.html.twig' %}
+    <div class="form-group row">
+        {{ form_label(form.phone) }}
+        <div class="col-sm-12 col-md-9">{{ form_widget(form.phone, { 'attr': {'class': 'w-100'} }) }}</div>
+        <div class="col-12">{{ form_errors(form.phone) }}</div>
+    </div>
 
-        {% include 'tools/_backButton.html.twig' with {
-            'text': 'Revenir au calendrier',
-            'path': path('partyroom_index')
-        } %}
+    {% include 'tools/_formAnonymValidateButton.html.twig' %}
+
+    {% include 'tools/_backButton.html.twig' with {
+        'text': 'Revenir au calendrier',
+        'path': path('partyroom_index')
+    } %}
 
 {{ form_end(form) }}

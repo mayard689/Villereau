@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PartyroomRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PartyroomRepository::class)
@@ -44,7 +45,7 @@ class Partyroom
      *      allowEmptyString = false
      * )
      */
-    private $phoneNumber;
+    private $phone;
 
     public function getId(): ?int
     {
@@ -87,14 +88,14 @@ class Partyroom
         return $this;
     }
 
-    public function getPhoneNumber(): ?string
+    public function getPhone(): ?string
     {
-        return $this->phoneNumber;
+        return $this->phone;
     }
 
-    public function setPhoneNumber(string $phoneNumber): self
+    public function setPhone(string $phone): self
     {
-        $this->phoneNumber = $phoneNumber;
+        $this->phone = $phone;
 
         return $this;
     }

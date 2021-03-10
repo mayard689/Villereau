@@ -13,6 +13,7 @@ class PartyroomType extends AbstractType
     {
         $builder
             ->add('booker')
+            ->add('phone')
         ;
     }
 
