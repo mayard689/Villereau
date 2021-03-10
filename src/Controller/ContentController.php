@@ -10,10 +10,12 @@ use App\Repository\ContentRepository;
 use App\Repository\Newspaper2Repository;
 use App\Repository\NewspaperRepository;
 use App\Service\MailSender;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @Route("/content")
@@ -60,9 +62,10 @@ class ContentController extends AbstractController
     /**
      * @Route("/new", name="content_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserInterface $user): Response
     {
         $content = new Content();
+        $content->setWriter($user->getName());
         $form = $this->createForm(ContentType::class, $content);
         $form->handleRequest($request);
 
@@ -105,12 +108,19 @@ class ContentController extends AbstractController
     /**
      * @Route("/{id}/edit", name="content_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Content $content): Response
+    public function edit(Request $request, Content $content, UserInterface $user): Response
     {
         $form = $this->createForm(ContentType::class, $content);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $content->setWriter($user->getName());
+
+            //if the publication date is past (it is already published) update it to today
+            if($content->getDate() < new DateTime()) {
+                $content->setDate(new DateTime());
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Votre article a bien été modifié');

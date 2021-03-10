@@ -76,6 +76,11 @@ class Content
      */
     private $category;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $writer;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -208,6 +213,18 @@ class Content
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getWriter(): ?string
+    {
+        return $this->writer;
+    }
+
+    public function setWriter(string $writer): self
+    {
+        $this->writer = $writer;
 
         return $this;
     }

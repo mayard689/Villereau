@@ -26,6 +26,9 @@
         </p>
 
         <p class="detail">Publié le {{ content.date ? content.date|date('d-m-Y') : '' }} dans la catégorie {{ content.category ? content.category.name : 'Aucune catégorie n\'est définie' }}</p>
+        {% if content.writer is not empty %}
+            <p class="detail">par {{content.writer}}</p>
+        {% endif %}
 
         {% include 'tools/_backButton.html.twig' with {
             'text': 'Revenir à la liste des articles',
