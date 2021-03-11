@@ -4,110 +4,238 @@
     <style>
 
         @page {
-            margin: 150px 100px;
+            margin: 50px 50px;
+        }
+
+        html {
+            font-family: 'Helvetica';
+        }
+
+        .summary {
+            page-break-after: always;
+        }
+
+        .summary-title {
+            font-size : 30pt;
+            margin-top : 75pt;
+        }
+
+        .title-list{
+            margin-left : 20pt;
+            margin-right : 20pt;
         }
 
         .article {
-            font-size : 12pt;
-            width : 100%;
+            font-size : 11pt;
+            width : 100vw;
+            border-bottom : thin solid #999999;
+            margin:0;
+            padding:0;
         }
 
-        .article:nth-of-type(2) {
-
+        .before {
+            padding-right : 10pt;
         }
+        .after {
+            padding-left : 10pt;
+        }
+
+        .article:nth-of-type(even) .before{
+            display:none;
+        }
+        .article:nth-of-type(odd) .after{
+            display:none;
+        }
+
+        .title-in-text { display:none; }
+        .title-before-everything { display:none; }
+        .title-before-image { display:block; }
 
        .text-block {
            min-width : 50%;
-           border:thin solid #000000;
+           max-width : 50%;
+       }
+
+       .text-block-body {
+           text-align: justify;
+           text-justify: inter-word;
        }
 
         .picture-block {
-            max-width : 50%;
-            border:thin solid #000000;
-            vertical-align: baseline;
+
         }
 
-        .picture {
-            border:thin solid #000000;
-            vertical-align: baseline;
-            text-align: center;
+        .picture{
+            width : 250px;
+            text-align : center;
+            padding-left: 12px;
+            padding-right : 10px
+
         }
 
         .details {
-            float: left;
             text-align : left;
-
+            width:100%;
             color : #999999;
             font-style: italic;
             font-size : 8pt;
-            border-top : thin solid #999999;
+
+            padding-left : 5px;
+            margin-top : 10px;
         }
 
+        .page_break {
+            page-break-before: always;
+        }
+
+        .line_break {
+            line-break: anywhere;
+        }
+
+        .home-trapeze{
+            position: absolute;
+            left : -50px;
+            top : -50px;
+
+            height: 150px;
+            width: 0;
+            border-bottom: 130px solid transparent;
+            border-left: 795px solid #273249;
+            z-index : -10;
+        }
+
+        .publication-date{
+            float: right;
+            color : black;
+            font-size : 16pt;
+        }
+
+        .main-title{
+            height : 210px;
+            color : white;
+        }
+
+        .pre-title{
+            font-size : 20pt;
+            margin : 0;
+            padding : 0;
+        }
+
+        h1{
+            weight : bold;
+            font-size : 50pt;
+            margin-left : 30px;
+            margin-top:0;
+        }
+
+        h2{
+            padding-top:0;
+            margin-top:0;
+            padding-left : 5px;
+            display:inline-block;
+        }
+
+        li{
+            list-style-type: none;
+            margin-top:10px;
+            margin-bottom : 10px;
+            vertical-align: center;
+            font-size : 16pt;
+        }
+
+        .title-category {
+            background-color : #b92c68;
+            color : white;
+            padding-left : 5px;
+            margin-left : -5px;
+        }
+
+        .miniture{
+            border-radius : 150%;
+            margin-right : 20pt;
+        }
 
     </style>
 {% endblock %}
 
 {% block body %}
-    <h1>Le Bulletin de VILLEREAU</h1>
-    <p>Edité le {{ newspaper2.date ? newspaper2.date|date('d ') ~ newspaper2.month ~ newspaper2.date|date(' Y'): '' }}</p>
+    <div class="home-trapeze"></div>
+
+    <div class="main-title">
+        <p class="pre-title">Le Bulletin de</p>
+        <h1>VILLEREAU</h1>
+        <p class="publication-date">{{ newspaper2.date ? newspaper2.month ~ newspaper2.date|date(' Y'): '' }}</p>
+    </div>
+
 
     <section class="summary">
-        <h1>Au sommaire : </h1>
-        {% for subject in newspaper2.newspaperSubject2s %}
-            {% set base64 = pictures[subject.content.picture] %}
+        <h1 class="summary-title">Au sommaire : </h1>
+        <ul class="title-list">
+            {% for subject in newspaper2.newspaperSubject2s %}
+                {% set base64 = pictures[subject.content.picture] %}
+                <li style="position:relative">
+                    <span style="position : absolute; left : 60pt; width : 85%;">{{ subject.content.title }}</span>
+                    <img class="miniture" src="{{base64}}" width="60" height="60"/>
+                </li>
+            {% endfor %}
+        </ul>
 
-            <h2><img src="{{base64}}" width="30" height="30"/>{{ subject.content.title }}</h2>
-        {% endfor %}
     </section>
 
 
 
     {% for subject in newspaper2.newspaperSubject2s %}
+        {% set base64 = pictures[subject.content.picture] %}
         <section class="article">
-
-                <div class="text-block">
-                    <h2>{{ subject.content.title }}</h2>
-                    <p>{{ subject.content.text }}</p>
-                    <div class="details">
-                        <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
-                        <p class="category">Dans la catégorie {{ subject.content.category.name }}</p>
-                    </div>
-
-                </div>
-                <div class="picture-block">
-                    {% set base64 = pictures[subject.content.picture] %}
-                    <p><img class="picture" src="{{base64}}"/>
-                </div>
-
-
-
             <table>
-                <thead>
-                <tr>
-                    <th colspan="2"></th>
-                </tr>
-                </thead>
                 <tbody>
-                <tr class="article">
-                    <td class="text-block">
+                    <tr class="title-before-everything">
+                        <td  colspan="2">
+                            <h2>
+                                <div class="title-category">{{ subject.content.category.name }}</div>
+                                {{ subject.content.title }}
+                            </h2>
+                        </td>
+                    </tr>
 
-                        <h2>{{ subject.content.title }}</h2>
-                        <p>{{ subject.content.text }}</p>
-                        <div class="details">
-                            <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
-                            <p class="category">Dans la catégorie {{ subject.content.category.name }}</p>
-                        </div>
-                    </td>
+                    <tr class="">
+                        <td class="picture-block before">
+                            <h2 class="title-before-image">
+                                <div class="title-category">{{ subject.content.category.name }}</div>
+                                {{ subject.content.title }}
+                            </h2>
+                            <div><img class="picture" src="{{base64}}"/></div>
+                            {#<div class="title-before-image details">
+                                <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
+                            </div>#}
+                        </td>
 
-                    <td class="picture-block">
-                        {% set base64 = pictures[subject.content.picture] %}
-                        <p><img class="picture" src="{{base64}}"/>
+                        <td class="text-block">
+                            <h2 class="title-in-text">
+                                <div class="title-category">{{ subject.content.category.name }}</div>
+                                {{ subject.content.title }}
+                            </h2>
+                            <p class="text-block-body">{{ subject.content.text }}</p>
+                            {#<div class="title-in-text details">
+                                <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
+                            </div>#}
+                        </td>
 
-                    </td>
-                </tr>
+                        <td class="picture-block after">
+                            <h2 class="title-before-image">
+                                <div class="title-category">{{ subject.content.category.name }}</div>
+                                {{ subject.content.title }}
+                            </h2>
+                            <div><img class="picture" src="{{base64}}"/></div>
+                            {#<div class="title-before-image details">
+                                <p class="date">Publié le {{ subject.content.date|date("d/m/Y") }}</p>
+                            </div>#}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
         </section>
+
     {% endfor %}
 {% endblock %}
