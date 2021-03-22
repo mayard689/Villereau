@@ -43,10 +43,11 @@ body {
 }
 
 section {
-    margin : $spacing-h-large;
+    margin : $spacing-h-normal;
 
     &:first-of-type{
-        margin-top:5vh;
+        margin-top:0;
+        margin-left:0;
     }
 }
 
@@ -59,7 +60,7 @@ h1 {
     color: $primary;
 
     margin-top: 0;
-    margin-bottom: $spacing-h-normal;
+    margin-bottom: $spacing-h-small;
     font-size: $thisFontSize;
     position: relative;
 
