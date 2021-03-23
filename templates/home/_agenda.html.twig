@@ -4,7 +4,7 @@
     <div class="row ustify-content-around">
         {%  for event in events %}
             {% include 'event/_eventCard.html.twig' with {
-                'index' : loop.index,
+                'index' : loop.index0,
             }  %}
         {% endfor %}
     </div>

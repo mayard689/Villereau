@@ -21,6 +21,8 @@
     background-color:$secondary-transparent;;
     border-radius : 0;
 
+    z-index :1;
+
     .day{
       font-size : $font-size-big;
       text-align: center;
@@ -39,18 +41,29 @@
 
   .img-wrapper {
     height : 300px;
+    overflow: hidden;
 
     .event-img{
       object-fit: cover;
       height : 100%;
       width:100%;
+      transition: transform 1.0s;
+
+      &:hover{
+        transform: scale(1.1);
+        z-index:0;
+      }
+
     }
+
   }
 
   .card-body{
     position : absolute;
     bottom : 5%;
     left : +15%;
+
+    z-index :2;
 
     box-shadow: $shadow;
     background-color : $light;
