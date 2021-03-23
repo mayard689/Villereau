@@ -32,7 +32,7 @@ class ContentFixtures extends Fixture implements DependentFixtureInterface
                 $content->setTitle($faker->sentence);
                 $content->setText($faker->text(1000));
                 $content->setWriter('Anonym');
-                $content->setPicture('fixture_content-'.rand(1,7).'.jpg');
+                $content->setPicture('fixture_content-'.rand(1,6).'.jpg');
 
                 $categoryIndex = rand(0 , CategoryFixtures::CATEGORY_NUMBER-1);
                 $category = $this->getReference('category_'.$categoryIndex);

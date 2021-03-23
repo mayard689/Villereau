@@ -9,4 +9,4 @@ twig:
         '%kernel.project_dir%/public/pictures': pictures
         '%kernel.project_dir%/public/documents/newspapers': newspapers
     globals:
-        admin_email: '%env(resolve:ADMIN_EMAIL)%'
+
