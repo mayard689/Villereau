@@ -43,11 +43,10 @@ body {
 }
 
 section {
-    margin : $spacing-h-normal;
+    margin : $spacing-h-large;
 
     &:first-of-type{
-        margin-top:0;
-        margin-left:0;
+        margin-top:$spacing-h-large;
     }
 }
 
@@ -65,6 +64,7 @@ h1 {
     position: relative;
 
     font-family: 'Julius', sans-serif;
+    font-weight: bold;
 
     .titleStyle{
         position : absolute;

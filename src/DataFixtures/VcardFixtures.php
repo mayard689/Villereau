@@ -54,11 +54,11 @@ class VcardFixtures extends Fixture
         }
 
         for ( $i=0; $i<self::ADMIN_NUMBER; $i++) {
-            $adjectif = $faker->randomElement(["pirate", "ripoux", "social", "communiste", "neutre"]);
+            $adjectif = $faker->randomElement(["pirates", "ripoux", "sociaux", "gilets jaunes", "neutres"]);
             $card = new Vcard();
             $card->setName(
-                $faker->randomElement(["Centre de", "Fond de", "Comité d'action de", "Bureau de"])." ".
-                $faker->randomElement(["maires", "perception", "l'urbanisme", "l'état civil", "médecine"])." ".
+                $faker->randomElement(["Centre des", "Fond des", "Comité d'action des", "Bureau des"])." ".
+                $faker->randomElement(["maires", "perceptions", "urbanismes", "états civils", "médecines"])." ".
                 $adjectif
 
             );

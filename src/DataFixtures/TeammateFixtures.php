@@ -84,7 +84,7 @@ class TeammateFixtures extends Fixture
         ],
         12 => [
             'firstname' => 'Steven',
-            'lastname' => 'FOURREAU',
+            'lastname' => 'FOURRAUX',
             'role' => 'Agent Communal',
             'type' => 'Agent'
         ],

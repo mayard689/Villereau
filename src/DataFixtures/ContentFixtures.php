@@ -26,10 +26,12 @@ class ContentFixtures extends Fixture implements DependentFixtureInterface
             if ($i < count(self::CONTENT)) {
                 $content->setTitle(self::CONTENT[$i]['title']);
                 $content->setText(self::CONTENT[$i]['text']);
+                $content->setWriter('Anonym');
                 $content->setPicture(self::CONTENT[$i]['picture']);
             } else {
                 $content->setTitle($faker->sentence);
                 $content->setText($faker->text(1000));
+                $content->setWriter('Anonym');
                 $content->setPicture('fixture_content-'.rand(1,7).'.jpg');
 
                 $categoryIndex = rand(0 , CategoryFixtures::CATEGORY_NUMBER-1);

@@ -23,6 +23,7 @@ class EventFixtures extends Fixture
             $event->setText($faker->paragraph(10, true));
             $event->setDate($faker->dateTimeBetween('-1 years', '2021/12/31'));
             $event->setPlace($city);
+            $event->setRestricted(false);
             $event->setPicture('fixture_event-'.rand(1,5).'.jpg');
             //$event->setPictureSize(100);
             $this->addReference('event_' .$i, $event);
