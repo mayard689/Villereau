@@ -42,12 +42,16 @@ body {
     justify-content: space-between;*/
 }
 
-section {
-    margin : $spacing-h-large;
+section, section.container {
+    margin-top : $spacing-h-small;
+    margin-bottom : $spacing-h-small;
 
-    &:first-of-type{
-        margin-top:$spacing-h-large;
-    }
+    padding-top : $spacing-h-large;
+    padding-bottom : $spacing-h-normal;
+}
+
+a:hover{
+    color : $thirdary;
 }
 
 h1 {

@@ -8,6 +8,11 @@ section:first-of-type{
     margin-left:0;
 }
 
+.dark{
+  background-color : $secondary-transparent;
+  box-sizing: border-box;
+}
+
 .introduction{
   width:100vw;
   height:60vh;
@@ -35,7 +40,7 @@ section:first-of-type{
 }
 
 .widget-picture-wrapper{
-  background-color:$secondary;
+  background-color:$secondary-transparent;
   min-width : 100%;
   max-width : 100%;
   height : 0;
@@ -49,7 +54,7 @@ section:first-of-type{
   width : 100%;
   height : 100%;
   position : absolute;
-  background : $secondary;
+  background : transparent;//$secondary;
   color : $light;
 
   &:hover{

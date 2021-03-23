@@ -1,8 +1,10 @@
 <div class="col-sm-12 col-md-6 col-lg-4 " >
-    <div class="
-        event-card
-        {% if event.restricted %}event-restricted{% endif %}
-    ">
+    <div data-aos="fade-up" data-aos-duration="1500" data-aos-delay="{{ (index??0) * 250 }}" data-aos-offset="10" data-aos-easing="ease-in-out"
+        class="
+            event-card
+            {% if event.restricted %}event-restricted{% endif %}
+        "
+    >
         <div class="date">
             <p class="day">{{event.date|date("d/m")}}</p>
             <p class="hour">{{event.date|date("h\\hi")}}</p>

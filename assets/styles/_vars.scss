@@ -3,16 +3,25 @@ $navbarLinkFontSize : 20px;
 
 $footer-height : auto;
 
-$background: #EBEBEB ;
+
 
 
 //$primary: #cc0f0f;//#D72D85;
-$primary: #b92c41;
+$primary: #b9262d;
+$primary-transparent : #b92c41EE;
 $secondary: #303030;//404e69;//#009688;
+$secondary-transparent: #303030EE;
 $thirdary : #f0ce2f;//#ffc107
 $thirdary-transparent : #f0ce2fDD;//#19b099DD;
-$dark: #303030EE;
 
+$dark: #303030;
+$light: #F2F2F2;
+$background: $light ;
+
+$various1 : rgba(255,105,54,.9);
+$various2 : rgba(144,210,87,.9);
+$various3 : #1aafa8;
+$various4 : #0080a3;
 
 /**
 $primary: #b20238;//#D72D85;
@@ -22,7 +31,7 @@ $thirdary-transparent : #e8d21dDD;//#19b099DD;
 $dark: #039fbeEE;
 **/
 
-$light: #EBEBEB;
+
 
 $medium : #A0A0A0;
 

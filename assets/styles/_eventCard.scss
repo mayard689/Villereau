@@ -18,7 +18,7 @@
     font-weight : bold;
 
     color : $thirdary;
-    background-color:$dark;
+    background-color:$secondary-transparent;;
     border-radius : 0;
 
     .day{
@@ -66,6 +66,6 @@
 .event-restricted {
   .date{
     background-color : $warning;
-    color:$dark;
+    color:$secondary-transparent;
   }
 }

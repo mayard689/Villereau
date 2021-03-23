@@ -9,7 +9,7 @@
 }
 
 .navbar{
-  background : $dark;
+  background : $secondary-transparent;
   color : $light;
   border-radius : 0;
 }
@@ -19,7 +19,7 @@
   justify-content: center;
 
   .dropdown-menu{
-    background-color : $dark;
+    background-color : $secondary-transparent;
 
     a{
       color : $light;

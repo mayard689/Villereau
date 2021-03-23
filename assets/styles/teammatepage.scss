@@ -46,7 +46,9 @@
 .job{
   font-size:20px;
   font-style: italic;
-  color:$primary;
+  color:$thirdary;
+  background-color : $secondary;
+  padding-left : 5px;
 }
 
 .person-name{

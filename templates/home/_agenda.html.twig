@@ -1,9 +1,11 @@
 <section class="agenda container">
     {%  include 'tools/_h1.html.twig' with {'title' : 'AGENDA'} %}
 
-    <div class="row justify-content-around">
+    <div class="row ustify-content-around">
         {%  for event in events %}
-            {{ include('event/_eventCard.html.twig') }}
+            {% include 'event/_eventCard.html.twig' with {
+                'index' : loop.index,
+            }  %}
         {% endfor %}
     </div>
 </section>
