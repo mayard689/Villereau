@@ -46,8 +46,8 @@ section, section.container {
     margin-top : $spacing-h-small;
     margin-bottom : $spacing-h-small;
 
-    padding-top : $spacing-h-large;
-    padding-bottom : $spacing-h-normal;
+    padding-top : $spacing-h-normal;
+    padding-bottom : $spacing-h-small;
 }
 
 a:hover{
@@ -245,6 +245,6 @@ li{
 
 .month-group{
     font-size: 50px;
-    margin-top : $spacing-h-large;
+    margin-top : $spacing-h-small;
     margin-bottom : 0;
 }
