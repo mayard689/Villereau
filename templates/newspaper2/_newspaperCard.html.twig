@@ -17,12 +17,12 @@
 
     <div class="button-panel">
         {% include 'tools/_seeButton.html.twig' with {
-            'text': 'Voir le rapport',
+            'text': 'Voir le bulletin',
             'path': "../documents/newspapers/newspaper_"~newspaper.id~'.pdf',
         } %}
 
         {% include 'tools/_adminButton.html.twig' with {
-            'text': 'Prévisualiser le rapport',
+            'text': 'Prévisualiser le bulletin',
             'path': path('newspaper2_preview', {'id': newspaper.id})
         } %}
 
